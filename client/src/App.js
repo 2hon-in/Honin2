@@ -10,11 +10,6 @@ function App() {
       
       <Routes>
           {/* <Route path='/' element={<Login />} />
-          <Route path='/main' element={<Main />} />
-          <Route path='/join' element={<Join />} />
-          <Route path='/writePost' element={<WritePost />} />
-          <Route path='/myPage' element={<MyPage />} />
-          <Route path='/postone/:postid' element={<Postone />} />
           <Route path='/kakaosaveinfo/:nickname' element={<Kakaosaveinfo />} />
           <Route path='/editProfile' element={<EditProfile />} />
           <Route path='/memberPage/:membernick' element={<MemberPage />} /> */}
