@@ -10,8 +10,6 @@ function App() {
       
       <Routes>
           {/* <Route path='/' element={<Login />} />
-          <Route path='/kakaosaveinfo/:nickname' element={<Kakaosaveinfo />} />
-          <Route path='/editProfile' element={<EditProfile />} />
           <Route path='/memberPage/:membernick' element={<MemberPage />} /> */}
       </Routes>
     </div>
