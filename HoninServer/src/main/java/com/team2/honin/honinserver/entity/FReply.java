@@ -15,11 +15,9 @@ public class FReply {
     @Column(name = "frnum")
     private Integer frnum;
 
-    @Id
     @Column(name = "fnum")
     private Integer fnum;
 
-    @Id
     @Column(name = "writer", length = 50)
     private String writer;
 
@@ -33,12 +31,12 @@ public class FReply {
     @Column(name = "nickname", length = 50)
     private String nickname;
 
-    @ManyToOne
-    @JoinColumn(name = "fnum", insertable = false, updatable = false)
-    private FBoard fboard;
-
-    @ManyToOne
-    @JoinColumn(name = "writer", insertable = false, updatable = false)
-    private FBoard fboardWriter;
+//    @ManyToOne
+//    @JoinColumn(name = "fnum", insertable = false, updatable = false)
+//    private FBoard fboard;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "writer", insertable = false, updatable = false)
+//    private FBoard fboardWriter;
 
 }

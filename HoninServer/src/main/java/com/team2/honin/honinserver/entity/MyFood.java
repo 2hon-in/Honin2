@@ -3,7 +3,6 @@ package com.team2.honin.honinserver.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.Id;
 
 import java.sql.Date;
 
@@ -15,7 +14,6 @@ public class MyFood {
     @Column(name = "mfnum")
     private Integer mfnum;
 
-    @Id
     @Column(name = "owner", length = 50)
     private String owner;
 
@@ -42,7 +40,7 @@ public class MyFood {
     @Column(name = "fstate", columnDefinition = "char(1) default 'Y'")
     private String fstate;
 
-    @ManyToOne
-    @JoinColumn(name = "owner", insertable = false, updatable = false)
-    private Member member;
+//    @ManyToOne
+//    @JoinColumn(name = "owner", insertable = false, updatable = false)
+//    private Member member;
 }
