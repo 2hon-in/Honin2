@@ -7,12 +7,18 @@ import {createSlice} from '@reduxjs/toolkit'
 const initialState = {
     email : '',
     nickname : '',
+    username : '',
+    password : '',
     provider : '',
+    phone : '',
     snsid : '',
     profileimg : '',
     profilemsg : '',
-    followers : [],
-    followings : [],
+    zipnum : '',
+    address1 : '',
+    address2 : '',
+    address3 : '',
+    userstate : '',
     accessToken : '',
     refreshToken : ''
 }
@@ -29,12 +35,18 @@ const userSlice = createSlice(
             //'user'객체는 state라고 부릅니다.
             state.email = action.payload.email;
             state.nickname = action.payload.nickname;
+            state.username = action.payload.username;
+            state.password = action.payload.password;
             state.provider = action.payload.provider;
             state.snsid = action.payload.snsid;
             state.profileimg = action.payload.profileimg;
             state.profilemsg = action.payload.profilemsg;
-            state.pwd = action.payload.pwd;
             state.phone = action.payload.phone;
+            state.zipnum = action.payload.zipnum;
+            state.address1 = action.payload.address1;
+            state.address2 = action.payload.address2;
+            state.address3 = action.payload.address3;
+            state.userstate = action.payload.userstate;
             state.accessToken = action.payload.accessToken;
             state.refreshToken = action.payload.refreshToken;
         },
@@ -45,11 +57,17 @@ const userSlice = createSlice(
             state.snsid = '';
             state.profileimg = '';
             state.profilemsg = '';
-            state.pwd = '';
+            state.password = '';
             state.phone = '';
+            state.username = '';
+            state.zipnum = '';
+            state.address1 = '';
+            state.address2 = '';
+            state.address3 = '';
+            state.userstate = '';
             state.accessToken = '';
             state.refreshToken = '';
-        },
+        }, 
         setFollowings : (state, action) =>{
             state.followings = action.payload.followings;
             //state.followings = [...action.payload];

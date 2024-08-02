@@ -15,7 +15,7 @@ import { persistReducer } from 'redux-persist';
 
 const reducers = combineReducers({
     user : userSlice.reducer,
-})
+}) 
 const persistConfig = {
     key:'root',
     storage,
