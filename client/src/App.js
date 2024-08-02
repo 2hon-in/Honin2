@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import Footer from "./Component/layout/Footer";
 
 function App() {
   return (
@@ -9,8 +10,7 @@ function App() {
       } */}
       
       <Routes>
-          {/* <Route path='/' element={<Login />} />
-          <Route path='/memberPage/:membernick' element={<MemberPage />} /> */}
+          <Route path='/' element={<Footer />} />
       </Routes>
     </div>
   );
