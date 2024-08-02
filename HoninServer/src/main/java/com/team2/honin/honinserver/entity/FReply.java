@@ -3,7 +3,6 @@ package com.team2.honin.honinserver.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.Id;
 
 import java.sql.Date;
 
@@ -11,6 +10,7 @@ import java.sql.Date;
 @Entity
 @Table
 public class FReply {
+
     @Id
     @Column(name = "frnum")
     private Integer frnum;
