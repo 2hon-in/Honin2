@@ -12,8 +12,9 @@ function Main() {
         <img src={jpg}/>
       </div>
       <section>
-        <div className="container">
-        </div>
+          <div className="container">
+            
+          </div>
       </section>
       <Footer></Footer>
     </>
