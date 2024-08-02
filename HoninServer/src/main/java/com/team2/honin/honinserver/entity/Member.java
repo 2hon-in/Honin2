@@ -1,14 +1,24 @@
 package com.team2.honin.honinserver.entity;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
 @Table
@@ -59,5 +69,9 @@ public class Member {
 
     @Column(name = "zipnum", length = 15)
     private String zipnum;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Builder.Default // Default:new ArrayList<>() 비어있는 리스트로 객체 저장
+    private List<MemberRole> memberRoleList = new ArrayList<MemberRole>();
 
 }
