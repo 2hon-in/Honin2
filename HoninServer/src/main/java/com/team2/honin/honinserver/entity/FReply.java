@@ -8,7 +8,6 @@ import java.sql.Date;
 
 @Data
 @Entity
-@Table
 public class FReply {
 
     @Id
@@ -25,7 +24,7 @@ public class FReply {
     private String content;
 
     @CreationTimestamp
-    @Column(name = "writedate", columnDefinition = "datetime default now()")
+    @Column(name = "writedate", columnDefinition = "timestamp default now()")
     private Date writedate;
 
     @Column(name = "nickname", length = 50)

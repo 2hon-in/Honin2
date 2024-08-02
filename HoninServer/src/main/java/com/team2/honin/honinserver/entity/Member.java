@@ -1,10 +1,6 @@
 package com.team2.honin.honinserver.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-@Table
 public class Member {
     @Id
     @Column(name = "nickname", length = 50)
@@ -52,7 +47,7 @@ public class Member {
     private String snsid;
 
     @CreationTimestamp
-    @Column(name = "indate", columnDefinition = "datetime default now()")
+    @Column(name = "indate", columnDefinition = "timestamp default now()")
     private Date indate;
 
     @Column(name = "address1", length = 100)

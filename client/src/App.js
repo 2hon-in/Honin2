@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import Header from "./Component/layout/Header";
 import Main from "./Component/Main";
 
 function App() {

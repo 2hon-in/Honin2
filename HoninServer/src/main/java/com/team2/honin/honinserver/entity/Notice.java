@@ -25,7 +25,7 @@ public class Notice {
     @Column(name = "content", columnDefinition = "text")
     private String content;
 
-    @Column(name = "writedate")
+    @Column(name = "writedate", columnDefinition = "timestamp default now()")
     @CreationTimestamp
     private Date writeDate;
 
