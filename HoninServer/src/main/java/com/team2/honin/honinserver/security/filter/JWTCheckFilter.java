@@ -80,7 +80,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         if(request.getMethod().equals("OPTIONS"))
             return true;
 
-        if(path.startsWith("/members/loginLocal"))
+        if(path.startsWith("/member/loginLocal"))
             return true;
 
         if(path.startsWith("/images"))
@@ -89,22 +89,22 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         if(path.startsWith("/uploads"))
             return true;
 
-        if(path.startsWith("/members/join"))
+        if(path.startsWith("/member/join"))
             return true;
 
-        if(path.startsWith("/members/emailCheck"))
+        if(path.startsWith("/member/emailCheck"))
             return true;
 
-        if(path.startsWith("/members/nickNameCheck"))
+        if(path.startsWith("/member/nickNameCheck"))
             return true;
 
-        if(path.startsWith("/members/fileupload"))
+        if(path.startsWith("/member/fileupload"))
             return true;
 
-        if(path.startsWith("/members/kakaostart"))
+        if(path.startsWith("/member/kakaostart"))
             return true;
 
-        if(path.startsWith("/members/kakaoLogin"))
+        if(path.startsWith("/member/kakaoLogin"))
             return true;
 
         if(path.startsWith("/favicon.ico"))
