@@ -27,8 +27,6 @@ public class FReply {
     @Column(name = "writedate", columnDefinition = "timestamp default now()")
     private Date writedate;
 
-    @Column(name = "nickname", length = 50)
-    private String nickname;
 
 //    @ManyToOne
 //    @JoinColumn(name = "fnum", insertable = false, updatable = false)

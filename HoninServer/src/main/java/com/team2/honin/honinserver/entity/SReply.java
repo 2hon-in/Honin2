@@ -23,7 +23,7 @@ public class SReply {
     @CreationTimestamp
     private Date writeDate;
 
-    @Column(name = "nickname", length = 50)
-    private String nickname;
+    @Column(name = "writer", length = 50)
+    private String writer;
 }
 

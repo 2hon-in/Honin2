@@ -1,3 +1,6 @@
+ALTER TABLE freply DROP COLUMN nickname;
+ALTER TABLE sreply DROP COLUMN seller;
+
 ALTER TABLE `honin`.`myfood`
 ADD INDEX `myfood_f1_idx` (`owner` ASC) VISIBLE;
 
@@ -44,7 +47,7 @@ ADD CONSTRAINT `secondhand_f1`
   ON DELETE CASCADE
   ON UPDATE CASCADE;
 
-ALTER TABLE sreply DROP COLUMN seller;
+
 
 ALTER TABLE `honin`.`sreply`
 ADD INDEX `sreply_f1_idx` (`nickname` ASC) VISIBLE,
@@ -52,7 +55,7 @@ ADD INDEX `sreply_f2_idx` (`snum` ASC) VISIBLE;
 ;
 ALTER TABLE `honin`.`sreply`
 ADD CONSTRAINT `sreply_f1`
-  FOREIGN KEY (`nickname`)
+  FOREIGN KEY (`writer`)
   REFERENCES `honin`.`member` (`nickname`)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
@@ -72,7 +75,6 @@ ADD CONSTRAINT `fboard_f1`
   ON DELETE CASCADE
   ON UPDATE CASCADE;
 
-ALTER TABLE freply DROP COLUMN nickname;
 
 ALTER TABLE `honin`.`freply`
 ADD INDEX `freply_f1_idx` (`nickname` ASC) VISIBLE,
@@ -80,7 +82,7 @@ ADD INDEX `freply_f2_idx` (`fnum` ASC) VISIBLE;
 ;
 ALTER TABLE `honin`.`freply`
 ADD CONSTRAINT `freply_f1`
-  FOREIGN KEY (`nickname`)
+  FOREIGN KEY (`writer`)
   REFERENCES `honin`.`member` (`nickname`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION,

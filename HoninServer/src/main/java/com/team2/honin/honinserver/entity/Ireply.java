@@ -28,7 +28,4 @@ public class Ireply {
     @CreationTimestamp
     private Date writeDate;
 
-    @Column(name = "nickname", length = 50)
-    private String nickname;
-
 }
