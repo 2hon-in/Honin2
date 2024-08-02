@@ -1,6 +1,3 @@
-ALTER TABLE freply DROP COLUMN nickname;
-ALTER TABLE sreply DROP COLUMN seller;
-
 ALTER TABLE `honin`.`myfood`
 ADD INDEX `myfood_f1_idx` (`owner` ASC) VISIBLE;
 
