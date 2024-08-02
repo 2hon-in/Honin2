@@ -1,7 +1,8 @@
 package com.team2.honin.honinserver.security.service;
 
+import com.team2.honin.honinserver.dao.MemberRepository;
+import com.team2.honin.honinserver.dto.MemberDTO;
 import com.team2.honin.honinserver.entity.Member;
-import com.team2.honin.honinserver.service.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,7 +32,22 @@ public class CustomUserDetailService implements UserDetailsService {
 
         // 존재하면 로그인 처리를 위해 Entity 데이터를 DTO 데이터로 옮김
         MemberDTO memberDTO = new MemberDTO(
-                member.getNickname(), member.getPwd(), member.getEmail(), member.getProvider(), member.getPhone(), member.getSnsid(), member.getProfileimg(), member.getProfilemsg(), member.getMemberRoleList().stream().map(memberRole -> memberRole.name()).collect(Collectors.toList())
+                member.getUsername(),
+                member.getPassword(),
+                member.getNickname(),
+                member.getEmail(),
+                member.getPhone(),
+                member.getProfileimg(),
+                member.getProfilemsg(),
+                member.getProvider(),
+                member.getSnsid(),
+                member.getIndate(),
+                member.getAddress1(),
+                member.getAddress2(),
+                member.getAddress3(),
+                member.getUserstate(),
+                member.getZipnum(),
+                member.getMemberRoleList().stream().map(memberRole -> memberRole.name()).collect(Collectors.toList())
 
         );
         log.info(memberDTO);
