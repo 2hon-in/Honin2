@@ -1,6 +1,7 @@
 package com.team2.honin.honinserver.security.filter;
 
 import com.google.gson.Gson;
+import com.team2.honin.honinserver.dto.MemberDTO;
 import com.team2.honin.honinserver.security.util.JWTUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
@@ -30,24 +32,30 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             Map<String, Object> claims = JWTUtil.validateToken(accessToken);
             log.info("JWT claims: " + claims);
 
-            String email = (String) claims.get("email");
-            String pwd = (String) claims.get("pwd");
+            String username = (String) claims.get("username");
+            String password = (String) claims.get("password");
             String nickname = (String) claims.get("nickname");
-            String snsid = (String) claims.get("snsid");
-            String provider = (String) claims.get("provider");
-            String profileimg = (String) claims.get("profileimg");
+            String email = (String) claims.get("email");
             String phone = (String) claims.get("phone");
+            String profileimg = (String) claims.get("profileimg");
             String profilemsg = (String) claims.get("profilemsg");
-
+            String provider = (String) claims.get("provider");
+            String snsid = (String) claims.get("snsid");
+            Date indate = (Date) claims.get("indate");
+            String address1 = (String) claims.get("address1");
+            String address2 = (String) claims.get("address2");
+            String address3 = (String) claims.get("address3");
+            String userstate = (String) claims.get("userstate");
+            String zipnum = (String) claims.get("zipnum");
             List<String> roleNames = (List<String>) claims.get("roleNames");
-            MemberDTO memberDTO = new MemberDTO( nickname, pwd, email, provider, phone, snsid,
-                     profileimg, profilemsg, roleNames);
+            MemberDTO memberDTO = new MemberDTO( username, password, nickname, email, phone, profileimg,
+                    profilemsg, provider, snsid, indate,address1, address2, address3, userstate, zipnum, roleNames);
             log.info("-----------------------------------");
             log.info(memberDTO);
             log.info(memberDTO.getAuthorities()); // 권한 추출
 
             UsernamePasswordAuthenticationToken authenticationToken
-                    = new UsernamePasswordAuthenticationToken(memberDTO, pwd , memberDTO.getAuthorities());
+                    = new UsernamePasswordAuthenticationToken(memberDTO, password , memberDTO.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
             filterChain.doFilter(request, response);
@@ -92,10 +100,13 @@ public class JWTCheckFilter extends OncePerRequestFilter {
 
         if(path.startsWith("/members/fileupload"))
             return true;
+
         if(path.startsWith("/members/kakaostart"))
             return true;
+
         if(path.startsWith("/members/kakaoLogin"))
             return true;
+
         if(path.startsWith("/favicon.ico"))
             return true;
 

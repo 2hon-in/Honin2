@@ -1,8 +1,8 @@
 package com.team2.honin.honinserver.security.handler;
 
 import com.google.gson.Gson;
-import com.himedia.spserver.dto.MemberDTO;
-import com.himedia.spserver.security.util.JWTUtil;
+import com.team2.honin.honinserver.dto.MemberDTO;
+import com.team2.honin.honinserver.security.util.JWTUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
