@@ -13,7 +13,7 @@ import java.util.HashMap;
 //필요한 객체에 의존주입을 자동으로 하는 어노테이션, 주로 final 로 생성되는 객체에 사용됩니다.
 // autowired 는 필요한 객체 선언 위에 개별로 작성했다면, 이는 현위치에 한번만 사용하면 내부에 모든 static final 객체에 일괄 적용됩니다.
 @RequiredArgsConstructor
-@RequestMapping("/members")
+@RequestMapping("/member")
 public class MailController {
     private final MailService mailService;
     private int number;
@@ -26,7 +26,7 @@ public class MailController {
             number = mailService.sendMail(email);
             String num = String.valueOf(number); // int 형 정수로 받은 number 를 String 로 변경
             result.put("message", "OK");
-            // result.put("number", num);
+            result.put("number", num);
         }catch(Exception e){
             result.put("message", "이메일 전송에 실패하였습니다.");
         }
