@@ -16,13 +16,10 @@ public class SReply {
     @Column(name = "snum")
     private Integer sNum;
 
-    @Column(name = "seller", length = 50)
-    private String seller;
-
     @Column(name = "content", length = 500)
     private String content;
 
-    @Column(name = "writedate")
+    @Column(name = "writedate", columnDefinition = "timestamp default now()")
     @CreationTimestamp
     private Date writeDate;
 

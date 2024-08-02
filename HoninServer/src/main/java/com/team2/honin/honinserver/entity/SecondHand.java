@@ -3,6 +3,7 @@ package com.team2.honin.honinserver.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -11,6 +12,7 @@ import java.sql.Date;
 
 @Data
 @Entity
+@Table(name = "secondhand")
 public class SecondHand {
 
     @Id
@@ -26,7 +28,7 @@ public class SecondHand {
     @Column(name = "content", columnDefinition = "text")
     private String content;
 
-    @Column(name = "writedate")
+    @Column(name = "writedate", columnDefinition = "timestamp default now()")
     @CreationTimestamp
     private Date writeDate;
 

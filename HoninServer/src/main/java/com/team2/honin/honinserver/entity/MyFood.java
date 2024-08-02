@@ -1,6 +1,9 @@
 package com.team2.honin.honinserver.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -8,7 +11,7 @@ import java.sql.Date;
 
 @Data
 @Entity
-@Table
+@Table(name = "myfood")
 public class MyFood {
     @Id
     @Column(name = "mfnum")
@@ -25,7 +28,7 @@ public class MyFood {
     private Date exdate;
 
     @CreationTimestamp
-    @Column(name = "indate", columnDefinition = "datetime default now()")
+    @Column(name = "indate", columnDefinition = "timestamp default now()")
     private Date indate;
 
     @Column(name = "image", length = 1000)
