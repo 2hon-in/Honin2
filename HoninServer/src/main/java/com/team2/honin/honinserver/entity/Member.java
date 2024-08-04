@@ -2,10 +2,9 @@ package com.team2.honin.honinserver.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.groups.Default;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.ArrayList;
@@ -59,8 +58,9 @@ public class Member {
     @Column(name = "address3", length = 100)
     private String address3;
 
-    @Column(name = "userstate", columnDefinition = "char(1) default 'Y'")
-    private String userstate;
+    @NotNull
+    @Column(name = "userstate", columnDefinition = "char(1) NOT NULL default 'Y'")
+    private String userstate = "Y";
 
     @Column(name = "zipnum", length = 15)
     private String zipnum;

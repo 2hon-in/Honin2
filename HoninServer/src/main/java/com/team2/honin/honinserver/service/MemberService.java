@@ -37,4 +37,13 @@ public class MemberService {
     public void insertMember(Member member) {
         mr.save(member);
     }
+
+    public Member getMemberBySnsid(String id) {
+        Optional<Member> mem = mr.findBySnsid(id);
+        if( !mem.isPresent() ){
+            return null;
+        }else {
+            return mem.get();
+        }
+    }
 }

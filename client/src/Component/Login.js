@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useSelector, useDispatch } from 'react-redux';
 import { loginAction, setFollowers, setFollowings } from './store/userSlice';
 import jaxios from './util/jwtUtil';
 import { setCookie, getCookie } from "./util/cookieUtil"
+import './style/form.css'
 
 
 function Login() {
+
     const [nickname, setNickname] = useState('');
     const [password, setPassword] = useState('');
-    const dispatch = useDispatch();  // 쓰기를 위한 함수 생성
+    const dispatch = useDispatch();  
     const navigate = useNavigate();
 
     async function onLoginLocal(){
@@ -25,22 +26,27 @@ function Login() {
                 dispatch( loginAction( result.data ) );
                 setCookie("user", JSON.stringify(result.data), 1);
                 
-                navigate('/main')
+                navigate('/')
             }
             
         }catch(err){ console.error(err)}
     }
 
     return (
-        <div className="loginform">
-            <div className='field'>
-                <label>Nickname</label>
-                <input type="text" value={nickname} onChange={(e)=>{ setNickname(e.currentTarget.value) }}/>
+        <div className="form">
+            <div className="fontlogo">Login</div>
+            <div className='block'></div>
+            <div className='inputform'>
+                <div className='field'>
+                    <label >Nickname</label>
+                    <input type="text" value={nickname} onChange={(e)=>{ setNickname(e.currentTarget.value) }}/>
+                </div>
+                <div className='field'>
+                    <label>Password</label>
+                    <input type="password" value={password} onChange={(e)=>{ setPassword(e.currentTarget.value) }}/>
+                </div>
             </div>
-            <div className='field'>
-                <label>PASSWORD</label>
-                <input type="password" value={password} onChange={(e)=>{ setPassword(e.currentTarget.value) }}/>
-            </div>
+            <div className='block'></div>
             <div className='btns'>
                 <button onClick={ ()=>{ onLoginLocal() } }>LOGIN</button>
                 <button onClick={ ()=>{ navigate('/join') } }>JOIN</button>
@@ -48,8 +54,10 @@ function Login() {
             <div className='snslogin'>
                 <button onClick={()=>{
                     window.location.href='http://localhost:8070/member/kakaostart';
-                }}>KAKAO</button>
-                <button>NAVER</button>
+                }} style={{backgroundColor:"#fae100", color:"black"}}>KAKAO</button>
+                <button onClick={()=>{
+                    window.location.href='http://localhost:8070/member/naverstart'
+                }}style={{backgroundColor:"#06cc80", color:"white"}}>NAVER</button>
             </div>
         </div>
     )

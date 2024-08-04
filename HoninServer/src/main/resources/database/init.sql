@@ -89,3 +89,6 @@ ADD CONSTRAINT `freply_f2`
   REFERENCES `honin`.`fboard` (`fnum`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
+
+ALTER TABLE member
+    MODIFY userstate CHAR(1) NOT NULL DEFAULT 'Y';
