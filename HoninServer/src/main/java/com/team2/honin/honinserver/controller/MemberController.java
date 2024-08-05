@@ -213,8 +213,8 @@ public class MemberController {
         Member member = ms.getMemberBySnsid(kakaoProfile.getId());
         if (member == null) {
             member = new Member();
-            //member.setEmail( pf.getNickname() );
-            member.setEmail(ac.getEmail());  // 전송된 이메일이 없으면 pf.getNickname()
+            member.setEmail( pf.getNickname() );
+//            member.setEmail(ac.getEmail());  // 전송된 이메일이 없으면 pf.getNickname()
             member.setNickname(pf.getNickname());
             member.setProvider("kakao");
             PasswordEncoder pe = cc.passwordEncoder();  // 비밀번호 암호화 도구
