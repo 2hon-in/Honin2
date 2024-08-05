@@ -1,0 +1,102 @@
+.menu-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-bar > .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 25rem;
+}
+
+.menu-bar > .menu-item {
+    margin: 0 0.5rem;
+    font-size: 1.1rem;
+    /* font-weight: bold; */
+    cursor: pointer;
+    padding: 0.3rem 0.6rem;
+}
+
+/* .menu-bar > .menu-item:nth-child(1) {
+    margin-left: 50px;
+} */
+
+.menu-bar > .menu-item:hover {
+    background-color: #f0f0f0;
+}
+
+.menu-bar > .buttons {
+    display: flex;
+    margin-left: 12.5rem;
+}
+
+.menu-bar > .buttons > button {
+    margin-left: 0.6rem;
+    padding: 0.3rem 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.menu-bar > .buttons > .signup {
+    background-color: #333;
+    color: white;
+    border: none;
+}
+
+@font-face {
+    font-family: 'CustomFont';
+    src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap') format('truetype');
+}
+
+body {
+    font-family: 'CustomFont', 'Malgun Gothic', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background-color: #f9f9f9;
+}
+
+
+
+.content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item {
+    background-color: #4682B4;
+    color: white;
+    margin: 5px;
+    padding: 10px;
+    flex: 1 1 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
+.large-item {
+    flex: 2 1 60%;
+    height: 200px;
+}
+
+.footer {
+    background-color: #ccc;
+    padding: 10px;
+    text-align: center;
+}
+.menu-bar > .buttons > button:hover {
+    opacity: 0.8;
+}
