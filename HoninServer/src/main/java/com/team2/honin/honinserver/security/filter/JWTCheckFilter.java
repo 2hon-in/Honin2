@@ -125,7 +125,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         if(path.startsWith("/member/naverLogin"))
             return true;
 
-        if(path.startsWith("/board/getSecondhandList"))
+        if(path.startsWith("/secondhand/getSecondhandList"))
             return true;
 
         return false;

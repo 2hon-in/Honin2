@@ -18,6 +18,7 @@ function Kakaosaveinfo() {
             axios.post('/api/member/loginlocal', null, {params:{username:nickname, password:'kakao'}} )
             .then((result=>{
                 if( result.data.error == 'ERROR_LOGIN' ){
+                    console.log("dd?"+result)
                     return alert("이메일 또는 패스워드 오류입니다");
                 }else{
                     console.log('kakaoUser', result.data );

@@ -21,6 +21,7 @@ function Login() {
         try{
             const result = await axios.post('/api/member/loginlocal', null, {params:{username:nickname, password}} )
             if( result.data.error == 'ERROR_LOGIN' ){
+                console.log("a" + result.data);
                 return alert("이메일 또는 패스워드 오류입니다");
             }else{
                 console.log('result.data', result.data );

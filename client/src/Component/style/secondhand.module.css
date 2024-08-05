@@ -11,7 +11,7 @@ h1 {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, 1fr); /* 네 개의 열로 설정 */
     gap: 20px;
     padding: 20px;
 }
@@ -68,4 +68,23 @@ blockquote {
 .description {
     font-size: 0.9rem;
     color: #777;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr); /* 화면이 줄어들면 세 개의 열로 변경 */
+    }
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr); /* 화면이 더 줄어들면 두 개의 열로 변경 */
+    }
+}
+
+@media (max-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(1, 1fr); /* 화면이 더 줄어들면 한 개의 열로 변경 */
+    }
 }

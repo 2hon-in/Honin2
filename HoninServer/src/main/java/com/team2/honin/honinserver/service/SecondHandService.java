@@ -10,13 +10,12 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CommunityService {
+public class SecondHandService {
 
     @Autowired
     SecondhandRepository shr;
 
-
-    public List<SecondHand> getSecondhandList(Integer snum) {
-        return shr.findBySnumOrderBySnumDesc(snum);
+    public List<SecondHand> getSecondhandList() {
+        return shr.findAllByOrderBySnumDesc();
     }
 }
