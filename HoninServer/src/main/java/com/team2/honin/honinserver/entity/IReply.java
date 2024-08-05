@@ -10,7 +10,7 @@ import java.sql.Date;
 
 @Data
 @Entity
-public class Ireply {
+public class IReply {
     @Id
     @Column(name = "irnum")
     private Integer irnum;

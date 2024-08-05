@@ -38,10 +38,4 @@ public class SecondHand {
 
     @Column(name = "price")
     private Integer price;
-
-    @Column(name = "savefilename", length = 1000)
-    private String savefilename;
-
-    @Column(name = "image", length = 1000)
-    private String image;
 }

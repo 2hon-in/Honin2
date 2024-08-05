@@ -8,7 +8,8 @@ import java.sql.Date;
 
 @Data
 @Entity
-public class Ctipreply {
+@Table(name = "ctipreply")
+public class CtipReply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ctrnum")

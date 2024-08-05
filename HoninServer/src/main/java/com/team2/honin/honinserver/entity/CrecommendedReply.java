@@ -8,6 +8,7 @@ import java.sql.Date;
 
 @Data
 @Entity
+@Table(name = "crecommendedreply")
 public class CrecommendedReply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

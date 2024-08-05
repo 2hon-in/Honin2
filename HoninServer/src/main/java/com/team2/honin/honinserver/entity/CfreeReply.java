@@ -8,6 +8,7 @@ import java.sql.Date;
 
 @Data
 @Entity
+@Table(name = "cfreereply")
 public class CfreeReply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
