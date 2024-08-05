@@ -118,10 +118,6 @@ ADD INDEX `ireply_f2_idx` (`inum` ASC) VISIBLE;
 ;
 
 ALTER TABLE `honin`.`ireply`
-ADD INDEX `ireply_f1_idx` (`writer` ASC) VISIBLE,
-ADD INDEX `ireply_f2_idx` (`inum` ASC) VISIBLE;
-;
-ALTER TABLE `honin`.`ireply`
 ADD CONSTRAINT `ireply_f1`
   FOREIGN KEY (`writer`)
   REFERENCES `honin`.`member` (`nickname`)
