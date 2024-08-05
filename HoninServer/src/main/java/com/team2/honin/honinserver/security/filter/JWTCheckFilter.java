@@ -77,57 +77,27 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
         log.info("check uri.............." + path);
 
-        if(request.getMethod().equals("OPTIONS"))
+        if(request.getMethod().equals("OPTIONS")
+                || path.startsWith("/member/loginlocal")
+                || path.startsWith("/images")
+                || path.startsWith("/uploads")
+                || path.startsWith("/member/sendMail")
+                || path.startsWith("/member/codeCheck")
+                || path.startsWith("/member/join")
+                || path.startsWith("/member/emailCheck")
+                || path.startsWith("/member/nickNameCheck")
+                || path.startsWith("/member/fileupload")
+                || path.startsWith("/member/kakaostart")
+                || path.startsWith("/member/kakaoLogin")
+                || path.startsWith("/favicon.ico")
+                || path.startsWith("/member/refresh")
+                || path.startsWith("/member/naverstart")
+                || path.startsWith("/member/naverLogin")
+                || path.startsWith("/board/getSecondhandList")
+                || path.startsWith("/community/getPostList")
+        ){
             return true;
-
-        if(path.startsWith("/member/loginlocal"))
-            return true;
-
-        if(path.startsWith("/images"))
-            return true;
-
-        if(path.startsWith("/uploads"))
-            return true;
-
-        if(path.startsWith("/member/sendMail"))
-            return true;
-
-        if(path.startsWith("/member/codeCheck"))
-            return true;
-
-        if(path.startsWith("/member/join"))
-            return true;
-
-        if(path.startsWith("/member/emailCheck"))
-            return true;
-
-        if(path.startsWith("/member/nickNameCheck"))
-            return true;
-
-        if(path.startsWith("/member/fileupload"))
-            return true;
-
-        if(path.startsWith("/member/kakaostart"))
-            return true;
-
-        if(path.startsWith("/member/kakaoLogin"))
-            return true;
-
-        if(path.startsWith("/favicon.ico"))
-            return true;
-
-        if(path.startsWith("/member/refresh"))
-            return true;
-
-        if(path.startsWith("/member/naverstart"))
-            return true;
-
-        if(path.startsWith("/member/naverLogin"))
-            return true;
-
-        if(path.startsWith("/board/getSecondhandList"))
-            return true;
-
+        }
         return false;
 
     }
