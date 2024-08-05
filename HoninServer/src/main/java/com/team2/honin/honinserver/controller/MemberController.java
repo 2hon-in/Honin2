@@ -48,51 +48,59 @@ public class MemberController {
             @PathVariable("refreshToken") String refreshToken
     ) throws CustomJWTException {
 
-        if (refreshToken == null) throw new CustomJWTException("NULL_REFRASH");
-        if (authHeader == null || authHeader.length() < 7)
+        if (refreshToken == null) throw new CustomJWTException("NULL_REFRESH_TOKEN");
+        if (authHeader == null || !authHeader.startsWith("Bearer ") || authHeader.length() < 7)
             throw new CustomJWTException("INVALID_HEADER");
 
-        //추출한 내용의 7번째 글자부터 끝까지 추출
+        // Extract the access token from the header
         String accessToken = authHeader.substring(7);
 
-        if (checkExpiredToken(accessToken)) {  // 기간이 지나면 false, 안지났으면  true 리턴
-            log.info("그대로 사용");
+        // Check if the access token is expired
+        if (checkExpiredToken(accessToken)) {
+            log.info("Access token is still valid");
             return Map.of("accessToken", accessToken, "refreshToken", refreshToken);
         } else {
+            // Validate the refresh token
+            Map<String, Object> claims;
+            try {
+                claims = JWTUtil.validateToken(refreshToken);
+            } catch (CustomJWTException ex) {
+                throw new CustomJWTException("INVALID_REFRESH_TOKEN");
+            }
 
-            // accessToken 기간 만료시  refresh 토큰으로 재 검증하여 사용자 정보 추출
-            Map<String, Object> claims = JWTUtil.validateToken(refreshToken);
-
-
-            // 토큰 교체
+            // Generate new tokens
             String newAccessToken = JWTUtil.generateToken(claims, 1);
             String newRefreshToken = "";
-            //if(  checkTime( (Integer)claims.get("exp") )  )
-            newRefreshToken = JWTUtil.generateToken(claims, 60 * 24);
-            //else
-            //    newRefreshToken = refreshToken;
+
+            // Generate a new refresh token if needed
+            if (checkTime((Integer) claims.get("exp"))) {
+                newRefreshToken = JWTUtil.generateToken(claims, 60 * 24);
+            } else {
+                newRefreshToken = refreshToken;
+            }
 
             return Map.of("accessToken", newAccessToken, "refreshToken", newRefreshToken);
         }
     }
 
     private boolean checkTime(Integer exp) {
-        java.util.Date expDate = new java.util.Date((long) exp * (1000));//밀리초로 변환
-        long gap = expDate.getTime() - System.currentTimeMillis();//현재 시간과의 차이 계산
-        long leftMin = gap / (1000 * 60); //분단위 변환
-        //1시간도 안남았는지..
+        java.util.Date expDate = new java.util.Date((long) exp * 1000); // Convert seconds to milliseconds
+        long gap = expDate.getTime() - System.currentTimeMillis(); // Time difference
+        long leftMin = gap / (1000 * 60); // Convert to minutes
+        // Check if less than 60 minutes remaining
         return leftMin < 60;
     }
 
-
-    private boolean checkExpiredToken(String accessToken) {
+    private boolean checkExpiredToken(String accessToken) throws CustomJWTException {
         try {
             JWTUtil.validateToken(accessToken);
+            return true;
         } catch (CustomJWTException ex) {
             if (ex.getMessage().equals("Expired")) return false;
+            throw ex; // Rethrow other exceptions
         }
-        return true;
     }
+
 
     @Autowired
     ServletContext context;
@@ -148,7 +156,6 @@ public class MemberController {
         return result;
     }
 
-
     @Value("${kakao.client_id}")
     private String client_id;
     @Value("${kakao.redirect_uri}")
@@ -164,7 +171,6 @@ public class MemberController {
         return a;
     }
 
-
     @RequestMapping("/kakaoLogin")
     public void loginKakao(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String code = request.getParameter("code");
@@ -179,45 +185,46 @@ public class MemberController {
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
         conn.setDoOutput(true);
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream(), "UTF-8"));
-        bw.write(bodyData);
-        bw.flush();
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-        String input = "";
-        StringBuilder sb = new StringBuilder();
-        while ((input = br.readLine()) != null) {
-            sb.append(input);
+        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream(), "UTF-8"))) {
+            bw.write(bodyData);
+            bw.flush();
         }
+
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
+            String input;
+            while ((input = br.readLine()) != null) {
+                sb.append(input);
+            }
+        }
+
         Gson gson = new Gson();
-        OAuthToken oAuthToken = gson.fromJson(sb.toString(), OAuthToken.class);
+        OAuthToken.KakaoOAuthToken oAuthToken = gson.fromJson(sb.toString(), OAuthToken.KakaoOAuthToken.class);
         String endpoint2 = "https://kapi.kakao.com/v2/user/me";
         URL url2 = new URL(endpoint2);
 
         HttpsURLConnection conn2 = (HttpsURLConnection) url2.openConnection();
         conn2.setRequestProperty("Authorization", "Bearer " + oAuthToken.getAccess_token());
         conn2.setDoOutput(true);
-        BufferedReader br2 = new BufferedReader(new InputStreamReader(conn2.getInputStream(), "UTF-8"));
-        String input2 = "";
         StringBuilder sb2 = new StringBuilder();
-        while ((input2 = br2.readLine()) != null) {
-            sb2.append(input2);
-            System.out.println(input2);
+        try (BufferedReader br2 = new BufferedReader(new InputStreamReader(conn2.getInputStream(), "UTF-8"))) {
+            String input2;
+            while ((input2 = br2.readLine()) != null) {
+                sb2.append(input2);
+            }
         }
+
         Gson gson2 = new Gson();
         KakaoProfile kakaoProfile = gson2.fromJson(sb2.toString(), KakaoProfile.class);
         KakaoProfile.KakaoAccount ac = kakaoProfile.getAccount();
         KakaoProfile.KakaoAccount.Profile pf = ac.getProfile();
-        System.out.println("id : " + kakaoProfile.getId());
-        System.out.println("KakaoAccount-Email : " + ac.getEmail());
-        System.out.println("Profile-Nickname : " + pf.getNickname());
+
         Member member = ms.getMemberBySnsid(kakaoProfile.getId());
         if (member == null) {
             member = new Member();
-            //member.setEmail( pf.getNickname() );
-            member.setEmail(ac.getEmail());  // 전송된 이메일이 없으면 pf.getNickname()
             member.setNickname(pf.getNickname());
             member.setProvider("kakao");
-            PasswordEncoder pe = cc.passwordEncoder();  // 비밀번호 암호화 도구
+            PasswordEncoder pe = cc.passwordEncoder();
             member.setPassword(pe.encode("kakao"));
             member.setSnsid(kakaoProfile.getId());
 
@@ -227,15 +234,14 @@ public class MemberController {
         response.sendRedirect("http://localhost:3000/kakaosaveinfo/" + nick);
     }
 
+    @Value("naver.client_id")
+    String naverClientId;
 
-    @Value("${naver.client_id}")
-    private String naverClientId;
+    @Value("naver.client_secret")
+    String naverClientSecret;
 
-    @Value("${naver.redirect_uri}")
-    private String naverRedirectUri;
-
-    @Value("${naver.client_secret}")
-    private String naverClientSecret;
+    @Value("naver.redirect_uri")
+    String naverRedirectUri;
 
     @GetMapping("/naverstart")
     public ModelAndView naverstart(HttpServletRequest request) {
@@ -253,6 +259,7 @@ public class MemberController {
         return new ModelAndView("redirect:" + loginUrl);
     }
 
+
     @GetMapping("/naverLogin")
     public void naverLogin(@RequestParam("code") String code,
                            @RequestParam("state") String state,
@@ -260,9 +267,7 @@ public class MemberController {
                            HttpServletResponse response) throws IOException {
         String sessionState = (String) request.getSession().getAttribute("state");
 
-        // CSRF 보호를 위해 state 값 비교
         if (state == null || !state.equals(sessionState)) {
-            System.out.println("세션 불일치");
             response.sendRedirect("/error");
             return;
         }
@@ -294,7 +299,7 @@ public class MemberController {
         }
 
         Gson gson = new Gson();
-        OAuthToken oAuthToken = gson.fromJson(sb.toString(), OAuthToken.class);
+        OAuthToken.NaverOAuthToken oAuthToken = gson.fromJson(sb.toString(), OAuthToken.NaverOAuthToken.class);
         String endpoint2 = "https://openapi.naver.com/v1/nid/me";
         URL url2 = new URL(endpoint2);
 
@@ -306,30 +311,12 @@ public class MemberController {
             String input2;
             while ((input2 = br2.readLine()) != null) {
                 sb2.append(input2);
-                System.out.println(input2);
             }
         }
 
         Gson gson2 = new Gson();
         NaverProfile naverProfile = gson2.fromJson(sb2.toString(), NaverProfile.class);
-
-        if (naverProfile == null || naverProfile.getResponse() == null) {
-            System.out.println("Naver profile or response is null");
-            response.sendRedirect("/error");
-            return;
-        }
-
         NaverProfile.Response ac = naverProfile.getResponse();
-        if (ac == null) {
-            System.out.println("Account is null");
-            response.sendRedirect("/error");
-            return;
-        }
-
-        System.out.println("Naver Profile Response: " + sb2.toString());
-        System.out.println("id : " + ac.getId());
-        System.out.println("NaverAccount-Email : " + ac.getEmail());
-        System.out.println("Profile-Nickname : " + ac.getNickname());
 
         Member member = ms.getMemberBySnsid(ac.getId());
         if (member == null) {

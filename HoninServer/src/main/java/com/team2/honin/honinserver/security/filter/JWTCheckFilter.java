@@ -32,7 +32,6 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             Map<String, Object> claims = JWTUtil.validateToken(accessToken);
             log.info("JWT claims: " + claims);
 
-            String username = (String) claims.get("username");
             String password = (String) claims.get("password");
             String nickname = (String) claims.get("nickname");
             String email = (String) claims.get("email");
@@ -48,7 +47,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             String userstate = (String) claims.get("userstate");
             String zipnum = (String) claims.get("zipnum");
             List<String> roleNames = (List<String>) claims.get("roleNames");
-            MemberDTO memberDTO = new MemberDTO( username, password, nickname, email, phone, profileimg,
+            MemberDTO memberDTO = new MemberDTO( password, nickname, email, phone, profileimg,
                     profilemsg, provider, snsid, indate,address1, address2, address3, userstate, zipnum, roleNames);
             log.info("-----------------------------------");
             log.info(memberDTO);
@@ -83,6 +82,9 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         if(path.startsWith("/member/loginlocal"))
             return true;
 
+        if(path.startsWith("/refresh"))
+            return true;
+
         if(path.startsWith("/images"))
             return true;
 
@@ -114,9 +116,6 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             return true;
 
         if(path.startsWith("/favicon.ico"))
-            return true;
-
-        if(path.startsWith("/member/refresh"))
             return true;
 
         if(path.startsWith("/member/naverstart"))

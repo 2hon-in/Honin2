@@ -10,7 +10,7 @@ function Header() {
     const dispatch = useDispatch();
     const loginUser = useSelector(state => state.user.accessToken);
 
-    function onLogout() {
+    function Logout() {
         dispatch(logoutAction());
         removeCookie("user")
         navigate('/');
@@ -32,7 +32,7 @@ function Header() {
                 <div className={s.buttons}>
                     {
                         (!loginUser) ? (<button className={s.login} onClick={() => { navigate('/login') }}>로그인</button>) :
-                            (<button className={s.login} onClick={() => { onLogout() }}>로그아웃</button>)
+                            (<button className={s.login} onClick={() => { Logout() }}>로그아웃</button>)
                     }
                     <button className={s.signup} onClick={() => { navigate('/join') }}>회원가입</button>
                 </div>

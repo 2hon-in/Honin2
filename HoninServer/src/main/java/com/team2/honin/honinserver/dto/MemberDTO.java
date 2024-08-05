@@ -1,6 +1,5 @@
 package com.team2.honin.honinserver.dto;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
@@ -18,7 +17,6 @@ public class MemberDTO extends User {
             String profileimg,
             String profilemsg,
             String provider,
-            String snsid,
             Date indate,
             String address1,
             String address2,
@@ -33,9 +31,8 @@ public class MemberDTO extends User {
            // ROLE_USER, ROLE_ADMIN, ROLE_MANAGER  와 같은 String 데이터 생성
         );
        // 생성자 전달된 전달인수들은 멤버변수에 저장
-        this.username = username;
+        this.nickname = username;
         this.password = password;
-        this.nickname = nickname;
         this.email = email;
         this.phone = phone;
         this.profileimg = profileimg;
@@ -52,7 +49,6 @@ public class MemberDTO extends User {
 
     }
 
-    private String username;
     private String password;
     private String nickname;
     private String email;
@@ -74,7 +70,6 @@ public class MemberDTO extends User {
     // 암호화 jwt 토근 생성시에 그 Map을 통채로 암호화합니다
     public Map<String, Object> getClaims() {
         Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("username", username);
         dataMap.put("password", password);
         dataMap.put("nickname", nickname);
         dataMap.put("email", email);

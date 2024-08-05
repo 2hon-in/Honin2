@@ -23,9 +23,6 @@ public class Member {
     @Column(name = "nickname", length = 50)
     private String nickname;
 
-    @Column(name = "username", length = 50)
-    private String username;
-
     @Column(name = "password", length = 1000)
     private String password;
 
@@ -67,6 +64,8 @@ public class Member {
     @Column(name = "zipnum", length = 15)
     private String zipnum;
 
+
+    @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default // Default:new ArrayList<>() 비어있는 리스트로 객체 저장
     private List<MemberRole> memberRoleList = new ArrayList<MemberRole>();
