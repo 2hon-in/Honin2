@@ -8,7 +8,6 @@ function Header() {
     return (
 
         <div>
-            <body>
                 <div class="menu-bar">
                     <div class="logo">
                         <img src="http://localhost:8070/images/honin.png" style={{width:"70px", height:"50px", lineHeight:"50px", cursor:"pointer"}}/>
@@ -22,7 +21,6 @@ function Header() {
                         <button class="signup" onClick={()=>{navigate('/join')}}>회원가입</button>
                     </div>
                 </div>
-            </body>
         </div>
     )
 }

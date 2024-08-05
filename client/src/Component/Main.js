@@ -13,7 +13,6 @@ function Main() {
       </div>
       <section>
           <div className="container">
-            
           </div>
       </section>
       <Footer></Footer>

@@ -11,7 +11,7 @@ ADD CONSTRAINT `myfood_f1`
 ALTER TABLE `honin`.`infoshare`
 ADD INDEX `infoshare_f1_idx` (`writer` ASC) VISIBLE;
 
-ALTER TABLE `honin`.`infoshare`
+ALTER TABLE `honin`.`infoshare``
 ADD CONSTRAINT `infoshare_f1`
   FOREIGN KEY (`writer`)
   REFERENCES `honin`.`member` (`nickname`)
