@@ -14,10 +14,11 @@ function Naversaveinfo() {
 
     useEffect(
         ()=>{
-            console.log(nickname);
+            console.log("naver nickname : ", nickname);
             axios.post('/api/member/loginlocal', null, {params:{username:nickname, password:'naver'}} )
             .then((result=>{
                 if( result.data.error == 'ERROR_LOGIN' ){
+                    console.log("result : ", result);
                     return alert("이메일 또는 패스워드 오류입니다");
                 }else{
                     console.log('naverUser', result.data );
