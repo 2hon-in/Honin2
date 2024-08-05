@@ -1,9 +1,21 @@
 import React from 'react'
 import {useNavigate } from 'react-router-dom'
+import { loginAction, logoutAction } from '../store/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {removeCookie, getCookie, setCookie} from '../util/cookieUtil'
 
 function Header() {
 
     const navigate = useNavigate();
+    const loginUser = useSelector(state=>state.user);
+    const dispatch = useDispatch();
+
+    function onLogout(){
+        dispatch( logoutAction() );
+        removeCookie("user")
+        navigate('/'); 
+    }
+
 
     return (
 
@@ -17,7 +29,10 @@ function Header() {
                     <div class="menu-item">우리동네맛집</div>
                     <div class="menu-item" onClick={()=>{navigate('/secondhand')}}>중고거래</div>
                     <div class="buttons">
-                        <button class="login" onClick={()=>{navigate('/login')}}>로그인</button>
+                        {
+                            (!loginUser)?(<button class="login" onClick={()=>{navigate('/login')}}>로그인</button>):
+                            (<button class="login" onClick={()=>{onLogout()}}>로그아웃</button>)
+                        }
                         <button class="signup" onClick={()=>{navigate('/join')}}>회원가입</button>
                     </div>
                 </div>
