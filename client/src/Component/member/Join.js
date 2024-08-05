@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import DaumPostcode  from 'react-daum-postcode'
 import Modal from "react-modal"
 import jaxios from '../util/jwtUtil'
+import s from "../style/form.module.css"
 
 function Join() {
 
@@ -118,19 +119,19 @@ function Join() {
     }
 
     return (
-        <div className='form'>
-            <div className="fontlogo">Member Join</div>
-            <div className='block'></div>
-            <div className='inputform'>
-                <div className='field'>
+        <div className={s.form}>
+            <div className={s.fontlogo}>Member Join</div>
+            <div className={s.block}></div>
+            <div className={s.inputform}>
+                <div className={s.field}>
                     <label>Nickname</label>
                     <input type="text"  value={nickname} onChange={(e)=>{ setNickname( e.currentTarget.value ) }}/>
                 </div><br/>
-                <div className='field'>
+                <div className={s.field}>
                     <label>Email</label>
                     <input type="text" value={email} onChange={(e)=>{ setEmail( e.currentTarget.value ) }}/>
                 </div>
-                <div className='field'>
+                <div className={s.field}>
                     <label>Email Confirm</label>
                     <input type="text" value={email} onChange={(e)=>{setEmail( e.currentTarget.value)}}/>
                         <button onClick={()=>{sendMail()}}>SEND MAIL</button>
@@ -138,23 +139,23 @@ function Join() {
                         <button onClick={()=>{codeCheck()}}>코드확인</button>
                         <div style={{flex:"1", color:"blue", fontSize:"0.8rem"}}>&nbsp;&nbsp;{msg}</div>
                 </div>    
-                <div className='field'>
+                <div className={s.field}>
                     <label>Password</label>
                     <input type="password" value={password} onChange={(e)=>{ setPassword( e.currentTarget.value ) } }/>
                 </div>
-                <div className='field'>
+                <div className={s.field}>
                     <label>Retype Pass</label>
                     <input type="password" value={pwdChk} onChange={(e)=>{ setPwdChk( e.currentTarget.value ) }}/>
                 </div>
-                <div className='field'>
+                <div className={s.field}>
                     <label>Name</label>
                     <input type="text"  value={username} onChange={(e)=>{ setUsername( e.currentTarget.value ) }}/>
                 </div>
-                <div className='field'>
+                <div className={s.field}>
                     <label>Phone</label>
                     <input type="text" value={phone} onChange={(e)=>{ setPhone( e.currentTarget.value ) }}/>
                 </div>
-                <div className="field">
+                <div className={s.field}>
                     <label>Zip num</label>
                     <input type="text" style={{flex:"2"}} value={zipnum} onChange={(e)=>{setZipnum( e.currentTarget.value )}} readOnly/>
                     <button style={{flex:"1"}} onClick={()=>{toggle()}}>우편번호 찾기</button>
@@ -166,37 +167,37 @@ function Join() {
                         <button onClick={()=>{setIsOpen(!isOpen)}}>닫기</button>
                     </Modal>
                     </div>
-                <div className="field" >
+                <div className={s.field} >
                     <label>Address</label>
                     <input type="text" value={address1} onChange={(e)=>{setAddress1( e.currentTarget.value )}} readOnly/>
                 </div>
-                <div className="field">
+                <div className={s.field}>
                     <label>Detail Address</label>
                     <input type="text" value={address2} onChange={(e)=>{setAddress2( e.currentTarget.value )}} placeholder='상세주소 입력'/>
                 </div>
-                <div className="field">
+                <div className={s.field}>
                     <label>Extra Address</label>
                     <input type="text" value={address3} onChange={(e)=>{setAddress3( e.currentTarget.value );}}/>
                 </div>
-                <div className='field'>
+                <div className={s.field}>
                     <label>Intro</label>
                     <input type="text" value={profilemsg} onChange={(e)=>{ setprofilemsg( e.currentTarget.value ) }}/>
                 </div>
-                <div className='field'>
+                <div className={s.field}>
                     <label>Profile img</label>
-                    <div className='field'>
+                    <div className={s.field}>
                         <input type="file" onChange={(e)=>{ fileupload(e) }}/>
                     </div>
                 </div>
-                <div className='field' style={{alignItems:'flex-start'}}>
+                <div className={s.field} style={{alignItems:'flex-start'}}>
                     <label>Profile img preview</label>
-                    <div className='field'>
+                    <div className={s.field}>
                         <div><img src={imgSrc} style={imgStyle} /></div>
                     </div>
                 </div>
             </div>
-            <div className='block'></div>
-            <div className='btns'>
+            <div className={s.block}></div>
+            <div className={s.btns}>
                 <button onClick={ ()=>{   onSubmit()    }  }>JOIN</button>
                 <button onClick={ ()=>{ navigate('/')   }  }>BACK</button>
             </div>

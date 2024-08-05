@@ -1,64 +1,51 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import jaxios from '../util/jwtUtil';
+import s from '../style/secondhand.module.css';
 
 function Secondhand() {
-
-    const [sboardList, setSboardList] = useState([]);
-    const [ paging, setPaging ] = useState({});
-    const [ beginend, setBeginend ] = useState([]);
+    const [secondhandList, setSecondhandList] = useState([]);
+    const [snum, setSnum] = useState(1);
 
     const navigate = useNavigate();
 
-    useEffect(
-        ()=>{
-            jaxios.get('/api/sboard/getBoardList/1')
-            .then((result)=>{
-                setSboardList( [...result.data.boardList ] );
-                setPaging( result.data.paging );
+    useEffect(() => {
+        if (snum) {
+            jaxios.get(`/api/board/getSecondhandList/${snum}`) 
+                .then((result) => {
+                    setSecondhandList([...result.data.secondhandList]);
+                    console.log(result.data.secondhandList);
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
+    }, [snum]);
 
-                const pageArr = [];
-                for(let i=result.data.paging.beginPage; i<=result.data.paging.endPage; i++){
-                     pageArr.push(i);
-                }
-                setBeginend( [...pageArr] );
-            })
-            .catch((err)=>{console.error(err)})
-        },[]
-    )
-
-    async function onBoardView(num){
-
+    async function onBoardView(num) {
+        // 게시판 상세보기 로직 구현
     }
 
     return (
-
-        <div className='sboardList'>
-            <div className='titlerow'>
-                <div className='titlecol'>번호</div>
-                <div className='titlecol'>제목</div>
-                <div className='titlecol'>글쓴이</div>
-                <div className='titlecol'>작성일</div>
-                <div className='titlecol'>조회수</div>
-            </div>
-            {
-                boardList.map((board, idx)=>{
-                    return (
-                        <div className='row' key={idx}>
-                            <div className='col'>{board.num}</div>
-                            <div className='col' onClick={()=>{
-                                onBoardView( board.num );
-                            }}>{board.title}</div>
-                            <div className='col'>{board.userid}</div>
-                            <div className='col'>{board.writedate}</div>
-                            <div className='col'>{board.readcount}</div>
+        <div className={s.container}>
+            <h1>중고거래</h1>
+            <div className={s.grid}>
+                {secondhandList.map((sh, idx) => (
+                    <div className={s.card} key={sh.snum} onClick={() => onBoardView(sh.num)}>
+                        <div className={s.imagePlaceholder}>사진 {sh.image}</div>
+                        <blockquote>Quote</blockquote>
+                        <div className={s.info}>
+                            <img src={sh.image} alt="Seller" className={s.avatar} />
+                            <div>
+                                <div className={s.title}>{sh.title}</div>
+                                <div className={s.description}>{sh.description}</div>
+                            </div>
                         </div>
-                    )
-                })
-            }
+                    </div>
+                ))}
+            </div>
         </div>
-    )
+    );
 }
 
-export default Secondhand
+export default Secondhand;

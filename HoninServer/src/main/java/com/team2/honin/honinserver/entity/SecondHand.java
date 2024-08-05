@@ -1,9 +1,6 @@
 package com.team2.honin.honinserver.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -17,7 +14,8 @@ public class SecondHand {
 
     @Id
     @Column(name = "snum")
-    private Integer sNum;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer snum;
 
     @Column(name = "seller", length = 50)
     private String seller;
@@ -30,10 +28,10 @@ public class SecondHand {
 
     @Column(name = "writedate", columnDefinition = "timestamp default now()")
     @CreationTimestamp
-    private Date writeDate;
+    private Date writedate;
 
     @Column(name = "readcount")
-    private Integer readCount;
+    private Integer readcount;
 
     @Column(name = "state", columnDefinition = "char(1) default 'Y'")
     private String state;
@@ -42,7 +40,7 @@ public class SecondHand {
     private Integer price;
 
     @Column(name = "savefilename", length = 1000)
-    private String saveFileName;
+    private String savefilename;
 
     @Column(name = "image", length = 1000)
     private String image;

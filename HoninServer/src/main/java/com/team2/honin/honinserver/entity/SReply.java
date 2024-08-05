@@ -11,17 +11,18 @@ import java.sql.Date;
 public class SReply {
     @Id
     @Column(name = "srnum")
-    private Integer srNum;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer srnum;
 
     @Column(name = "snum")
-    private Integer sNum;
+    private Integer snum;
 
     @Column(name = "content", length = 500)
     private String content;
 
     @Column(name = "writedate", columnDefinition = "timestamp default now()")
     @CreationTimestamp
-    private Date writeDate;
+    private Date writedate;
 
     @Column(name = "writer", length = 50)
     private String writer;
