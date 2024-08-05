@@ -12,7 +12,14 @@
 .menu_bar > .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-left: 25rem;
+    margin-left: 13rem;
+}
+
+.menu_bar > .logo > img {
+    width: 4.5rem; 
+    height: 3.2rem; 
+    line-height: 3.2rem; 
+    cursor: pointer;
 }
 
 .menu_bar > .menu_item {
@@ -23,9 +30,9 @@
     padding: 0.3rem 0.6rem;
 }
 
-/* .menu_bar > .menu_item:nth-child(1) {
-    margin-left: 50px;
-} */
+.menu_bar > .menu_item:first-child {
+    margin-left: 30rem;
+}
 
 .menu_bar > .menu_item:hover {
     background-color: #f0f0f0;

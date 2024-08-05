@@ -8,11 +8,11 @@ import java.sql.Date;
 
 @Data
 @Entity
-public class FBoard {
+public class NPolicy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "fnum")
-    private Integer fNum;
+    @Column(name = "npnum")
+    private Integer npnum;
 
     @Column(name = "writer", length = 50)
     private String writer;
@@ -25,14 +25,15 @@ public class FBoard {
 
     @Column(name = "writedate", columnDefinition = "timestamp default now()")
     @CreationTimestamp
-    private Date writeDate;
+    private Date writedate;
 
-    @Column(name = "readcount", columnDefinition = "integer")
-    private Integer readCount;
+    @Column(name = "readcount")
+    private Integer readcount;
 
     @Column(name = "image", length = 1000)
     private String image;
 
     @Column(name = "savefilename", length = 1000)
-    private String saveFileName;
+    private String savefilename;
 }
+

@@ -8,14 +8,14 @@ import java.sql.Date;
 
 @Data
 @Entity
-public class FReply {
-
+public class CfreeReply {
     @Id
-    @Column(name = "frnum")
-    private Integer frnum;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cfrnum")
+    private Integer cfrnum;
 
-    @Column(name = "fnum")
-    private Integer fnum;
+    @Column(name = "cfnum")
+    private Integer cfnum;
 
     @Column(name = "writer", length = 50)
     private String writer;
@@ -26,7 +26,6 @@ public class FReply {
     @CreationTimestamp
     @Column(name = "writedate", columnDefinition = "timestamp default now()")
     private Date writedate;
-
 
 //    @ManyToOne
 //    @JoinColumn(name = "fnum", insertable = false, updatable = false)
