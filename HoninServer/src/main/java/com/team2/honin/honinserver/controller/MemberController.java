@@ -12,7 +12,6 @@ import com.team2.honin.honinserver.service.MemberService;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -353,16 +352,7 @@ public class MemberController {
         return UUID.randomUUID().toString();
     }
 
-    @PostMapping("/logout")
-    public HashMap<String, Object> logout(@RequestParam("loginUser") String loginUser, HttpServletRequest request) {
-        HashMap<String, Object> result = new HashMap<>();
-        HttpSession session = request.getSession();
-        if (session != null) {
-            session.invalidate();
-        }
-        result.put("msg", "ok");
-        return result;
-    }
+
 }
 
 

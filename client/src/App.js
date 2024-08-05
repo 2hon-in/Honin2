@@ -15,7 +15,7 @@ function App() {
           <Route path='/join' element={<Join></Join>} />
           <Route path="/kakaosaveinfo/:nickname" element={<Kakaosaveinfo />} />
           <Route path="/naversaveinfo/:nickname" element={<Naversaveinfo />} />
-          <Route path="/Secondhand" element={<Secondhand />} />
+          <Route path="/secondhand" element={<Secondhand />} />
       </Routes>
     </div>
   );

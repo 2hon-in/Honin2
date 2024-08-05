@@ -80,7 +80,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         if(request.getMethod().equals("OPTIONS"))
             return true;
 
-        if(path.startsWith("/member/loginLocal"))
+        if(path.startsWith("/member/loginlocal"))
             return true;
 
         if(path.startsWith("/images"))

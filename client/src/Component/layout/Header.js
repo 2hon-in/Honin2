@@ -2,13 +2,13 @@ import React from 'react'
 import {useNavigate } from 'react-router-dom'
 import { loginAction, logoutAction } from '../store/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import {removeCookie, getCookie, setCookie} from '../util/cookieUtil'
+import {removeCookie} from '../util/cookieUtil'
 
 function Header() {
 
     const navigate = useNavigate();
-    const loginUser = useSelector(state=>state.user);
     const dispatch = useDispatch();
+    const loginUser = useSelector(state => state.user.accessToken);
 
     function onLogout(){
         dispatch( logoutAction() );
