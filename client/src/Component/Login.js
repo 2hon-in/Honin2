@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginAction, setFollowers, setFollowings } from './store/userSlice';
 import jaxios from './util/jwtUtil';
 import { setCookie, getCookie } from "./util/cookieUtil"
-import './style/form.css'
+import s from './style/form.module.css'
 
 
 function Login() {
@@ -33,25 +33,25 @@ function Login() {
     }
 
     return (
-        <div className="form">
-            <div className="fontlogo">Login</div>
-            <div className='block'></div>
-            <div className='inputform'>
-                <div className='field'>
+        <div className={s.form}>
+            <div className={s.fontlogo}>Login</div>
+            <div className={s.block}></div>
+            <div className={s.inputform}>
+                <div className={s.field}>
                     <label >Nickname</label>
                     <input type="text" value={nickname} onChange={(e)=>{ setNickname(e.currentTarget.value) }}/>
                 </div>
-                <div className='field'>
+                <div className={s.field}>
                     <label>Password</label>
                     <input type="password" value={password} onChange={(e)=>{ setPassword(e.currentTarget.value) }}/>
                 </div>
             </div>
-            <div className='block'></div>
-            <div className='btns'>
+            <div className={s.block}></div>
+            <div className={s.btns}>
                 <button onClick={ ()=>{ onLoginLocal() } }>LOGIN</button>
                 <button onClick={ ()=>{ navigate('/join') } }>JOIN</button>
             </div>
-            <div className='snslogin'>
+            <div className={s.snslogin}>
                 <button onClick={()=>{
                     window.location.href='http://localhost:8070/member/kakaostart';
                 }} style={{backgroundColor:"#fae100", color:"black"}}>KAKAO</button>
