@@ -1,29 +1,26 @@
 package com.team2.honin.honinserver.controller;
 
-import com.team2.honin.honinserver.entity.SecondHand;
 import com.team2.honin.honinserver.service.CommunityService;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
 @RestController
-@Log4j2
-@RequestMapping("/board")
+@RequestMapping("/community")
 public class CommunityController {
 
     @Autowired
     CommunityService cs;
 
-    @GetMapping("/getSecondhandList/{snum}")
-    public HashMap<String, Object> getSecondhandList(@PathVariable("snum") Integer snum) {
-        SecondHand sh = new SecondHand();
-        sh.setSnum(snum);
+    @GetMapping("/getPostList/{tableName}")
+    public HashMap<String, Object> getPostList(@PathVariable("tableName") String tableName){
         HashMap<String, Object> result = new HashMap<>();
-        result.put("secondhandList", cs.getSecondhandList(snum));
+        System.out.println("postList : " + cs.getPostList(tableName));
+        result.put("postList", cs.getPostList(tableName));
         return result;
     }
-
-
 }
