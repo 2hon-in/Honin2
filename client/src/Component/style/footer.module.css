@@ -10,28 +10,28 @@ footer {
     padding: 20px 0;
 }
 
-.footer-links {
+.footer_links {
     margin-bottom: 10px;
 }
 
-.footer-links a {
+.footer_links a {
     color: #333;
     text-decoration: none;
     margin: 0 5px;
 }
 
-.footer-links span {
+.footer_links span {
     color: #ccc;
     margin: 0 5px;
 }
 
-.footer-info {
+.footer_info {
     color: #999;
     font-size: 12px;
     margin-bottom: 10px;
 }
 
-.footer-buttons button {
+.footer_buttons button {
     background-color: #f1f1f1;
     border: none;
     border-radius: 20px;
@@ -41,6 +41,6 @@ footer {
     transition: background-color 0.3s;
 }
 
-.footer-buttons button:hover {
+.footer_buttons button:hover {
     background-color: #ddd;
 }

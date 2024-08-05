@@ -1,4 +1,4 @@
-.menu-bar {
+.menu_bar {
     width: 100%;
     display: flex;
     align-items: center;
@@ -9,13 +9,13 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.menu-bar > .logo {
+.menu_bar > .logo {
     font-size: 1.5rem;
     font-weight: bold;
     margin-left: 25rem;
 }
 
-.menu-bar > .menu-item {
+.menu_bar > .menu_item {
     margin: 0 0.5rem;
     font-size: 1.1rem;
     /* font-weight: bold; */
@@ -23,20 +23,20 @@
     padding: 0.3rem 0.6rem;
 }
 
-/* .menu-bar > .menu-item:nth-child(1) {
+/* .menu_bar > .menu_item:nth-child(1) {
     margin-left: 50px;
 } */
 
-.menu-bar > .menu-item:hover {
+.menu_bar > .menu_item:hover {
     background-color: #f0f0f0;
 }
 
-.menu-bar > .buttons {
+.menu_bar > .buttons {
     display: flex;
     margin-left: 12.5rem;
 }
 
-.menu-bar > .buttons > button {
+.menu_bar > .buttons > button {
     margin-left: 0.6rem;
     padding: 0.3rem 1.5rem;
     border: 1px solid #ddd;
@@ -46,7 +46,7 @@
     font-size: 1rem;
 }
 
-.menu-bar > .buttons > .signup {
+.menu_bar > .buttons > .signup {
     background-color: #333;
     color: white;
     border: none;
@@ -97,6 +97,6 @@ body {
     padding: 10px;
     text-align: center;
 }
-.menu-bar > .buttons > button:hover {
+.menu_bar > .buttons > button:hover {
     opacity: 0.8;
 }

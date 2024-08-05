@@ -1,11 +1,11 @@
 import React from 'react'
-import s from "./style/footer.module.css"
+import s from "../style/footer.module.css"
 
 function Footer() {
     return (
         <>
             <footer>
-                <div className={s.footer-links}>
+                <div className={s.footer_links}>
                     <a href="#">서비스 소개</a>
                     <span>|</span>
                     <a href="#">이용약관</a>
@@ -20,11 +20,11 @@ function Footer() {
                     <span>|</span>
                     <a href="#">신고가이드</a>
                 </div>
-                <div className={s.footer-info}>
+                <div className={s.footer_info}>
                     <p>직업정보제공사업 신고번호 : J12000202300022</p>
                     <p>&copy; 2023 Teamblind. Inc</p>
                 </div>
-                <div className={s.footer-buttons}>
+                <div className={s.footer_buttons}>
                     <button onclick="window.location.href='https://apps.apple.com/app'">APP STORE</button>
                     <button onclick="window.location.href='https://play.google.com/store'">GOOGLE PLAY</button>
                 </div>

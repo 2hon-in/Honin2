@@ -12,7 +12,6 @@ import Footer from "./Component/layout/Footer";
 function App() {
   return (
     <div className="App" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <Header></Header>
         <Routes>
           <Route path='/' element={<Main></Main>} />
           <Route path='/login' element={<Login></Login>} />
@@ -20,11 +19,8 @@ function App() {
           <Route path="/kakaosaveinfo/:nickname" element={<Kakaosaveinfo />} />
           <Route path="/naversaveinfo/:nickname" element={<Naversaveinfo />} />
           <Route path="/secondhand" element={<Secondhand />} />
+          <Route path="/community" element={<Community />} />
         </Routes>
-      <Footer></Footer>
-      <Routes>
-        <Route path="/community" element={<Community />} />
-      </Routes>
     </div>
   );
 }
