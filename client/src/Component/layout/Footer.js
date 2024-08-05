@@ -4,6 +4,8 @@ import s from "../style/footer.module.css"
 function Footer() {
     return (
         <>
+            <p />
+            <hr />
             <footer>
                 <div className={s.footer_links}>
                     <a href="#">서비스 소개</a>
@@ -16,17 +18,16 @@ function Footer() {
                     <span>|</span>
                     <a href="#">인재채용</a>
                     <span>|</span>
-                    <a href="#">블라인드 기업서비스</a>
+                    <a href="#">기업서비스</a>
                     <span>|</span>
                     <a href="#">신고가이드</a>
                 </div>
                 <div className={s.footer_info}>
-                    <p>직업정보제공사업 신고번호 : J12000202300022</p>
-                    <p>&copy; 2023 Teamblind. Inc</p>
+                    <p>고객센터 번호 : 010-1234-5678</p>
+                    <p>&copy; 2024 TeamHonin. Inc</p>
                 </div>
                 <div className={s.footer_buttons}>
-                    <button onclick="window.location.href='https://apps.apple.com/app'">APP STORE</button>
-                    <button onclick="window.location.href='https://play.google.com/store'">GOOGLE PLAY</button>
+                    <button onclick="window.location.href='/'">관리자</button>
                 </div>
             </footer>
         </>

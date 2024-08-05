@@ -1,8 +1,6 @@
 package com.team2.honin.honinserver.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -10,11 +8,11 @@ import java.sql.Date;
 
 @Data
 @Entity
-public class Notice {
-
+public class NCareer {
     @Id
-    @Column(name = "nnum")
-    private Integer nNum;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ncnum")
+    private Integer ncnum;
 
     @Column(name = "writer", length = 50)
     private String writer;
@@ -27,15 +25,14 @@ public class Notice {
 
     @Column(name = "writedate", columnDefinition = "timestamp default now()")
     @CreationTimestamp
-    private Date writeDate;
+    private Date writedate;
 
     @Column(name = "readcount")
-    private Integer readCount;
+    private Integer readcount;
 
     @Column(name = "image", length = 1000)
     private String image;
 
     @Column(name = "savefilename", length = 1000)
-    private String saveFileName;
+    private String savefilename;
 }
-
