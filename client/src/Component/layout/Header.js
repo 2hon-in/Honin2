@@ -25,9 +25,10 @@ function Header() {
                     <img src="http://localhost:8070/images/honin.png" style={{ width: "70px", height: "50px", lineHeight: "50px", cursor: "pointer" }} />
                 </div>
                 <div className={s.menu_item} style={{ marginLeft: "50px" }} onClick={() => { navigate("/community") }}>커뮤니티</div>
-                <div className={s.menu_item}>소식지</div>
-                <div className={s.menu_item}>우리동네맛집</div>
+                <div className={s.menu_item} onClick={()=>{navigate("/notice")}}>소식지</div>
+                <div className={s.menu_item} onClick={()=>{navigate("/restaurant")}}>우리동네맛집</div>
                 <div className={s.menu_item} onClick={() => { navigate('/secondhand') }}>중고거래</div>
+                <div className={s.menu_item} onClick={() => { navigate('/mypage') }}>마이페이지</div>
                 <div className={s.buttons}>
                     {
                         (!loginUser) ? (<button className={s.login} onClick={() => { navigate('/login') }}>로그인</button>) :

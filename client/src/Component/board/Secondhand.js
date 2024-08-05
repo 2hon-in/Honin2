@@ -2,6 +2,8 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import jaxios from '../util/jwtUtil';
+import Header from '../layout/Header';
+import Footer from '../layout/Footer';
 
 function Secondhand() {
 
@@ -13,7 +15,7 @@ function Secondhand() {
 
     useEffect(
         ()=>{
-            jaxios.get('/api/sboard/getBoardList/1')
+            /* jaxios.get('/api/sboard/getBoardList/1')
             .then((result)=>{
                 setSboardList( [...result.data.boardList ] );
                 setPaging( result.data.paging );
@@ -24,7 +26,7 @@ function Secondhand() {
                 }
                 setBeginend( [...pageArr] );
             })
-            .catch((err)=>{console.error(err)})
+            .catch((err)=>{console.error(err)}) */
         },[]
     )
 
@@ -33,31 +35,34 @@ function Secondhand() {
     }
 
     return (
-
-        <div className='sboardList'>
-            <div className='titlerow'>
-                <div className='titlecol'>번호</div>
-                <div className='titlecol'>제목</div>
-                <div className='titlecol'>글쓴이</div>
-                <div className='titlecol'>작성일</div>
-                <div className='titlecol'>조회수</div>
+        <>
+            <Header></Header>
+            <div className='sboardList'>
+                <div className='titlerow'>
+                    <div className='titlecol'>번호</div>
+                    <div className='titlecol'>제목</div>
+                    <div className='titlecol'>글쓴이</div>
+                    <div className='titlecol'>작성일</div>
+                    <div className='titlecol'>조회수</div>
+                </div>
+                {
+                    sboardList.map((board, idx)=>{
+                        return (
+                            <div className='row' key={idx}>
+                                <div className='col'>{board.num}</div>
+                                <div className='col' onClick={()=>{
+                                    onBoardView( board.num );
+                                }}>{board.title}</div>
+                                <div className='col'>{board.userid}</div>
+                                <div className='col'>{board.writedate}</div>
+                                <div className='col'>{board.readcount}</div>
+                            </div>
+                        )
+                    })
+                }
             </div>
-            {
-                boardList.map((board, idx)=>{
-                    return (
-                        <div className='row' key={idx}>
-                            <div className='col'>{board.num}</div>
-                            <div className='col' onClick={()=>{
-                                onBoardView( board.num );
-                            }}>{board.title}</div>
-                            <div className='col'>{board.userid}</div>
-                            <div className='col'>{board.writedate}</div>
-                            <div className='col'>{board.readcount}</div>
-                        </div>
-                    )
-                })
-            }
-        </div>
+            <Footer></Footer>
+        </>
     )
 }
 
