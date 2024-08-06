@@ -1,9 +1,9 @@
 .menu_bar {
-    width: 100%;
+    width: 100vw;
     display: flex;
     align-items: center;
     border: 1px solid #ddd;
-    padding: 1rem 2rem;
+    padding: 1rem 0rem;
     border-radius: 5px;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -12,7 +12,8 @@
 .menu_bar > .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-left: 13rem;
+    margin-left: 6rem;
+    margin-right: 4rem;
 }
 
 .menu_bar > .logo > img {
@@ -40,7 +41,8 @@
 
 .menu_bar > .buttons {
     display: flex;
-    margin-left: 12.5rem;
+    margin-left: 33rem;
+    margin-right: 5rem;
 }
 
 .menu_bar > .buttons > button {
