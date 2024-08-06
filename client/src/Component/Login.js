@@ -37,6 +37,7 @@ function Login() {
 
     return (
         <>
+        <div className={s.section}>
         <Header/>
         <div className={s.form}>
             <div className={s.fontlogo}>Login</div>
@@ -64,6 +65,7 @@ function Login() {
                     window.location.href='http://localhost:8070/member/naverstart'
                 }}style={{backgroundColor:"#06cc80", color:"white"}}>NAVER</button>
             </div>
+        </div>
         </div>
         <Footer/>
         </>

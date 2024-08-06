@@ -1,6 +1,11 @@
 /* secondhand.module.css */
 @import url('//fonts.googleapis.com/earlyaccess/notosanskr.css');
 
+.section {
+    position: relative;
+    width: 100%;
+    top: 5.6rem;
+}
 
 .container {
     text-align: center;

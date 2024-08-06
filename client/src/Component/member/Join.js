@@ -121,6 +121,7 @@ function Join() {
     return (
         <>
         <Header/>
+        <div className={s.section}>
         <div className={s.form}>
             <div className={s.fontlogo}>Member Join</div>
             <div className={s.block}></div>
@@ -199,6 +200,7 @@ function Join() {
                 <button onClick={ ()=>{   onSubmit()    }  }>JOIN</button>
                 <button onClick={ ()=>{ navigate('/')   }  }>BACK</button>
             </div>
+        </div>
         </div>
         <Footer/>
         </>

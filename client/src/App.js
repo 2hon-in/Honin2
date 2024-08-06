@@ -11,6 +11,8 @@ import Restaurant from "./Component/restaurant/Restaurant";
 import Mypage from "./Component/member/Mypage";
 import SecondhandView from "./Component/secondhand/SecondhandView";
 
+
+
 function App() {
   return (
     <div className="App" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
