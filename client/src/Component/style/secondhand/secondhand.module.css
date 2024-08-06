@@ -1,4 +1,3 @@
-/* secondhand.module.css */
 @import url('//fonts.googleapis.com/earlyaccess/notosanskr.css');
 
 .section {
@@ -15,7 +14,7 @@
     font-family: "Noto Sans KR", sans-serif;
 }
 
-.block{
+.block {
     width: 100%;
     height: 20rem;
     background-color: #FAFAD2;
@@ -31,10 +30,21 @@ h1 {
     margin-bottom: 1rem;
 }
 
+.gridcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gridblock {
+    width: 80rem;
+    margin: 5rem;
+}
+
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 2rem;
     padding: 1rem;
 }
 
@@ -42,30 +52,59 @@ h1 {
     background: white;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 2rem;
+    padding: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 15rem;
 }
 
 .card:hover {
     transform: translateY(-10px);
 }
 
-.imagePlaceholder {
+.imageblock {
     width: 100%;
     height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    background: #f4f4f4;
+    overflow: hidden; /* To handle overflowed images */
+    border-radius: 4px; /* Rounded corners */
+    position: relative;
+}
+
+.imageblock img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: cover; /* Ensure image covers the block while maintaining aspect ratio */
+}
+
+.imagePlaceholder {
+    width: 100%;
+    height: 100%;
     background: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
+    border-radius: 4px; /* Rounded corners */
+    color: #aaa; /* Placeholder text color */
+    font-size: 1rem;
 }
-
 
 .info {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    margin-top: 1rem;
 }
 
 .title {
@@ -73,14 +112,16 @@ h1 {
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
     color: #333;
-    margin: 20px 0;
 }
 
 .description {
     font-size: 0.9rem;
     color: #777;
+    text-align: center;
 }
 
-.seller{
-    margin: 1em;
+.seller {
+    margin-top: 0.5em;
+    font-size: 0.9rem;
+    color: #555;
 }

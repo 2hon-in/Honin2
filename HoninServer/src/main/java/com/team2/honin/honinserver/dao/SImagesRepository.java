@@ -5,13 +5,13 @@ import com.team2.honin.honinserver.entity.SecondHand;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface SImagesRepository extends JpaRepository<SImages, Integer> {
 
-    @Query("SELECT i.savefilename FROM SImages i JOIN SecondHand s ON i.snum = s.snum")
-    List<SImages> selectImage();
 }
 
 
