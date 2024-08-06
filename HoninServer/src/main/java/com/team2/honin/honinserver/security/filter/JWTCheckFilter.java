@@ -44,18 +44,18 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             String userstate = (String) claims.get("userstate");
             String zipnum = (String) claims.get("zipnum");
             List<String> roleNames = (List<String>) claims.get("roleNames");
-            MemberDTO memberDTO = new MemberDTO( password, nickname, email, phone, profileimg,
-                    profilemsg, provider, snsid, indate,address1, address2, address3, userstate, zipnum, roleNames);
+            MemberDTO memberDTO = new MemberDTO(password, nickname, email, phone, profileimg,
+                    profilemsg, provider, snsid, indate, address1, address2, address3, userstate, zipnum, roleNames);
             log.info("-----------------------------------");
             log.info(memberDTO);
             log.info(memberDTO.getAuthorities()); // 권한 추출
 
             UsernamePasswordAuthenticationToken authenticationToken
-                    = new UsernamePasswordAuthenticationToken(memberDTO, password , memberDTO.getAuthorities());
+                    = new UsernamePasswordAuthenticationToken(memberDTO, password, memberDTO.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
             filterChain.doFilter(request, response);
-        }catch(Exception e){
+        } catch (Exception e) {
             log.error("JWT Check Error..............");
             log.error(e.getMessage());
             Gson gson = new Gson();
@@ -69,61 +69,30 @@ public class JWTCheckFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected boolean shouldNotFilter(HttpServletRequest request)  throws ServletException{
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getRequestURI();
         log.info("check uri.............." + path);
 
-        if(request.getMethod().equals("OPTIONS"))
+        if (request.getMethod().equals("OPTIONS")
+                || path.startsWith("/member/loginlocal")
+                || path.startsWith("/member/refresh")
+                || path.startsWith("/images")
+                || path.startsWith("/uploads")
+                || path.startsWith("/member/sendMail")
+                || path.startsWith("/member/codeCheck")
+                || path.startsWith("/member/join")
+                || path.startsWith("/member/emailCheck")
+                || path.startsWith("/member/nickNameCheck")
+                || path.startsWith("/member/fileupload")
+                || path.startsWith("/member/kakaostart")
+                || path.startsWith("/member/kakaoLogin")
+                || path.startsWith("/favicon.ico")
+                || path.startsWith("/member/naverstart")
+                || path.startsWith("/member/naverLogin")
+                || path.startsWith("/secondhand/getSecondhandList")
+                || path.startsWith("/community/getPostList")) {
             return true;
-
-        if(path.startsWith("/member/loginlocal"))
-            return true;
-
-        if(path.startsWith("/member/refresh"))
-            return true;
-
-        if(path.startsWith("/images"))
-            return true;
-
-        if(path.startsWith("/uploads"))
-            return true;
-
-        if(path.startsWith("/member/sendMail"))
-            return true;
-
-        if(path.startsWith("/member/codeCheck"))
-            return true;
-
-        if(path.startsWith("/member/join"))
-            return true;
-
-        if(path.startsWith("/member/emailCheck"))
-            return true;
-
-        if(path.startsWith("/member/nickNameCheck"))
-            return true;
-
-        if(path.startsWith("/member/fileupload"))
-            return true;
-
-        if(path.startsWith("/member/kakaostart"))
-            return true;
-
-        if(path.startsWith("/member/kakaoLogin"))
-            return true;
-
-        if(path.startsWith("/favicon.ico"))
-            return true;
-
-        if(path.startsWith("/member/naverstart"))
-            return true;
-
-        if(path.startsWith("/member/naverLogin"))
-            return true;
-
-        if(path.startsWith("/secondhand/getSecondhandList"))
-            return true;
-
+        }
         return false;
 
     }

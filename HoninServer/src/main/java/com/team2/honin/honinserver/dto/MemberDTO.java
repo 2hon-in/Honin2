@@ -34,13 +34,12 @@ public class MemberDTO extends User {
        // 생성자 전달된 전달인수들은 멤버변수에 저장
         this.nickname = nickname;
         this.password = password;
-        this.nickname = nickname;
         this.email = email;
         this.phone = phone;
         this.profileimg = profileimg;
         this.profilemsg = profilemsg;
         this.provider = provider;
-        this.snsid = this.snsid;
+        this.snsid = snsid;
         this.indate = indate;
         this.address1 = address1;
         this.address2 = address2;
