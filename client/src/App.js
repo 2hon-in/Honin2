@@ -10,6 +10,8 @@ import NCareer from "./Component/notice/NCareer";
 import Restaurant from "./Component/restaurant/Restaurant";
 import Mypage from "./Component/member/Mypage";
 import SecondhandView from "./Component/secondhand/SecondhandView";
+import NPolicy from "./Component/notice/NPolicy";
+
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
           <Route path="/restaurant" element={<Restaurant />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/secondhandView/:num" element={<SecondhandView />} />
+          <Route path="/npolicy" element={<NPolicy />} />
       </Routes>
     </div>
   );
