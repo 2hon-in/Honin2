@@ -4,6 +4,8 @@ import DaumPostcode  from 'react-daum-postcode'
 import Modal from "react-modal"
 import jaxios from '../util/jwtUtil'
 import s from "../style/form.module.css"
+import Header from '../layout/Header';
+import Footer from '../layout/Footer';
 
 function Join() {
 
@@ -117,6 +119,8 @@ function Join() {
     }
 
     return (
+        <>
+        <Header/>
         <div className={s.form}>
             <div className={s.fontlogo}>Member Join</div>
             <div className={s.block}></div>
@@ -196,6 +200,8 @@ function Join() {
                 <button onClick={ ()=>{ navigate('/')   }  }>BACK</button>
             </div>
         </div>
+        <Footer/>
+        </>
     )
 
 }
