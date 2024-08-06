@@ -25,14 +25,14 @@ public class Infoshare {
 
     @Column(name = "writedate", columnDefinition = "timestamp default now()")
     @CreationTimestamp
-    private Date writeDate;
+    private Date writedate;
 
-    @Column(name = "readcount", columnDefinition = "integer")
-    private Integer readCount;
+    @Column(name = "readcount", columnDefinition = "Integer default 0")
+    private Integer readcount;
 
     @Column(name = "image", length = 1000)
     private String image;
 
     @Column(name = "savefilename", length = 1000)
-    private String saveFileName;
+    private String savefilename;
 }

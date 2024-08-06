@@ -30,7 +30,7 @@ public class SecondHand {
     @CreationTimestamp
     private Date writedate;
 
-    @Column(name = "readcount")
+    @Column(name = "readcount", columnDefinition = "Integer default 0")
     private Integer readcount;
 
     @Column(name = "state", columnDefinition = "char(1) default 'Y'")

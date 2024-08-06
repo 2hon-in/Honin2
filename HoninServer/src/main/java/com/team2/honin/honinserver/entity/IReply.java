@@ -26,7 +26,7 @@ public class IReply {
 
     @Column(name = "writedate", columnDefinition = "timestamp default now()")
     @CreationTimestamp
-    private Date writeDate;
+    private Date writedate;
 
     @Column(name = "nickname", length = 50)
     private String nickname;
