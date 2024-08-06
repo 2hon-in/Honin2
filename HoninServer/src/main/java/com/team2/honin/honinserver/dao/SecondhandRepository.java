@@ -19,4 +19,5 @@ public interface SecondhandRepository extends JpaRepository<SecondHand, Long> {
     void updateReadCount(int num);
 
     SecondHand findBySnum(int num);
+
 }

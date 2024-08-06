@@ -6,7 +6,7 @@ import { loginAction } from '../store/userSlice';
 import jaxios from '../util/jwtUtil';
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
-import s from '../style/secondhandview.module.css'
+import s from '../style/secondhand/secondhandview.module.css'
 
 function SecondhandView() {
     const navigate = useNavigate();
@@ -99,8 +99,15 @@ function SecondhandView() {
     return (
         <>
         <Header/>
+        <div className={s.section}>
+        <div className={s.block}></div>
         <div className={s.SecondhandView}>
             <h2>SecondHand View</h2>
+            <div className={s.mainfield}>
+                <div>
+                    <img src={`http://localhost:8070/images/${secondhand.savefilename}` } style={{width:"400px"}} />
+                </div>
+            </div>
             <div className={s.field}>
                 <label>작성자</label><div>{secondhand.seller}</div>
             </div>
@@ -121,12 +128,6 @@ function SecondhandView() {
             </div>
             <div className={s.field}>
                 <label>내용</label><div><pre>{secondhand.content}</pre></div>
-            </div>
-            <div className={s.field}>
-                <label>이미지</label>
-                <div>
-                    <img src={`http://localhost:8070/images/${secondhand.savefilename}` } style={{width:"300px"}} />
-                </div>
             </div>
 
             <div className={s.btns}>
@@ -171,6 +172,8 @@ function SecondhandView() {
                 ):null
             }
 
+        </div>
+        <div className={s.block}></div>
         </div>
         <Footer/>
         </>
