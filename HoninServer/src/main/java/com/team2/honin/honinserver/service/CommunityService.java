@@ -26,13 +26,13 @@ public class CommunityService {
 
     public List<?> getPostList(String tableName) {
         switch (tableName) {
-            case "cfree":
+            case "자유게시판":
                 return cfr.findAll(Sort.by(Sort.Direction.DESC, "cfnum"));
-            case "ctip":
+            case "팁과노하우":
                 return ctr.findAll(Sort.by(Sort.Direction.DESC, "ctnum"));
-            case "crecommended":
+            case "업체추천":
                 return crr.findAll(Sort.by(Sort.Direction.DESC, "crnum"));
-            case "canonymous":
+            case "고민상담":
                 return car.findAll(Sort.by(Sort.Direction.DESC, "canum"));
             default:
                 return null;
