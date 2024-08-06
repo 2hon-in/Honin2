@@ -1,26 +1,43 @@
 /* secondhand.module.css */
+@import url('//fonts.googleapis.com/earlyaccess/notosanskr.css');
+
+
 .container {
     text-align: center;
     padding: 20px;
+    width: 100rem;
+    height: 70rem;
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+.block{
+    width: 100%;
+    height: 20rem;
+    background-color: #FAFAD2;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 20rem;
+    font-family: "Noto Sans KR", sans-serif;
 }
 
 h1 {
     font-size: 2rem;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
+    gap: 1rem;
+    padding: 1rem;
 }
 
 .card {
     background: white;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 20px;
+    padding: 2rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     cursor: pointer;
@@ -32,7 +49,7 @@ h1 {
 
 .imagePlaceholder {
     width: 100%;
-    height: 150px;
+    height: 10rem;
     background: #f4f4f4;
     display: flex;
     justify-content: center;
@@ -40,32 +57,25 @@ h1 {
     font-weight: bold;
 }
 
-blockquote {
-    font-size: 1.2rem;
-    color: #333;
-    margin: 20px 0;
-    font-style: italic;
-}
 
 .info {
     display: flex;
     align-items: center;
 }
 
-.avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
 .title {
     font-weight: bold;
-    font-size: 1rem;
-    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: #333;
+    margin: 20px 0;
 }
 
 .description {
     font-size: 0.9rem;
     color: #777;
+}
+
+.seller{
+    margin: 1em;
 }

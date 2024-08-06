@@ -6,6 +6,8 @@ import jaxios from './util/jwtUtil';
 import axios from 'axios';
 import { setCookie, getCookie } from "./util/cookieUtil"
 import s from './style/form.module.css'
+import Footer from './layout/Footer';
+import Header from './layout/Header';
 
 
 function Login() {
@@ -34,6 +36,8 @@ function Login() {
     }
 
     return (
+        <>
+        <Header/>
         <div className={s.form}>
             <div className={s.fontlogo}>Login</div>
             <div className={s.block}></div>
@@ -61,6 +65,8 @@ function Login() {
                 }}style={{backgroundColor:"#06cc80", color:"white"}}>NAVER</button>
             </div>
         </div>
+        <Footer/>
+        </>
     )
 }
 

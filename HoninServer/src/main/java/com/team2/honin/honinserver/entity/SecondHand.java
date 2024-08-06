@@ -1,7 +1,9 @@
 package com.team2.honin.honinserver.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
@@ -33,8 +35,9 @@ public class SecondHand {
     @Column(name = "readcount", columnDefinition = "Integer default 0")
     private Integer readcount;
 
-    @Column(name = "state", columnDefinition = "char(1) default 'Y'")
-    private String state;
+    @NotNull
+    @Column(name = "state", columnDefinition = "char(1) NOT NULL default 'Y'")
+    private String state = "Y";
 
     @Column(name = "price")
     private Integer price;

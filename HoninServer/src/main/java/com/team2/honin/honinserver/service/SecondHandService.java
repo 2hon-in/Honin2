@@ -2,9 +2,9 @@ package com.team2.honin.honinserver.service;
 
 import com.team2.honin.honinserver.dao.SecondhandRepository;
 import com.team2.honin.honinserver.entity.SecondHand;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,7 +16,16 @@ public class SecondHandService {
     SecondhandRepository shr;
 
 
-    public List<SecondHand> getSecondhandList(Integer snum) {
-        return shr.findBySnumOrderBySnumDesc(snum);
+    public List<SecondHand> getSecondhandList() {
+        return shr.findAllByOrderBySnumDesc();
+    }
+
+    public void updateReadCount(int num) {
+        shr.updateReadCount(num);
+    }
+
+    public SecondHand getSecondhand(int num) {
+        SecondHand secondHand = shr.findBySnum(num);
+        return secondHand;
     }
 }
