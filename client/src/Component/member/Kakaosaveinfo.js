@@ -18,9 +18,10 @@ function Kakaosaveinfo() {
             axios.post('/api/member/loginlocal', null, {params:{username:nickname, password:'kakao'}} )
             .then((result=>{
                 if( result.data.error == 'ERROR_LOGIN' ){
+                    console.log('kakaoUser1 :', result);
                     return alert("이메일 또는 패스워드 오류입니다");
                 }else{
-                    console.log('kakaoUser', result.data );
+                    console.log('kakaoUser2 : ', result.data );
                     dispatch( loginAction( result.data ) );
                     setCookie("user", JSON.stringify(result.data), 1);
                     // jaxios.get('/api/member/getFollowings', { params : { nickname:result.data.nickname } } )

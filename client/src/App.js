@@ -6,7 +6,7 @@ import Kakaosaveinfo from "./Component/member/Kakaosaveinfo";
 import Secondhand from "./Component/board/Secondhand";
 import Naversaveinfo from "./Component/member/Naversaveinfo";
 import Community from "./Component/board/Community";
-import Notice from "./Component/notice/Notice";
+import NCareer from "./Component/notice/NCareer";
 import Restaurant from "./Component/restaurant/Restaurant";
 import Mypage from "./Component/member/Mypage";
 
@@ -21,7 +21,7 @@ function App() {
           <Route path="/naversaveinfo/:nickname" element={<Naversaveinfo />} />
           <Route path="/secondhand" element={<Secondhand />} />
           <Route path="/community" element={<Community />} />
-          <Route path="/notice" element={<Notice />} />
+          <Route path="/ncareer" element={<NCareer />} />
           <Route path="/restaurant" element={<Restaurant />} />
           <Route path="/mypage" element={<Mypage />} />
       </Routes>
