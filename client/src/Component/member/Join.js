@@ -7,7 +7,6 @@ import s from "../style/form.module.css"
 
 function Join() {
 
-    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [pwdChk, setPwdChk ] = useState('');
@@ -83,7 +82,6 @@ function Join() {
         if(email==''){ return alert('이메일을 입력하세요');}
         if(password==''){ return alert('패스워드를 입력하세요');}
         if(password!==pwdChk){ return alert('패스워드 확인이 일치하지 않습니다');}
-        if(username==''){return alert('이름을 입력하세요')}
 
         try{
             let result = await jaxios.post('/api/member/emailcheck', null, {params:{email}} );
@@ -98,7 +96,7 @@ function Join() {
 
             result = await jaxios.post('/api/member/join', 
                 {
-                    username, email, password, nickname, phone, profilemsg, profileimg:imgSrc, address1, address2, address3, zipnum
+                    email, password, nickname, phone, profilemsg, profileimg:imgSrc, address1, address2, address3, zipnum
                 });
             if(result.data.msg=='ok'){
                 alert('회원 가입이 완료되었습니다. 로그인하세요'); 
@@ -146,10 +144,6 @@ function Join() {
                 <div className={s.field}>
                     <label>Retype Pass</label>
                     <input type="password" value={pwdChk} onChange={(e)=>{ setPwdChk( e.currentTarget.value ) }}/>
-                </div>
-                <div className={s.field}>
-                    <label>Name</label>
-                    <input type="text"  value={username} onChange={(e)=>{ setUsername( e.currentTarget.value ) }}/>
                 </div>
                 <div className={s.field}>
                     <label>Phone</label>

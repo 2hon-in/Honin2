@@ -7,7 +7,6 @@ import {createSlice} from '@reduxjs/toolkit'
 const initialState = {
     email : '',
     nickname : '',
-    username : '',
     password : '',
     provider : '',
     phone : '',
@@ -35,7 +34,6 @@ const userSlice = createSlice(
             //'user'객체는 state라고 부릅니다.
             state.email = action.payload.email;
             state.nickname = action.payload.nickname;
-            state.username = action.payload.username;
             state.password = action.payload.password;
             state.provider = action.payload.provider;
             state.snsid = action.payload.snsid;
@@ -59,7 +57,6 @@ const userSlice = createSlice(
             state.profilemsg = '';
             state.password = '';
             state.phone = '';
-            state.username = '';
             state.zipnum = '';
             state.address1 = '';
             state.address2 = '';

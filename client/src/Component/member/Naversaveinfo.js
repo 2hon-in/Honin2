@@ -4,6 +4,7 @@ import jaxios from '../util/jwtUtil';
 import axios from 'axios';
 import {loginAction} from '../store/userSlice'
 import { setCookie } from '../util/cookieUtil';
+import { useDispatch } from 'react-redux';
 
 function Kakaosaveinfo() {
     const dispatch = useDispatch();

@@ -23,9 +23,6 @@ public class Member {
     @Column(name = "nickname", length = 50)
     private String nickname;
 
-    @Column(name = "username", length = 50)
-    private String username;
-
     @Column(name = "password", length = 1000)
     private String password;
 
