@@ -5,7 +5,7 @@ import Join from './Component/member/Join'
 import Kakaosaveinfo from "./Component/member/Kakaosaveinfo";
 import Secondhand from "./Component/community/Secondhand";
 import Naversaveinfo from "./Component/member/Naversaveinfo";
-import Community from "./Component/board/Community";
+import Community from "./Component/community/Community";
 import NCareer from "./Component/notice/NCareer";
 import Restaurant from "./Component/restaurant/Restaurant";
 import Mypage from "./Component/member/Mypage";
