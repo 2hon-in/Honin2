@@ -88,7 +88,7 @@ function Community() {
             postList.map((list, idx) => {
               return (
                 (
-                  list.readcount > 400
+                  list.readcount > 300
                 ) ? (
                   <div className={s.post} key={idx}>
                     <div className={s.flag}><span className={s.hot}>HOT</span></div>
