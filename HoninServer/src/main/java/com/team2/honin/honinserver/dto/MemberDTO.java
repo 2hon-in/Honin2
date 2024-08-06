@@ -34,13 +34,12 @@ public class MemberDTO extends User {
        // 생성자 전달된 전달인수들은 멤버변수에 저장
         this.nickname = nickname;
         this.password = password;
-        this.nickname = nickname;
         this.email = email;
         this.phone = phone;
         this.profileimg = profileimg;
         this.profilemsg = profilemsg;
         this.provider = provider;
-        this.snsid = this.snsid;
+        this.snsid = snsid;
         this.indate = indate;
         this.address1 = address1;
         this.address2 = address2;
@@ -51,7 +50,6 @@ public class MemberDTO extends User {
 
     }
 
-    private String username;
     private String password;
     private String nickname;
     private String email;
@@ -73,9 +71,8 @@ public class MemberDTO extends User {
     // 암호화 jwt 토근 생성시에 그 Map을 통채로 암호화합니다
     public Map<String, Object> getClaims() {
         Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("username", username);
-        dataMap.put("password", password);
         dataMap.put("nickname", nickname);
+        dataMap.put("password", password);
         dataMap.put("email", email);
         dataMap.put("phone", phone);
         dataMap.put("profileimg", profileimg);
