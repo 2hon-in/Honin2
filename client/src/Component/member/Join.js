@@ -77,32 +77,32 @@ function Join() {
     }
 
 
-    async function onSubmit(){
-        if(nickname==''){ return alert('닉네임을 입력하세요');}
-        if(email==''){ return alert('이메일을 입력하세요');}
-        if(password==''){ return alert('패스워드를 입력하세요');}
-        if(password!==pwdChk){ return alert('패스워드 확인이 일치하지 않습니다');}
+    async function onSubmit() {
+        if (nickname === '') { return alert('닉네임을 입력하세요'); }
+        if (email === '') { return alert('이메일을 입력하세요'); }
+        if (password === '') { return alert('패스워드를 입력하세요'); }
+        if (password !== pwdChk) { return alert('패스워드 확인이 일치하지 않습니다'); }
 
-        try{
-            let result = await jaxios.post('/api/member/emailcheck', null, {params:{email}} );
-            if(result.data.msg == 'no' ){
+        try {
+            let result = await jaxios.post('/api/member/emailcheck', null, { params: { email } });
+            if (result.data.msg === 'no') {
                 return alert('이메일이 중복됩니다');
             }
 
-            result = await jaxios.post('/api/member/nicknamecheck', null, {params:{nickname}} );
-            if(result.data.msg == 'no' ){
+            result = await jaxios.post('/api/member/nicknamecheck', null, { params: { nickname } });
+            if (result.data.msg === 'no') {
                 return alert('닉네임이 중복됩니다');
             }
 
-            result = await jaxios.post('/api/member/join', 
+            result = await jaxios.post('/api/member/join',
                 {
-                    email, password, nickname, phone, profilemsg, profileimg:imgSrc, address1, address2, address3, zipnum
+                    email, password, nickname, phone, profilemsg, profileimg: imgSrc, address1, address2, address3, zipnum
                 });
-            if(result.data.msg=='ok'){
-                alert('회원 가입이 완료되었습니다. 로그인하세요'); 
+            if (result.data.msg === 'ok') {
+                alert('회원 가입이 완료되었습니다. 로그인하세요');
                 navigate('/');
             }
-        }catch(err){
+        } catch (err) {
             console.error(err);
         }
     }

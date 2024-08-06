@@ -3,7 +3,7 @@ import Main from "./Component/Main";
 import Login from './Component/Login'
 import Join from './Component/member/Join'
 import Kakaosaveinfo from "./Component/member/Kakaosaveinfo";
-import Secondhand from "./Component/community/Secondhand";
+import Secondhand from "./Component/secondhand/Secondhand";
 import Naversaveinfo from "./Component/member/Naversaveinfo";
 import Community from "./Component/community/Community";
 import NCareer from "./Component/notice/NCareer";

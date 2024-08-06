@@ -4,30 +4,45 @@ import { setCookie, getCookie } from './cookieUtil';
 const jaxios = axios.create();
 
 const beforeReq = async (config) => {
-    const loginUser = getCookie('user')
-    setCookie('user', JSON.stringify(loginUser), 1);
-    const {accessToken} = loginUser;
-    config.headers.Authorization = `Bearer ${accessToken}`;
-    return config;
-}
-
-const requestFail = (err) => { }
-const beforeRes = async (res) => { 
-    if(res.data && res.data.error =='ERROR_ACCESS_TOKEN'){
-        const loginUser = getCookie('user')
-        //accessToken은 header에 refreshToken은 pathvariable 에 실어서 전송
-        const Header = { headers:{'Authorization' : `Bearer ${loginUser.accessToken}`} }
-        const res = await axios.get(`api/member/refresh/${loginUser.refreshToken}`, Header);
-        loginUser.accessToken = res.data.accessToken;
-        loginUser.refreshToken = res.data.refreshToken;
-        setCookie('user', JSON.stringify(loginUser), 1);
+    const loginUserStr = getCookie('user');
+    if (loginUserStr) {
+        const loginUser = JSON.parse(loginUserStr);
+        const { accessToken } = loginUser;
+        if (accessToken) {
+            config.headers.Authorization = `Bearer ${accessToken}`;
+        }
     }
-    return res; 
+    return config;
+};
 
-}
-const responseFail = (err) => { }
+const requestFail = (err) => Promise.reject(err);
 
-jaxios.interceptors.request.use( beforeReq, requestFail );
-jaxios.interceptors.response.use( beforeRes, responseFail );
+const beforeRes = async (response) => {
+    if (response.data && response.data.error === 'ERROR_ACCESS_TOKEN') {
+        const loginUserStr = getCookie('user');
+        if (loginUserStr) {
+            const loginUser = JSON.parse(loginUserStr);
+            const headers = { Authorization: `Bearer ${loginUser.accessToken}` };
+            try {
+                const res = await axios.get(`/api/member/refresh/${loginUser.refreshToken}`, { headers });
+                loginUser.accessToken = res.data.accessToken;
+                loginUser.refreshToken = res.data.refreshToken;
+                setCookie('user', JSON.stringify(loginUser), 1);
+
+                // 요청을 재시도
+                response.config.headers.Authorization = `Bearer ${res.data.accessToken}`;
+                return jaxios(response.config);
+            } catch (refreshError) {
+                return Promise.reject(refreshError);
+            }
+        }
+    }
+    return response;
+};
+
+const responseFail = (err) => Promise.reject(err);
+
+jaxios.interceptors.request.use(beforeReq, requestFail);
+jaxios.interceptors.response.use(beforeRes, responseFail);
 
 export default jaxios;

@@ -50,7 +50,6 @@ public class MemberDTO extends User {
 
     }
 
-    private String username;
     private String password;
     private String nickname;
     private String email;
@@ -72,9 +71,8 @@ public class MemberDTO extends User {
     // 암호화 jwt 토근 생성시에 그 Map을 통채로 암호화합니다
     public Map<String, Object> getClaims() {
         Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("username", username);
-        dataMap.put("password", password);
         dataMap.put("nickname", nickname);
+        dataMap.put("password", password);
         dataMap.put("email", email);
         dataMap.put("phone", phone);
         dataMap.put("profileimg", profileimg);
