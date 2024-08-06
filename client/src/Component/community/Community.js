@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
-import s from "../style/community.module.css";
+import s from "../style/community/community.module.css";
 import axios from "axios";
 import jaxios from "../util/jwtUtil";
 
@@ -11,8 +11,9 @@ function Community() {
   const [category, setCategory] = useState("자유게시판");
   const [postList, setPostList] = useState([]);
   const [seq, setSeq] = useState("cfnum");
-
-
+  const currentTime = new Date().getTime();
+  
+  
   useEffect(() => {
     axios.get("/api/community/getPostList/" + "자유게시판")
       .then(res => {
@@ -27,7 +28,9 @@ function Community() {
       .catch(err => console.error(err));
 
     console.log("postList : ", postList);
-  }, []);
+    console.log("currentTime : ", currentTime);
+    console.log("postList[0].writedate : ", postList.writedate);
+  },[]);
 
   useEffect(() => {
     axios.get(`/api/community/getPostList/${category}`)
@@ -59,7 +62,7 @@ function Community() {
   }
 
   return (
-    <>
+    <div className={s.wrap}>
       <Header></Header>
       <div className={s.main}>
         <div className={s.banner}>
@@ -84,12 +87,37 @@ function Community() {
           {
             postList.map((list, idx) => {
               return (
-                <div className={s.post} key={idx}>
-                  <div className={s.category}>{list[seq]}</div>
-                  <div className={s.title}>{list.title}</div>
-                  <div className={s.content}>{list.content}</div>
-                  <div className={s.info}>{list.writer}</div>
-                </div>
+                (
+                  list.readcount > 400
+                ) ? (
+                  <div className={s.post} key={idx}>
+                    <div className={s.flag}><span className={s.hot}>HOT</span></div>
+                    <div className={s.title}>{list.title}</div>
+                    <div className={s.content}>{list.content}</div>
+                    <div className={s.writer}>{list.writer}</div>
+                    <div className={s.readcount}>
+                      <div>
+                        <img src="/api/images/eye.png" alt="조회수"/>
+                        <span className={s.count}>{list.readcount}</span>
+                      </div>
+                      <span className={s.date}>{list.writedate}</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className={s.post} key={idx}>
+                    <div className={s.flag}></div>
+                    <div className={s.title}>{list.title}</div>
+                    <div className={s.content}>{list.content}</div>
+                    <div className={s.writer}>{list.writer}</div>
+                    <div className={s.readcount}>
+                      <div>
+                        <img src="/api/images/eye.png" alt="조회수"/>
+                        <span className={s.count}>{list.readcount}</span>
+                      </div>
+                      <span className={s.date}>{list.writedate}</span>
+                    </div>
+                  </div>
+                )
               )
             })
           }
@@ -97,7 +125,7 @@ function Community() {
       </div>
 
       <Footer></Footer>
-    </>
+    </div>
   );
 }
 

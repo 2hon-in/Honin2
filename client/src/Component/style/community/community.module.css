@@ -1,8 +1,13 @@
+.wrap{
+  margin-top: 5.6rem;
+}
+
 body {
   width: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  font-family: 'Roboto', 'Noto Sans KR', AppleSDGothicNeo-Regular, 'Malgun Gothic', '맑은 고딕', dotum, '돋움', sans-serif;
 }
 
 .main{
@@ -20,10 +25,8 @@ body {
 
 .banner img{
   width: 100%;
-  /* height: 100%; */
   object-fit: cover;
   position: relative;
-  /* top: 30%; */
 }
 
 .category_btn {
@@ -34,13 +37,17 @@ body {
 }
 
 .category_btn button {
-  width: 12rem;
+  width: 8rem;
+  height: 3rem;
   margin-right: 1rem;
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #e2e2e2;
+  background-color: white;
+  border:1px solid #e2e2e2;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
 }
 .category_btn button:hover{
   background-color: #cacaca;
@@ -53,16 +60,37 @@ body {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .post {
   width: 40%;
   height: 12rem;
-  background-color: #fff;
+  background-color: #f4f4f4;
   padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgb(192, 192, 192);
+}
+
+.post:nth-child(1),
+.post:nth-child(2){
+  border-top: 1px solid rgb(192, 192, 192);
+}
+
+.post:nth-child(2n+1){
+  border-right: 1px solid rgb(192, 192, 192);
+}
+
+.flag{
+  margin-bottom: 1rem;
+}
+
+.hot {
+  font-size: 0.8rem;
+  background-color: red;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+  padding: 2px;
 }
 
 .category {
@@ -78,14 +106,29 @@ body {
 }
 
 .content {
-  font-size: 14px;
+  font-size: 0.9rem;
   margin-bottom: 10px;
 }
 
-.info {
-  font-size: 12px;
+.writer {
+  font-size: 0.8rem;
   color: #666;
 }
+
+.readcount {
+  display: flex;
+  justify-content: space-between;
+  height: 1rem;
+  font-size: 0.8rem;
+  margin-top: 10px;
+  color: #666;
+}
+
+.readcount img {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
 
 .category_btn .selected_btn{
   background-color: black;
