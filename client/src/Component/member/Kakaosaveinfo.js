@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import jaxios from '../util/jwtUtil';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import {loginAction} from '../store/userSlice'
+import { setCookie } from '../util/cookieUtil';
 
 function Kakaosaveinfo() {
     const dispatch = useDispatch();
@@ -10,7 +12,7 @@ function Kakaosaveinfo() {
     const { nickname } = useParams();
 
     useEffect(() => {
-        axios.post('/api/member/loginlocal', { username: nickname, password: 'kakao' })
+        axios.post('/api/member/loginlocal', null, {params:{ username: nickname, password: 'kakao' }})
             .then(result => {
                 if (result.data.error === 'ERROR_LOGIN') {
                     console.log("kakao :"+result.data)
