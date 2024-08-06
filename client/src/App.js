@@ -9,8 +9,8 @@ import Community from "./Component/community/Community";
 import NCareer from "./Component/notice/NCareer";
 import Restaurant from "./Component/restaurant/Restaurant";
 import Mypage from "./Component/member/Mypage";
-import SecondhandView from "./Component/secondhand/SecondhandView";
 import NPolicy from "./Component/notice/NPolicy";
+import SecondhandView from "./Component/secondhand/SeconhandView";
 
 
 
