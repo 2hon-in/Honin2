@@ -10,9 +10,8 @@ import java.util.stream.Collectors;
 public class MemberDTO extends User {
 
     public MemberDTO(
-            String username,
-            String password,
             String nickname,
+            String password,
             String email,
             String phone,
             String profileimg,
@@ -26,14 +25,14 @@ public class MemberDTO extends User {
             String userstate,
             String zipnum,
             List<String> roleNames) {
-        super( username, password,
+        super( nickname, password,
            roleNames.stream().map(
              str -> new SimpleGrantedAuthority("ROLE_"+str)
            ).collect(Collectors.toList())
            // ROLE_USER, ROLE_ADMIN, ROLE_MANAGER  와 같은 String 데이터 생성
         );
        // 생성자 전달된 전달인수들은 멤버변수에 저장
-        this.username = username;
+        this.nickname = nickname;
         this.password = password;
         this.nickname = nickname;
         this.email = email;
@@ -41,7 +40,7 @@ public class MemberDTO extends User {
         this.profileimg = profileimg;
         this.profilemsg = profilemsg;
         this.provider = provider;
-        this.snsid = snsid;
+        this.snsid = this.snsid;
         this.indate = indate;
         this.address1 = address1;
         this.address2 = address2;
