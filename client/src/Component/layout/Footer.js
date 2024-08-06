@@ -1,9 +1,9 @@
 import React from 'react'
-import s from "../style/footer.module.css"
+import s from "../style/layout/footer.module.css"
 
 function Footer() {
     return (
-        <>
+        <div className={s.footerClass}>
             <p />
             <hr />
             <footer>
@@ -30,7 +30,7 @@ function Footer() {
                     <button onclick="window.location.href='/'">관리자</button>
                 </div>
             </footer>
-        </>
+        </div>
     )
 }
 

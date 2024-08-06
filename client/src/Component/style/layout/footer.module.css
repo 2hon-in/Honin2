@@ -4,6 +4,10 @@ body {
     padding: 0;
 }
 
+.footerClass {
+    z-index: 20;
+}
+
 footer {
     background-color: #f9f9f9;
     text-align: center;
