@@ -24,11 +24,13 @@ function NCareer() {
                     <div className={s.post_rank}>1</div>
                     <div className={s.post_details}>
                         <div className={s.post_author}>
-                            <img src="author1.jpg" alt="author1" />
+                            <img src="http://localhost:8070/images/honin.png" /> 
+                            {/* alt="author1"  */}
                             <span>작성자 이름</span>
                         </div>
                         <h3>Java Spring Boot에서 If-Else문 줄이기</h3>
                         <p>If-else 문은 흔하지만 남용되면 복잡하고 유지보수가 어려운 코드로 이어질 수...</p>
+                        <br/>
                         <div className={s.post_stats}>
                             <span>좋아요 185</span>
                             <span>저장 327</span>
