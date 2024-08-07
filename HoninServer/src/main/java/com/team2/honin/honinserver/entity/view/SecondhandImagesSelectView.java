@@ -16,7 +16,7 @@ import java.sql.Date;
         " s.writedate, i.sinum, i.savefilename from secondhand s join simages i on i.snum=s.snum;")
 @Table(name = "shimgsellectview")
 @Entity
-public class ShimageSelectView {
+public class SecondhandImagesSelectView {
 
     @Id
     @Column(name = "snum")

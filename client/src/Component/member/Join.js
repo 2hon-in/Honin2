@@ -1,6 +1,6 @@
-import React, {useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import DaumPostcode  from 'react-daum-postcode'
+import DaumPostcode from 'react-daum-postcode'
 import Modal from "react-modal"
 import jaxios from '../util/jwtUtil'
 import s from "../style/form.module.css"
@@ -11,7 +11,7 @@ function Join() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [pwdChk, setPwdChk ] = useState('');
+    const [pwdChk, setPwdChk] = useState('');
     const [nickname, setNickname] = useState('');
     const [phone, setPhone] = useState('');
     const [profilemsg, setprofilemsg] = useState('');
@@ -20,7 +20,7 @@ function Join() {
     const [address3, setAddress3] = useState('');
     const [zipnum, setZipnum] = useState('');
     const [imgSrc, setImgSrc] = useState('');
-    const [imgStyle, setImgStyle] = useState({display:"flex", alignItems:"center", justtifyConetent:"center"});
+    const [imgStyle, setImgStyle] = useState({ display: "flex", alignItems: "center", justtifyConetent: "center" });
 
     const [userCode, setUsercode] = useState("");
     const [msg, setMsg] = useState("");
@@ -46,34 +46,34 @@ function Join() {
         },
     };
 
-    const completeHandler = (data) =>{
+    const completeHandler = (data) => {
         setZipnum(data.zonecode);
         setAddress1(data.address);
         setIsOpen(false);
     }
 
-    async function sendMail(){
-        if(!email){
+    async function sendMail() {
+        if (!email) {
             return window.alert("이메일을 입력해주세요");
         }
-        try{
-            const result = await jaxios.post("/api/member/sendMail", null, {params:{email:email}})
-            if(result.data.message == "OK"){
+        try {
+            const result = await jaxios.post("/api/member/sendMail", null, { params: { email: email } })
+            if (result.data.message == "OK") {
                 setUsercode(result.data.number);
                 window.alert("이메일이 전송되었습니다. 해당 이메일의 수신내역을 확인하세요.");
                 console.log(`result.data.number : ` + result.data.number);
             }
-        }catch(err){
+        } catch (err) {
             console.error(err);
         }
     }
 
-    async function codeCheck(){
-        
-        try{
-            const result = await jaxios.post("/api/member/codeCheck", null, {params:{userCode:userCode}})
+    async function codeCheck() {
+
+        try {
+            const result = await jaxios.post("/api/member/codeCheck", null, { params: { userCode: userCode } })
             setMsg(result.data.message);
-        }catch(err){
+        } catch (err) {
             console.error(err);
         }
     }
@@ -109,100 +109,100 @@ function Join() {
         }
     }
 
-    async function fileupload(e){
+    async function fileupload(e) {
         const formData = new FormData();
-        formData.append('image',  e.target.files[0]);
+        formData.append('image', e.target.files[0]);
         const result = await jaxios.post('/api/member/fileupload', formData);
         console.log(result.data);
         setImgSrc(`http://localhost:8070/uploads/${result.data.savefilename}`);
-        setImgStyle({display:"block", width:"200px"});
+        setImgStyle({ display: "block", width: "200px" });
     }
 
     return (
         <div className={s.container}>
-        <Header/>
-        <div className={s.section}>
-        <div className={s.form}>
-            <div className={s.fontlogo}>Member Join</div>
-            <div className={s.block}></div>
-            <div className={s.inputform}>
-                <div className={s.field}>
-                    <label>Nickname</label>
-                    <input type="text"  value={nickname} onChange={(e)=>{ setNickname( e.currentTarget.value ) }}/>
-                </div><br/>
-                <div className={s.field}>
-                    <label>Email</label>
-                    <input type="text" value={email} onChange={(e)=>{ setEmail( e.currentTarget.value ) }}/>
-                </div>
-                <div className={s.field}>
-                    <label>Email Confirm</label>
-                    <input type="text" value={email} onChange={(e)=>{setEmail( e.currentTarget.value)}}/>
-                        <button onClick={()=>{sendMail()}}>SEND MAIL</button>
-                        <input type="text" value={userCode} onChange={(e)=>{setUsercode(e.currentTarget.value)}}></input>
-                        <button onClick={()=>{codeCheck()}}>코드확인</button>
-                        <div style={{flex:"1", color:"blue", fontSize:"0.8rem"}}>&nbsp;&nbsp;{msg}</div>
-                </div>    
-                <div className={s.field}>
-                    <label>Password</label>
-                    <input type="password" value={password} onChange={(e)=>{ setPassword( e.currentTarget.value ) } }/>
-                </div>
-                <div className={s.field}>
-                    <label>Retype Pass</label>
-                    <input type="password" value={pwdChk} onChange={(e)=>{ setPwdChk( e.currentTarget.value ) }}/>
-                </div>
-                <div className={s.field}>
-                    <label>Phone</label>
-                    <input type="text" value={phone} onChange={(e)=>{ setPhone( e.currentTarget.value ) }}/>
-                </div>
-                <div className={s.field}>
-                    <label>Zip num</label>
-                    <input type="text" style={{flex:"2"}} value={zipnum} onChange={(e)=>{setZipnum( e.currentTarget.value )}} readOnly/>
-                    <button style={{flex:"1"}} onClick={()=>{toggle()}}>우편번호 찾기</button>
-                    <div style={{flex:"2"}}></div>
-                </div>
-                    <div>
-                    <Modal isOpen={isOpen} ariaHideApp={false} style={customStyles}>
-                        <DaumPostcode onComplete={completeHandler}></DaumPostcode><br></br>
-                        <button onClick={()=>{setIsOpen(!isOpen)}}>닫기</button>
-                    </Modal>
+            <Header />
+            <div className={s.section}>
+                <div className={s.form}>
+                    <div className={s.fontlogo}>Member Join</div>
+                    <div className={s.block}></div>
+                    <div className={s.inputform}>
+                        <div className={s.field}>
+                            <label>Nickname</label>
+                            <input type="text" value={nickname} onChange={(e) => { setNickname(e.currentTarget.value) }} />
+                        </div><br />
+                        <div className={s.field}>
+                            <label>Email</label>
+                            <input type="text" value={email} onChange={(e) => { setEmail(e.currentTarget.value) }} />
+                        </div>
+                        <div className={s.field}>
+                            <label>Email Confirm</label>
+                            <input type="text" value={email} onChange={(e) => { setEmail(e.currentTarget.value) }} />
+                            <button onClick={() => { sendMail() }}>SEND MAIL</button>
+                            <input type="text" value={userCode} onChange={(e) => { setUsercode(e.currentTarget.value) }}></input>
+                            <button onClick={() => { codeCheck() }}>코드확인</button>
+                            <div style={{ flex: "1", color: "blue", fontSize: "0.8rem" }}>&nbsp;&nbsp;{msg}</div>
+                        </div>
+                        <div className={s.field}>
+                            <label>Password</label>
+                            <input type="password" value={password} onChange={(e) => { setPassword(e.currentTarget.value) }} />
+                        </div>
+                        <div className={s.field}>
+                            <label>Retype Pass</label>
+                            <input type="password" value={pwdChk} onChange={(e) => { setPwdChk(e.currentTarget.value) }} />
+                        </div>
+                        <div className={s.field}>
+                            <label>Phone</label>
+                            <input type="text" value={phone} onChange={(e) => { setPhone(e.currentTarget.value) }} />
+                        </div>
+                        <div className={s.field}>
+                            <label>Zip num</label>
+                            <input type="text" style={{ flex: "2" }} value={zipnum} onChange={(e) => { setZipnum(e.currentTarget.value) }} readOnly />
+                            <button style={{ flex: "1" }} onClick={() => { toggle() }}>우편번호 찾기</button>
+                            <div style={{ flex: "2" }}></div>
+                        </div>
+                        <div>
+                            <Modal isOpen={isOpen} ariaHideApp={false} style={customStyles}>
+                                <DaumPostcode onComplete={completeHandler}></DaumPostcode><br></br>
+                                <button onClick={() => { setIsOpen(!isOpen) }}>닫기</button>
+                            </Modal>
+                        </div>
+                        <div className={s.field} >
+                            <label>Address</label>
+                            <input type="text" value={address1} onChange={(e) => { setAddress1(e.currentTarget.value) }} readOnly />
+                        </div>
+                        <div className={s.field}>
+                            <label>Detail Address</label>
+                            <input type="text" value={address2} onChange={(e) => { setAddress2(e.currentTarget.value) }} placeholder='상세주소 입력' />
+                        </div>
+                        <div className={s.field}>
+                            <label>Extra Address</label>
+                            <input type="text" value={address3} onChange={(e) => { setAddress3(e.currentTarget.value); }} />
+                        </div>
+                        <div className={s.field}>
+                            <label>Intro</label>
+                            <input type="text" value={profilemsg} onChange={(e) => { setprofilemsg(e.currentTarget.value) }} />
+                        </div>
+                        <div className={s.field}>
+                            <label>Profile img</label>
+                            <div className={s.field}>
+                                <input type="file" onChange={(e) => { fileupload(e) }} />
+                            </div>
+                        </div>
+                        <div className={s.field} style={{ alignItems: 'flex-start' }}>
+                            <label>Profile img preview</label>
+                            <div className={s.field}>
+                                <div><img src={imgSrc} style={imgStyle} /></div>
+                            </div>
+                        </div>
                     </div>
-                <div className={s.field} >
-                    <label>Address</label>
-                    <input type="text" value={address1} onChange={(e)=>{setAddress1( e.currentTarget.value )}} readOnly/>
-                </div>
-                <div className={s.field}>
-                    <label>Detail Address</label>
-                    <input type="text" value={address2} onChange={(e)=>{setAddress2( e.currentTarget.value )}} placeholder='상세주소 입력'/>
-                </div>
-                <div className={s.field}>
-                    <label>Extra Address</label>
-                    <input type="text" value={address3} onChange={(e)=>{setAddress3( e.currentTarget.value );}}/>
-                </div>
-                <div className={s.field}>
-                    <label>Intro</label>
-                    <input type="text" value={profilemsg} onChange={(e)=>{ setprofilemsg( e.currentTarget.value ) }}/>
-                </div>
-                <div className={s.field}>
-                    <label>Profile img</label>
-                    <div className={s.field}>
-                        <input type="file" onChange={(e)=>{ fileupload(e) }}/>
-                    </div>
-                </div>
-                <div className={s.field} style={{alignItems:'flex-start'}}>
-                    <label>Profile img preview</label>
-                    <div className={s.field}>
-                        <div><img src={imgSrc} style={imgStyle} /></div>
+                    <div className={s.block}></div>
+                    <div className={s.btns}>
+                        <button onClick={() => { onSubmit() }}>JOIN</button>
+                        <button onClick={() => { navigate('/') }}>BACK</button>
                     </div>
                 </div>
             </div>
-            <div className={s.block}></div>
-            <div className={s.btns}>
-                <button onClick={ ()=>{   onSubmit()    }  }>JOIN</button>
-                <button onClick={ ()=>{ navigate('/')   }  }>BACK</button>
-            </div>
-        </div>
-        </div>
-        <Footer/>
+            <Footer />
         </div>
     )
 

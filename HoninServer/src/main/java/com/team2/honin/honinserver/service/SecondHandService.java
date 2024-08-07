@@ -1,8 +1,7 @@
 package com.team2.honin.honinserver.service;
 
 import com.team2.honin.honinserver.dao.SecondhandRepository;
-import com.team2.honin.honinserver.dao.viewDao.ShimageSelectViewRepository;
-import com.team2.honin.honinserver.entity.SecondHand;
+import com.team2.honin.honinserver.dao.viewDao.SecondhandImagesSelectViewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class SecondHandService {
     SecondhandRepository shr;
 
     @Autowired
-    ShimageSelectViewRepository shir;
+    SecondhandImagesSelectViewRepository shir;
 
 
 
