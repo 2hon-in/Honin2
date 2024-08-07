@@ -44,6 +44,7 @@ body{
     align-items: center;
     margin-bottom: 10px;
     font-size: 14px;
+    flex-direction: row-reverse;
 }
 
 .fileList label input {
@@ -68,7 +69,8 @@ body{
 
 .button {
     display: block;
-    width: 100px;
+    width: 74rem;
+    height: 3rem;
     margin: 20px auto 0;
     padding: 10px 0;
     background-color: #666;
@@ -77,8 +79,16 @@ body{
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 120%;
 }
 
 .button:hover {
     background-color: #555;
 }
+
+.fileList > label > img {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+}
+
