@@ -1,4 +1,4 @@
-package com.team2.honin.honinserver.service;
+package com.team2.honin.honinserver.service.viewService;
 
 import com.team2.honin.honinserver.dao.viewDao.ShimageSelectViewRepository;
 import com.team2.honin.honinserver.entity.view.ShimageSelectView;
@@ -19,5 +19,13 @@ public class ShimageSelectViewService {
 
     public List<ShimageSelectView> getSecondhandList() {
         return shivr.findAllByOrderBySnumDesc();
+    }
+
+    public void updateReadCount(int num) {
+        shivr.updateReadCount(num);
+    }
+
+    public ShimageSelectView getSecondhand(int num) {
+        return shivr.findBySnum(num);
     }
 }

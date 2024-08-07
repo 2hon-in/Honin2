@@ -20,14 +20,5 @@ public class SecondHandService {
     ShimageSelectViewRepository shir;
 
 
-    public void updateReadCount(int num) {
-        shr.updateReadCount(num);
-    }
-
-    public SecondHand getSecondhand(int num) {
-        SecondHand secondHand = shr.findBySnum(num);
-        return secondHand;
-    }
-
 
 }

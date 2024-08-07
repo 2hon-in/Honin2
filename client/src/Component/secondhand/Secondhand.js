@@ -4,10 +4,24 @@ import jaxios from '../util/jwtUtil';
 import s from '../style/secondhand/secondhand.module.css';
 import Header from '../layout/Header';
 import Footer from '../layout/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAction, test } from '../store/userSlice';
 
-function Secondhand(props) {
+
+
+function Secondhand() {
     const [secondhandList, setSecondhandList] = useState([]);
     const navigate = useNavigate();
+    const loginUser = useSelector(state=>state.user);
+    const dispatch = useDispatch();
+
+    function test(){
+        console.log("loginUser.refreshToken : ", loginUser.refreshToken);
+        console.log("loginUser.accessToken : ", loginUser.accessToken);
+        if(loginUser.accessToken==null){
+            dispatch(test(loginUser.refreshToken))
+        }
+    }
 
     useEffect(() => {
         jaxios.get(`/api/secondhand/getSecondhandList`)
@@ -37,6 +51,7 @@ function Secondhand(props) {
                 <div className={s.container}>
                     <div className={s.block}>
                         <h1>중고거래</h1>
+                        <button onClick={()=>{test()}}></button>
                     </div>
                     <div className={s.gridcontainer}>
                         <div className={s.gridblock}>
@@ -64,7 +79,6 @@ function Secondhand(props) {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     );
 }

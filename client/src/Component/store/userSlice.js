@@ -65,6 +65,11 @@ const userSlice = createSlice(
             state.accessToken = '';
             state.refreshToken = '';
         }, 
+
+        test : (state, action) =>{
+            state.refreshToken = action.payload.refreshToken;
+        },
+        
         setFollowings : (state, action) =>{
             state.followings = action.payload.followings;
             //state.followings = [...action.payload];
@@ -77,5 +82,5 @@ const userSlice = createSlice(
     }
 );
 
-export const {loginAction, logoutAction, setFollowings, setFollowers} = userSlice.actions;
+export const {loginAction, logoutAction, setFollowings, setFollowers, test} = userSlice.actions;
 export default userSlice;

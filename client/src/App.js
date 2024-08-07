@@ -11,6 +11,7 @@ import Restaurant from "./Component/restaurant/Restaurant";
 import Mypage from "./Component/member/Mypage";
 import NPolicy from "./Component/notice/NPolicy";
 import SecondhandView from "./Component/secondhand/SeconhandView";
+import UpdateSecondhand from './Component/secondhand/UpdateSecondhand';
 
 
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/secondhandView/:num" element={<SecondhandView />} />
           <Route path="/npolicy" element={<NPolicy />} />
+          <Route path="/updateSecondhand/:num" element={<UpdateSecondhand />} />
       </Routes>
     </div>
   );
