@@ -27,4 +27,8 @@ public class NoticeService {
     public List<NPolicy> getNpolicyList() {
         return npr.findAll(Sort.by(Sort.Direction.DESC, "npnum"));
     }
+
+    public NCareer getNcareer(int ncnum) {
+        return ncr.findByNcnum(ncnum);
+    }
 }

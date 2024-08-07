@@ -74,29 +74,30 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         log.info("check uri.............." + path);
 
         if (request.getMethod().equals("OPTIONS")
-         || request.getMethod().equals("GET"))
-//
-//                || path.startsWith("/member/loginlocal")
-//                || path.startsWith("/member/loginlocal")
-//                || path.startsWith("/member/refresh")
-//                || path.startsWith("/images")
-//                || path.startsWith("/uploads")
-//                || path.startsWith("/member/sendMail")
-//                || path.startsWith("/member/codeCheck")
-//                || path.startsWith("/member/join")
-//                || path.startsWith("/member/emailCheck")
-//                || path.startsWith("/member/nickNameCheck")
-//                || path.startsWith("/member/fileupload")
-//                || path.startsWith("/member/kakaostart")
-//                || path.startsWith("/member/kakaoLogin")
-//                || path.startsWith("/favicon.ico")
-//                || path.startsWith("/member/naverstart")
-//                || path.startsWith("/member/naverLogin")
-//                || path.startsWith("/secondhand/getSecondhandList")
-//                || path.startsWith("/community"))
-////                || path.startsWith("/community/getCommunityCategoryList"))
-                {
-
+     //         || request.getMethod().equals("GET"))
+                || path.startsWith("/member/loginlocal")
+                || path.startsWith("/member/loginlocal")
+                || path.startsWith("/member/refresh")
+                || path.startsWith("/images")
+                || path.startsWith("/uploads")
+                || path.startsWith("/member/sendMail")
+                || path.startsWith("/member/codeCheck")
+                || path.startsWith("/member/join")
+                || path.startsWith("/member/emailCheck")
+                || path.startsWith("/member/nickNameCheck")
+                || path.startsWith("/member/fileupload")
+                || path.startsWith("/member/kakaostart")
+                || path.startsWith("/member/kakaoLogin")
+                || path.startsWith("/favicon.ico")
+                || path.startsWith("/member/naverstart")
+                || path.startsWith("/member/naverLogin")
+                || path.startsWith("/secondhand/getSecondhandList")
+                || path.startsWith("/community")
+                || path.startsWith("/community/getCommunityCategoryList")
+                || path.startsWith("/notice/getNcareerList")
+                || path.startsWith("/notice/getNpolicyList")
+        )
+        {
             return true;
         }
         return false;

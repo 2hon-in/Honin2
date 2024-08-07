@@ -11,9 +11,8 @@ import Restaurant from "./Component/restaurant/Restaurant";
 import Mypage from "./Component/member/Mypage";
 import NPolicy from "./Component/notice/NPolicy";
 import SecondhandView from "./Component/secondhand/SeconhandView";
-
-
-
+import NcareerView from "./Component/notice/NcareerView";
+import NpolicyView from "./Component/notice/NpolicyView";
 
 function App() {
   return (
@@ -31,6 +30,8 @@ function App() {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/secondhandView/:num" element={<SecondhandView />} />
           <Route path="/npolicy" element={<NPolicy />} />
+          <Route path="/ncareerView/:ncnum" element={<NcareerView />} />
+          <Route path="/npolicyView/:npnum" element={<NpolicyView />} />
       </Routes>
     </div>
   );
