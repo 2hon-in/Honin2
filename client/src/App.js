@@ -11,6 +11,7 @@ import Restaurant from "./Component/restaurant/Restaurant";
 import Mypage from "./Component/member/Mypage";
 import NPolicy from "./Component/notice/NPolicy";
 import SecondhandView from "./Component/secondhand/SeconhandView";
+import CommunityView from "./Component/community/CommunityView";
 
 
 
@@ -20,17 +21,30 @@ function App() {
     <div className="App" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <Routes>
           <Route path='/' element={<Main></Main>} />
+
+          {/* 회원관리 */}
           <Route path='/login' element={<Login></Login>} />
           <Route path='/join' element={<Join></Join>} />
           <Route path="/kakaosaveinfo/:nickname" element={<Kakaosaveinfo />} />
           <Route path="/naversaveinfo/:nickname" element={<Naversaveinfo />} />
-          <Route path="/secondhand" element={<Secondhand />} />
+
+          {/* 커뮤니티 */}
           <Route path="/community" element={<Community />} />
+          <Route path="/communityView/:seq/:seqNum" element={<CommunityView />} />
+
+          {/* 소식지 */}
           <Route path="/ncareer" element={<NCareer />} />
-          <Route path="/restaurant" element={<Restaurant />} />
-          <Route path="/mypage" element={<Mypage />} />
-          <Route path="/secondhandView/:num" element={<SecondhandView />} />
           <Route path="/npolicy" element={<NPolicy />} />
+
+          {/* 우리동네맛집 */}
+          <Route path="/restaurant" element={<Restaurant />} />
+
+          {/* 중고거래 */}
+          <Route path="/secondhand" element={<Secondhand />} />
+          <Route path="/secondhandView/:num" element={<SecondhandView />} />
+
+          {/* 마이페이지 */}
+          <Route path="/mypage" element={<Mypage />} />
       </Routes>
     </div>
   );
