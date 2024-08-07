@@ -98,6 +98,8 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 || path.startsWith("/secondhand/getSecondhandList")
                 || path.startsWith("/secondhand/getSecondHand")
                 || path.startsWith("/secondhand/updateReadCount")
+                || path.startsWith("/notice/getNcareer")
+                || path.startsWith("/notice/getNpolicy")
         )
         {
             return true;

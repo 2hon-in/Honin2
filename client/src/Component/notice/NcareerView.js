@@ -33,29 +33,22 @@ function NcareerView() {
                 <div className={s.container}>
                     <hr/>
                         <h1 className={s.title}>{ncareer.title}</h1>
-                        <div className={s.date}>2024-06-28</div>
+                        <div className={s.date}>{ncareer.writedate}</div>
                     <hr/>
 
                     <br />
                     <div className={s.downloadSection}>
                         <div className={s.fileList}>
-                            <label>
-                                <input type="checkbox" /> 20240628_청년정책_우수기관_보도자료.pdf 457.36 KB
+                            <label className={s.imageLabel}>
+                                20240628_청년정책_우수기관_보도자료.pdf 457.36 KB<img src = "/api/images/pdf.png" />
                             </label>
                         </div>
                     </div>
                     <br />
 
                     <div className={s.content}>
-                        <p>
-                            디테일
-                            - 우수기관 :
-                            <br />
-                            [울산광역시], 행정안전부, 교육부, 국토부, 중기부
-                            <br />
-                            [단체분야] 중부발전, 통영, 부산, 대전, 충북, 제주
-                            <br />
-                            [시-서울] 서울시, 청주, 제주
+                        <p style={{color:"red"}}>
+                            {ncareer.content}
                         </p>
                         <p>
                             ○ 고용노동부(장관 이정식)와 (사)한국청년정책연구원이 '2024년(2023년도 실적)'청년정책 우수기관을 발표했다.
