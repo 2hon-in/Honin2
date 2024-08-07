@@ -1,11 +1,11 @@
 @font-face {
     font-family: '3dumbregular';
-    src: url('./font/3Dumb-webfont.woff');
-    src: url('./font/3Dumb-webfont.woff') format('embedded-opentype'),
-         url('./font/3Dumb-webfont.woff') format('woff2'),
-         url('./font/3Dumb-webfont.woff') format('woff'),
-         url('./font/3Dumb-webfont.woff') format('truetype'),
-         url('./font/3Dumb-webfont.woff') format('svg');
+    src: url('../font/3Dumb-webfont.woff');
+    src: url('../font/3Dumb-webfont.woff') format('embedded-opentype'),
+         url('../font/3Dumb-webfont.woff') format('woff2'),
+         url('../font/3Dumb-webfont.woff') format('woff'),
+         url('../font/3Dumb-webfont.woff') format('truetype'),
+         url('../font/3Dumb-webfont.woff') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -13,34 +13,24 @@
 
 @font-face {
     font-family: 'acmeregular';
-    src: url('./font/Acme-Regular-webfont.woff');
-    src: url('./font/Acme-Regular-webfont.woff') format('embedded-opentype'),
-         url('./font/Acme-Regular-webfont.woff') format('woff2'),
-         url('./font/Acme-Regular-webfont.woff') format('woff'),
-         url('./font/Acme-Regular-webfont.woff') format('truetype'),
-         url('./font/Acme-Regular-webfont.woff') format('svg');
+    src: url('../font/Acme-Regular-webfont.woff');
+    src: url('../font/Acme-Regular-webfont.woff') format('embedded-opentype'),
+         url('../font/Acme-Regular-webfont.woff') format('woff2'),
+         url('../font/Acme-Regular-webfont.woff') format('woff'),
+         url('../font/Acme-Regular-webfont.woff') format('truetype'),
+         url('../font/Acme-Regular-webfont.woff') format('svg');
     font-weight: normal;
     font-style: normal;
 
 }
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: start;
-}
+
 .section {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: start;
-}
-
-.form{
     font-family: 'acmeregular';
-    padding: 10vh;
-    width: 120vh;
-    height: 101vh;
-    margin-top: 10vh;
+    margin: 10% auto;
 }
 
 .fontlogo {

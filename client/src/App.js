@@ -1,7 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import Main from "./Component/Main";
-import Login from './Component/Login'
-import Join from './Component/member/Join'
 import Kakaosaveinfo from "./Component/member/Kakaosaveinfo";
 import Secondhand from "./Component/secondhand/Secondhand";
 import Naversaveinfo from "./Component/member/Naversaveinfo";
@@ -15,6 +13,8 @@ import CommunityView from "./Component/community/CommunityView";
 import UpdateSecondhand from './Component/secondhand/UpdateSecondhand';
 import NcareerView from "./Component/notice/NcareerView";
 import NpolicyView from "./Component/notice/NpolicyView";
+import Login from "./Component/member/Login";
+import Join from "./Component/member/Join";
 
 function App() {
   return (

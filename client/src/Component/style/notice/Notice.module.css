@@ -9,9 +9,12 @@
     transition: background-color 0.3s ease;
     cursor: pointer;
 }
+.content:hover{
+    background-color: #FCF6BD;
+
+}
 
 .post:hover {
-    background-color: #FCF6BD !important;
 }
 
 .container {
@@ -33,6 +36,7 @@
 .contentDiv{
     width: 62rem;
     /* overflow: auto; */
+    border-left: 1px solid #ddd;
 }
 
 .sidebar {
@@ -78,8 +82,7 @@
 
 .content {
     flex: 3;
-    padding: 1.2rem;
-    border-left: 1px solid #ddd;
+    padding: 1.2rem 0 0 1.2rem;
 }
 
 .post {

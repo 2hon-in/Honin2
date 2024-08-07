@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import DaumPostcode from 'react-daum-postcode'
 import Modal from "react-modal"
 import jaxios from '../util/jwtUtil'
-import s from "../style/form.module.css"
+import s from "../style/member/join.module.css"
 import Header from '../layout/Header';
 import Footer from '../layout/Footer';
 

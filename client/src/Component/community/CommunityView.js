@@ -13,7 +13,7 @@ function CommunityView() {
 
     useEffect(() => {
         console.log("seq, seqNum : ", seq, " ", seqNum);
-        axios.get(`/api/community/getPostOne/${seq}/${seqNum}`)
+        jaxios.get(`/api/community/getPostOne/${seq}/${seqNum}`)
             .then(res => {
                 setPost(res.data.post);
                 console.log("res.data.post : ", res.data.post);

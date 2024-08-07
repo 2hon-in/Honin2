@@ -47,7 +47,8 @@
   font-weight: bold;
 }
 .category_btn button:hover{
-  background-color: #cacaca;
+  background-color: #f4f4f4;
+  color: black;
 }
 
 .posts {
