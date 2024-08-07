@@ -4,36 +4,34 @@ import Footer from "../layout/Footer";
 import s from "../style/community/community.module.css";
 import axios from "axios";
 import jaxios from "../util/jwtUtil";
+import { useNavigate } from "react-router-dom";
 
 function Community() {
+  const navigate = useNavigate();
   const [bannerImgSrc, setBannerImgSrc] = useState("/api/images/tree.jpg");
   const [categoryList, setCategoryList] = useState([]);
   const [category, setCategory] = useState("자유게시판");
   const [postList, setPostList] = useState([]);
   const [seq, setSeq] = useState("cfnum");
   const currentTime = new Date().getTime();
-  
+
   
   useEffect(() => {
-    axios.get("/api/community/getPostList/" + "자유게시판")
+    jaxios.get("/api/community/getPostList/" + "자유게시판")
       .then(res => {
         setPostList(res.data.postList);
       })
       .catch(err => console.error(err));
 
-    axios.get("/api/community/getCommunityCategoryList")
+    jaxios.get("/api/community/getCommunityCategoryList")
       .then(res => {
         setCategoryList(res.data.categoryList);
       })
       .catch(err => console.error(err));
-
-    console.log("postList : ", postList);
-    console.log("currentTime : ", currentTime);
-    console.log("postList[0].writedate : ", postList.writedate);
   },[]);
 
   useEffect(() => {
-    axios.get(`/api/community/getPostList/${category}`)
+    jaxios.get(`/api/community/getPostList/${category}`)
       .then(res => {
         setPostList(res.data.postList);
       })
@@ -90,7 +88,7 @@ function Community() {
                 (
                   list.readcount > 300
                 ) ? (
-                  <div className={s.post} key={idx}>
+                  <div className={s.post} key={idx} onClick={()=>navigate(`/communityView/${seq}/${list[seq]}`)}>
                     <div className={s.flag}><span className={s.hot}>HOT</span></div>
                     <div className={s.title}>{list.title}</div>
                     <div className={s.content}>{list.content}</div>
@@ -104,7 +102,7 @@ function Community() {
                     </div>
                   </div>
                 ) : (
-                  <div className={s.post} key={idx}>
+                  <div className={s.post} key={idx} onClick={()=>navigate(`/communityView/${seq}/${list[seq]}`)}>
                     <div className={s.flag}></div>
                     <div className={s.title}>{list.title}</div>
                     <div className={s.content}>{list.content}</div>

@@ -76,7 +76,6 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         if (request.getMethod().equals("OPTIONS")
                 || request.getMethod().equals("GET")
                 || path.startsWith("/member/loginlocal")
-                || path.startsWith("/member/loginlocal")
                 || path.startsWith("/member/refresh")
                 || path.startsWith("/images")
                 || path.startsWith("/uploads")
@@ -92,7 +91,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 || path.startsWith("/member/naverstart")
                 || path.startsWith("/member/naverLogin")
                 || path.startsWith("/secondhand/getSecondhandList")
-                || path.startsWith("/community")
+                || path.startsWith("/community/getPostList")
                 || path.startsWith("/community/getCommunityCategoryList")) {
 
             return true;

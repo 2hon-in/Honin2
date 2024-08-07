@@ -5,6 +5,7 @@ import s from '../style/secondhand/secondhand.module.css';
 import Header from '../layout/Header';
 import Footer from '../layout/Footer';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function Secondhand(props) {
     const [secondhandList, setSecondhandList] = useState([]);

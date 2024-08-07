@@ -38,4 +38,19 @@ public class CommunityService {
                 return null;
         }
     }
+
+    public Object getPostOne(String seq, Integer seqNum) {
+        switch (seq) {
+            case "cfnum":
+                return cfr.findByCfnum(seqNum);
+            case "ctnum":
+                return ctr.findByCtnum(seqNum);
+            case "crnum":
+                return crr.findByCrnum(seqNum);
+            case "canum":
+                return car.findByCanum(seqNum);
+            default:
+                return null;
+        }
+    }
 }
