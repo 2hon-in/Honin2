@@ -144,11 +144,11 @@ function Login() {
                 <button onClick={ ()=>{ onLoginLocal() } }>LOGIN</button>
                 <div className={s.snslogin}>
                     <button onClick={()=>{
-                        window.location.href='http://localhost:8070/member/kakaostart';
-                    }} style={{backgroundColor:"#fae100", color:"black"}}>KAKAO</button>
+                        window.location.href='/api/member/kakaostart';
+                    }}>KAKAO</button>
                     <button onClick={()=>{
-                        window.location.href='http://localhost:8070/member/naverstart'
-                    }}style={{backgroundColor:"#06cc80", color:"white"}}>NAVER</button>
+                        window.location.href='/api/member/naverstart'
+                    }}>NAVER</button>
                 </div>
                 <p>
                   <b> Forgot password? </b>

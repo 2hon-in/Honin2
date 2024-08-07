@@ -10,22 +10,9 @@
   --google-color: #DB4437;
   --twitter-color: #1DA1F2;
   --insta-color: #E1306C;
+  --kakao-color: #FEE500;
+  --naver-color: #03C75A;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
-
-* {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-  /* box-sizing: border-box; */
-}
-
-/* html,
-body {
-  height: 100vh;
-  overflow: hidden;
-} */
 
 .container {
   position: relative;
@@ -280,10 +267,18 @@ body {
   display: flex;
   justify-content: space-between;
 }
-.snslogin button{
-  width: 40%;
+
+.snslogin button:first-child{
+  width: 49%;
+  background-color: var(--kakao-color);
+  color: var(--black);
 }
 
+.snslogin button:last-child{
+  width: 49%;
+  background-color: var(--naver-color);
+  color: var(--white)
+}
 /* RESPONSIVE */
 
 @media only screen and (max-width: 425px) {
