@@ -17,13 +17,13 @@ function Community() {
 
   
   useEffect(() => {
-    jaxios.get("/api/community/getPostList/" + "자유게시판")
+    axios.get("/api/community/getPostList/" + "자유게시판")
       .then(res => {
         setPostList(res.data.postList);
       })
       .catch(err => console.error(err));
 
-    jaxios.get("/api/community/getCommunityCategoryList")
+    axios.get("/api/community/getCommunityCategoryList")
       .then(res => {
         setCategoryList(res.data.categoryList);
       })
@@ -31,7 +31,7 @@ function Community() {
   },[]);
 
   useEffect(() => {
-    jaxios.get(`/api/community/getPostList/${category}`)
+    axios.get(`/api/community/getPostList/${category}`)
       .then(res => {
         setPostList(res.data.postList);
       })
