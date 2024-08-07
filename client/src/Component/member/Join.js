@@ -10,9 +10,9 @@ import Footer from '../layout/Footer';
 function Join() {
 
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [joinPassword, setJoinPassword] = useState('');
     const [pwdChk, setPwdChk] = useState('');
-    const [nickname, setNickname] = useState('');
+    const [joinNickname, setJoinNickname] = useState('');
     const [phone, setPhone] = useState('');
     const [profilemsg, setprofilemsg] = useState('');
     const [address1, setAddress1] = useState('');

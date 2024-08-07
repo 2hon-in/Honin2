@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginAction, setFollowers, setFollowings } from "../store/userSlice";
 import jaxios from "../util/jwtUtil";
+import DaumPostcode from "react-daum-postcode";
+import Modal from "react-modal";
 import { setCookie, getCookie } from "../util/cookieUtil";
 import s from "../style/member/loginForm.module.css";
 import Footer from "../layout/Footer";
@@ -10,20 +12,159 @@ import Header from "../layout/Header";
 // import "../style/member/login.css";
 
 function Login() {
-  const [nickname, setNickname] = useState("");
-  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [toggleClass, setToggleClass] = useState(`{s.container}`);
 
   useEffect(() => {
-    const timer = setTimeout(()=>{
-        setToggleClass(`${s.container} ${s.sign_in}`)
+    const timer = setTimeout(() => {
+      setToggleClass(`${s.container} ${s.sign_up}`);
     }, 200);
-    return ()=>clearTimeout(timer);
+    return () => clearTimeout(timer);
   }, []);
 
+  //회원가입용 state 변수
+  const [email, setEmail] = useState("");
+  const [joinPassword, setJoinPassword] = useState("");
+  const [pwdChk, setPwdChk] = useState("");
+  const [joinNickname, setJoinNickname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [profilemsg, setprofilemsg] = useState("");
+  const [address1, setAddress1] = useState("");
+  const [address2, setAddress2] = useState("");
+  const [address3, setAddress3] = useState("");
+  const [zipnum, setZipnum] = useState("");
+  const [imgSrc, setImgSrc] = useState("");
+  const [imgStyle, setImgStyle] = useState({
+    display: "flex",
+    alignItems: "center",
+    justtifyConetent: "center",
+  });
+  const [userCode, setUsercode] = useState("");
+  const [msg, setMsg] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+  //로그인용 state 변수
+  const [nickname, setNickname] = useState("");
+  const [password, setPassword] = useState("");
+  const [toggleClass, setToggleClass] = useState(`{s.container}`);
+
   const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const customStyles = {
+    overlay: {
+      backgroundColor: "rgba( 0 , 0 , 0 , 0.5)",
+    },
+    content: {
+      left: "-50%",
+      margin: "auto",
+      width: "500px",
+      height: "50%",
+      padding: "0",
+      overflow: "hidden",
+    },
+  };
+
+  const completeHandler = (data) => {
+    setZipnum(data.zonecode);
+    setAddress1(data.address);
+    setIsOpen(false);
+  };
+
+  const sendMail = async () => {
+    if (!email) {
+      return window.alert("이메일을 입력해주세요");
+    }
+    try {
+      const result = await jaxios.post("/api/member/sendMail", null, {
+        params: { email: email },
+      });
+      if (result.data.message == "OK") {
+        setUsercode(result.data.number);
+        window.alert(
+          "이메일이 전송되었습니다. 해당 이메일의 수신내역을 확인하세요."
+        );
+        console.log(`result.data.number : ` + result.data.number);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const codeCheck = async () => {
+    try {
+      const result = await jaxios.post("/api/member/codeCheck", null, {
+        params: { userCode: userCode },
+      });
+      setMsg(result.data.message);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const onSubmit = async () => {
+    if (nickname === "") {
+      return alert("닉네임을 입력하세요");
+    }
+    if (email === "") {
+      return alert("이메일을 입력하세요");
+    }
+    if (password === "") {
+      return alert("패스워드를 입력하세요");
+    }
+    if (password !== pwdChk) {
+      return alert("패스워드 확인이 일치하지 않습니다");
+    }
+
+    try {
+      let result = await jaxios.post("/api/member/emailcheck", null, {
+        params: { email },
+      });
+      if (result.data.msg === "no") {
+        return alert("이메일이 중복됩니다");
+      }
+
+      result = await jaxios.post("/api/member/nicknamecheck", null, {
+        params: { nickname },
+      });
+      if (result.data.msg === "no") {
+        return alert("닉네임이 중복됩니다");
+      }
+
+      result = await jaxios.post("/api/member/join", {
+        email,
+        password,
+        nickname,
+        phone,
+        profilemsg,
+        profileimg: imgSrc,
+        address1,
+        address2,
+        address3,
+        zipnum,
+      });
+      if (result.data.msg === "ok") {
+        alert("회원 가입이 완료되었습니다. 로그인하세요");
+        navigate("/");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  async function fileupload(e) {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    const result = await jaxios.post("/api/member/fileupload", formData);
+    console.log(result.data);
+    setImgSrc(`http://localhost:8070/uploads/${result.data.savefilename}`);
+    setImgStyle({ display: "block", width: "200px" });
+  }
+
+  // 로그인용
+
+  const toggleClassName = () => {
     if (toggleClass === `${s.container} ${s.sign_in}`) {
       setToggleClass(`${s.container} ${s.sign_up}`);
     } else {
@@ -31,7 +172,7 @@ function Login() {
     }
   };
 
-  async function onLoginLocal() {
+  const onLoginLocal = async () => {
     if (!nickname) {
       return alert("이메일을 입력하세요");
     }
@@ -54,112 +195,283 @@ function Login() {
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
-  
-    /* <>
-    <div className={s.section}>
-    <Header/>
-    <div className={s.form}>
-        <div className={s.fontlogo}>Login</div>
-        <div className={s.block}></div>
-        <div className={s.inputform}>
-            <div className={s.field}>
-                <label >Nickname</label>
-                <input type="text" value={nickname} onChange={(e)=>{ setNickname(e.currentTarget.value) }}/>
-            </div>
-            <div className={s.field}>
-                <label>Password</label>
-                <input type="password" value={password} onChange={(e)=>{ setPassword(e.currentTarget.value) }}/>
-            </div>
-        </div>
-        <div className={s.block}></div>
-        <div className={s.btns}>
-            <button onClick={ ()=>{ onLoginLocal() } }>LOGIN</button>
-            <button onClick={ ()=>{ navigate('/join') } }>JOIN</button>
-        </div>
-        <div className={s.snslogin}>
-            <button onClick={()=>{
-                window.location.href='http://localhost:8070/member/kakaostart';
-            }} style={{backgroundColor:"#fae100", color:"black"}}>KAKAO</button>
-            <button onClick={()=>{
-                window.location.href='http://localhost:8070/member/naverstart'
-            }}style={{backgroundColor:"#06cc80", color:"white"}}>NAVER</button>
-        </div>
-    </div>
-    </div>
-    <Footer/>
-    </> */
-  
   return (
     <>
-    <Header></Header>
+      <Header></Header>
       <div id="container" className={toggleClass}>
         {/* FORM SECTION */}
         <div className={s.row}>
           {/* SIGN UP */}
-          <div className={`${s.col} ${s.align_items_center} ${s.flex_col} ${s.sign_up}`}>
+          <div
+            className={`${s.col} ${s.align_items_center} ${s.flex_col} ${s.sign_up}`}
+          >
             <div className={`${s.form_wrapper} ${s.align_items_center}`}>
               <div className={`${s.form} ${s.sign_up}`}>
                 <div className={s.input_group}>
+                  <button onClick={() => toggleClassName()}>Login</button>
                   <i className={`${s.bx} ${s.bxs_user}`}></i>
-                  <input type="text" placeholder="Username" />
+                  <input
+                    type="text"
+                    placeholder="Nickname"
+                    value={nickname}
+                    onChange={(e) => {
+                      setNickname(e.currentTarget.value);
+                    }}
+                  />
                 </div>
                 <div className={s.input_group}>
                   <i className={`${s.bx} ${s.bx_mail_send}`}></i>
-                  <input type="email" placeholder="Email" />
+                  <input
+                    type="text"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.currentTarget.value);
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      sendMail();
+                    }}
+                  >
+                    SEND MAIL
+                  </button>
                 </div>
                 <div className={s.input_group}>
                   <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
-                  <input type="password" placeholder="Password" />
+                  <input
+                    type="text"
+                    placeholder="Email Confirm"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.currentTarget.value);
+                    }}
+                  />
                 </div>
                 <div className={s.input_group}>
                   <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
-                  <input type="password" placeholder="Confirm password" />
+                  <input
+                    type="text"
+                    placeholder="User code"
+                    value={userCode}
+                    onChange={(e) => {
+                      setUsercode(e.currentTarget.value);
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      codeCheck();
+                    }}
+                  >
+                    코드확인
+                  </button>
+                </div>
+                <div style={{ flex: "1", color: "blue", fontSize: "0.8rem" }}>
+                    &nbsp;&nbsp;{msg}
+                  </div>
+                <div className={s.input_group}>
+                  <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.currentTarget.value);
+                    }}
+                  />
+                </div>
+                <div className={s.input_group}>
+                  <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                  <input
+                    type="password"
+                    placeholder="Retype Pass"
+                    value={pwdChk}
+                    onChange={(e) => {
+                      setPwdChk(e.currentTarget.value);
+                    }}
+                  />
+                </div>
+                <div className={s.input_group}>
+                  <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                  <input
+                    type="text"
+                    placeholder="Phone"
+                    value={phone}
+                    onChange={(e) => {
+                      setPhone(e.currentTarget.value);
+                    }}
+                  />
+                </div>
+                <div className={s.input_group}>
+                  <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                  <input
+                    type="text"
+                    placeholder="Post number"
+                    style={{ flex: "2" }}
+                    value={zipnum}
+                    onChange={(e) => {
+                      setZipnum(e.currentTarget.value);
+                    }}
+                    readOnly
+                  />
+                  <button
+                    style={{ flex: "1" }}
+                    onClick={() => {
+                      toggle();
+                    }}
+                  >
+                    우편번호 찾기
+                  </button>
+                </div>
+                <div className={s.field}>
+                  <div style={{ flex: "2" }}></div>
+                </div>
+                <div>
+                  <Modal
+                    isOpen={isOpen}
+                    ariaHideApp={false}
+                    style={customStyles}
+                  >
+                    <DaumPostcode onComplete={completeHandler}></DaumPostcode>
+                    <br></br>
+                    <button
+                      onClick={() => {
+                        setIsOpen(!isOpen);
+                      }}
+                    >
+                      닫기
+                    </button>
+                  </Modal>
+                </div>
+                <div className={s.field}>
+                  <label>Address</label>
+                  <input
+                    type="text"
+                    value={address1}
+                    onChange={(e) => {
+                      setAddress1(e.currentTarget.value);
+                    }}
+                    readOnly
+                  />
+                </div>
+                <div className={s.field}>
+                  <label>Detail Address</label>
+                  <input
+                    type="text"
+                    value={address2}
+                    onChange={(e) => {
+                      setAddress2(e.currentTarget.value);
+                    }}
+                    placeholder="상세주소 입력"
+                  />
+                </div>
+                <div className={s.field}>
+                  <label>Extra Address</label>
+                  <input
+                    type="text"
+                    value={address3}
+                    onChange={(e) => {
+                      setAddress3(e.currentTarget.value);
+                    }}
+                  />
+                </div>
+                <div className={s.input_group}>
+                  <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                  <input
+                    type="text"
+                    placeholder="Profile Message"
+                    value={profilemsg}
+                    onChange={(e) => {
+                      setprofilemsg(e.currentTarget.value);
+                    }}
+                  />
+                </div>
+                <div className={s.field}>
+                  <label>Profile img</label>
+                  <div className={s.field}>
+                    <input
+                      type="file"
+                      onChange={(e) => {
+                        fileupload(e);
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className={s.field} style={{ alignItems: "flex-start" }}>
+                  <label>Profile img preview</label>
+                  <div className={s.field}>
+                    <div>
+                      <img src={imgSrc} style={imgStyle} />
+                    </div>
+                  </div>
                 </div>
                 <button>Sign up</button>
-                <p>
-                  <span> Already have an account? </span>
-                  <b onClick={() => toggle()} className={s.pointer}>
-                    {" "}
-                    Sign in here{" "}
-                  </b>
-                </p>
               </div>
             </div>
           </div>
           {/* END SIGN UP */}
           {/* SIGN IN */}
-          <div className={`${s.col} ${s.align_items_center} ${s.flex_col} ${s.sign_in}`}>
+          <div
+            className={`${s.col} ${s.align_items_center} ${s.flex_col} ${s.sign_in}`}
+          >
             <div className={`${s.form_wrapper} ${s.align_items_center}`}>
               <div className={`${s.form} ${s.sign_in}`}>
                 <div className={s.input_group}>
                   <i className={`${s.bx} ${s.bxs_user}`}></i>
-                  <input type="text" placeholder="Username" value={nickname} onChange={(e)=>{ setNickname(e.currentTarget.value) }}/>
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    value={nickname}
+                    onChange={(e) => {
+                      setNickname(e.currentTarget.value);
+                    }}
+                  />
                 </div>
                 <div className={s.input_group}>
                   <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
-                  <input type="password" placeholder="Password" value={password} onChange={(e)=>{ setPassword(e.currentTarget.value) }}/>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.currentTarget.value);
+                    }}
+                  />
                 </div>
-                <button onClick={ ()=>{ onLoginLocal() } }>LOGIN</button>
+                <button
+                  className={s.login_btn}
+                  onClick={() => {
+                    onLoginLocal();
+                  }}
+                >
+                  LOGIN
+                </button>
                 <div className={s.snslogin}>
-                    <button onClick={()=>{
-                        window.location.href='/api/member/kakaostart';
-                    }}>KAKAO</button>
-                    <button onClick={()=>{
-                        window.location.href='/api/member/naverstart'
-                    }}>NAVER</button>
+                  <button
+                    className={s.kakao}
+                    onClick={() => {
+                      window.location.href = "/api/member/kakaostart";
+                    }}
+                  >
+                    KAKAO
+                  </button>
+                  <button
+                    className={s.naver}
+                    onClick={() => {
+                      window.location.href = "/api/member/naverstart";
+                    }}
+                  >
+                    NAVER
+                  </button>
                 </div>
-                <p>
-                  <b> Forgot password? </b>
-                </p>
-                <p>
-                  <span> Don't have an account? </span>
-                  <b onClick={() => toggle()} className={s.pointer}>
-                    {" "}
-                    Sign up here{" "}
-                  </b>
-                </p>
+                <button
+                  className={s.join_btn}
+                  onClick={() => toggleClassName()}
+                >
+                  JOIN
+                </button>
               </div>
             </div>
             <div className={s.form_wrapper}></div>

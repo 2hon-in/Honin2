@@ -104,7 +104,7 @@
   flex-direction: column;
 }
 
-.social_list {
+/* .social_list {
   margin: 2rem 0;
   padding: 1rem;
   border-radius: 1.5rem;
@@ -149,7 +149,7 @@
 
 .social_list>div:hover i {
   transform: scale(1.5);
-}
+} */
 
 .facebook_bg {
   background-color: var(--facebook-color);
@@ -262,19 +262,32 @@
   right: 50%;
 }
 
+.form .login_btn{
+  border: 2px solid var(--primary-color);
+  cursor: pointer;
+  width: 100%;
+  padding: .6rem 0;
+  border-radius: .5rem;
+  background-color: var(--white);
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
 .snslogin{
-  margin-top: 1rem;
+  margin: 1rem 0;
   display: flex;
   justify-content: space-between;
 }
 
-.snslogin button:first-child{
+.snslogin .kakao{
   width: 49%;
   background-color: var(--kakao-color);
   color: var(--black);
 }
 
-.snslogin button:last-child{
+.snslogin .naver{
   width: 49%;
   background-color: var(--naver-color);
   color: var(--white)
