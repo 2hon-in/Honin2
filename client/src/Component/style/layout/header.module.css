@@ -15,7 +15,6 @@
 }
 
 .menu_bar {
-    /* width: fit-content; */
     height: 3.5rem;
     display: flex;
     align-items: center;
@@ -26,8 +25,6 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
-    /* left: 0;
-    right: 0; */
     z-index: 1000;
 }
 
@@ -45,7 +42,7 @@
     cursor: pointer;
 }
 
-.menu_bar > .menu_item {
+/* .menu_bar > .menu_item {
     min-width: fit-content;
     width: 8rem;
     text-align: center;
@@ -61,7 +58,7 @@
 
 .menu_bar > .menu_item:hover {
     background-color: #f0f0f0;
-}
+} */
 
 .menu_bar > .buttons {
     display: flex;
@@ -117,3 +114,49 @@
 .menu_bar > .buttons > button:hover {
     opacity: 0.8;
 }
+
+/* 네비게이션바 스타일 */
+  .menu{
+    display: flex;
+  }
+
+  .menu_item {
+    color: black;
+    font-weight: 400;
+    padding: 15px 25px;
+    /**/
+    position: relative;
+    min-width: fit-content;
+    width: 7rem;
+    text-align: center;
+    margin: 0 0.5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.3rem 0.6rem;
+  }
+
+.menu_item:after{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: rgb(0, 0, 0);
+    content: '';
+    opacity: 0;
+    -webkit-transition: height 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+    -moz-transition: height 0.3s, opacity 0.3s, -moz-transform 0.3s;
+    transition: height 0.3s, opacity 0.3s, transform 0.3s;
+    -webkit-transform: translateY(-10px);
+    -moz-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+  
+  .menu_item:hover:after, .menu_item:focus:after{
+    height: 3px;
+    width: 100%;
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
+  }
