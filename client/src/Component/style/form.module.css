@@ -23,17 +23,15 @@
     font-style: normal;
 
 }
-
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
 .section {
     position: relative;
     width: 100%;
     top: 5.6rem;
-}
-
-body{
-    display: flex;
-    justify-content: center;
-    align-items: start;
 }
 
 .form{

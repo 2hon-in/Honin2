@@ -28,7 +28,7 @@ function CommunityView() {
             <CommunityViewSide></CommunityViewSide>
             <div className={s.post_container}>
                 <div className={s.post_header}>
-                    <div className={s.writer}>{post.writer}</div>
+                    <div className={s.post_writer}>{post.writer}</div>
                     <h2>{post.title}</h2>
                 </div>
                 <div className={s.post_content}>
