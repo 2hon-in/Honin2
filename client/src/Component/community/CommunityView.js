@@ -5,6 +5,7 @@ import s from "../style/community/communityView.module.css"
 import Header from '../layout/Header';
 import Footer from '../layout/Footer';
 import CommunityViewSide from './CommunityViewSide';
+import axios from 'axios';
 
 function CommunityView() {
     const { seq, seqNum } = useParams();
