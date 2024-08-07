@@ -11,10 +11,10 @@ import java.sql.Date;
 
 @Getter
 @Immutable
-@View(query = "create view shimgsellectview as" +
+@View(query = "create view secondhandimagessellectview as" +
         " select s.snum, s.content, s.price, s.readcount, s.seller, s.state, s.title," +
         " s.writedate, i.sinum, i.savefilename from secondhand s join simages i on i.snum=s.snum;")
-@Table(name = "shimgsellectview")
+@Table(name = "secondhandimagessellectview")
 @Entity
 public class SecondhandImagesSelectView {
 

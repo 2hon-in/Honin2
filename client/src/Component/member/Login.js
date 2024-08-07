@@ -7,6 +7,7 @@ import { setCookie, getCookie } from "../util/cookieUtil"
 import s from '../style/member/login.module.css'
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
+import axios from 'axios';
 
 
 function Login() {
@@ -20,7 +21,7 @@ function Login() {
         if(!nickname){return alert("이메일을 입력하세요");}
         if(!password){return alert("패스워드를 입력하세요");}
         try{
-            const result = await jaxios.post('/api/member/loginlocal', null, {params:{username:nickname, password}} )
+            const result = await axios.post('/api/member/loginlocal', null, {params:{username:nickname, password}} )
             if( result.data.error == 'ERROR_LOGIN' ){
                 return alert("이메일 또는 패스워드 오류입니다");
             }else{

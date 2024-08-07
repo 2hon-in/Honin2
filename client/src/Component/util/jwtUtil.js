@@ -5,8 +5,6 @@ const jaxios = axios.create();
 
 const beforeReq = async (config) => {
     const loginUser = getCookie('user');
-    console.log(loginUser);
-    console.log("loginUser.accessToken"+loginUser.accessToken);
     if (loginUser) {
         const { accessToken } = loginUser.accessToken;
         if (accessToken) {
