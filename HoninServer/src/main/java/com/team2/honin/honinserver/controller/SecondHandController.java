@@ -1,7 +1,7 @@
 package com.team2.honin.honinserver.controller;
 
 import com.team2.honin.honinserver.entity.view.SecondhandImagesSelectView;
-import com.team2.honin.honinserver.service.SImageService;
+import com.team2.honin.honinserver.service.SImagesService;
 import com.team2.honin.honinserver.service.SecondHandService;
 import com.team2.honin.honinserver.service.viewService.SecondhandImagesSelectViewService;
 import lombok.extern.log4j.Log4j2;
@@ -20,7 +20,7 @@ public class SecondHandController {
     SecondHandService shs;
 
     @Autowired
-    SImageService sis;
+    SImagesService sis;
 
     @Autowired
     SecondhandImagesSelectViewService sivs;

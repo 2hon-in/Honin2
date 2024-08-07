@@ -4,11 +4,10 @@ import { setCookie, getCookie } from './cookieUtil';
 const jaxios = axios.create();
 
 const beforeReq = async (config) => {
-    const loginUserStr = getCookie('user');
-    console.log(loginUserStr);
-    console.log("loginUser.accessToken"+loginUserStr.accessToken);
-    if (loginUserStr) {
-        const loginUser = JSON.parse(loginUserStr);
+    const loginUser = getCookie('user');
+    console.log(loginUser);
+    console.log("loginUser.accessToken"+loginUser.accessToken);
+    if (loginUser) {
         const { accessToken } = loginUser.accessToken;
         if (accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`;
@@ -21,9 +20,8 @@ const requestFail = (err) => Promise.reject(err);
 
 const beforeRes = async (response) => {
     if (response.data && response.data.error === 'ERROR_ACCESS_TOKEN') {
-        const loginUserStr = getCookie('user');
-        if (loginUserStr) {
-            const loginUser = JSON.parse(loginUserStr);
+        const loginUser = getCookie('user');
+        if (loginUser) {
             const headers = { Authorization: `Bearer ${loginUser.accessToken}` };
             try {
                 const res = await axios.get(`/api/member/refresh/${loginUser.refreshToken}`, { headers });
