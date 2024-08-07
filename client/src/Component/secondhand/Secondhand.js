@@ -4,7 +4,6 @@ import jaxios from '../util/jwtUtil';
 import s from '../style/secondhand/secondhand.module.css';
 import Header from '../layout/Header';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 
 
 
@@ -23,7 +22,7 @@ function Secondhand() {
     }
 
     useEffect(() => {
-        axios.get(`/api/secondhand/getSecondhandList`)
+        jaxios.get(`/api/secondhand/getSecondhandList`)
             .then((result) => {
                 setSecondhandList(result.data.secondhandList);
                 console.log(result.data.secondhandList);
@@ -34,7 +33,7 @@ function Secondhand() {
     }, []);
 
     function onSBoardView(num) {
-        axios.get(`/api/secondhand/updateReadCount/${num}`)
+        jaxios.get(`/api/secondhand/updateReadCount/${num}`)
             .then(() => {
                 navigate(`/secondhandView/${num}`);
             })

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../store/userSlice';
@@ -25,7 +24,7 @@ function SecondhandView() {
         ()=>{
 
             // 게시물 조회
-            axios.get(`/api/secondhand/getSecondHand/${num}`)
+            jaxios.get(`/api/secondhand/getSecondHand/${num}`)
             .then((result)=>{
                 setSecondhand(result.data.secondhand);
                 console.log("secondhand + ", result.data.secondhand);
@@ -33,7 +32,7 @@ function SecondhandView() {
             .catch((err)=>{console.log(err)})
 
             // 댓글 조회
-            axios.get(`/api/secondhand/getReplyList/${num}`)
+            jaxios.get(`/api/secondhand/getReplyList/${num}`)
             .then((result)=>{
                 setSreplyList( [... result.data.sreply ] );
                 console.log(result.data);
