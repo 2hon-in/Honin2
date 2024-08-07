@@ -3,10 +3,10 @@ import axios from 'axios';
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import jaxios from '../util/jwtUtil';
 import { useSelector, useDispatch } from 'react-redux';
-import s from "../style/notice/NoticeView.module.css"
+import s from "../style/notice/noticeView.module.css"
 
 function NpolicyView() {
-    
+
     const [npolicy, setNpolicy] = useState({});
     const loginUser = useSelector( state => state.user );
     const {npnum} = useParams();

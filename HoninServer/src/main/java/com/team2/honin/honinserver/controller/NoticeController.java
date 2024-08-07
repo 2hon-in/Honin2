@@ -36,4 +36,11 @@ public class NoticeController {
         result.put("ncareer",ns.getNcareer(ncnum));
         return result;
     }
+
+    @GetMapping("/getNpolicy/{npnum}")
+    public HashMap<String, Object> getNpolicy(@PathVariable("npnum") int npnum){
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("npolicy",ns.getNpolicy(npnum));
+        return result;
+    }
 }

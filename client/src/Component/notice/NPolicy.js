@@ -5,7 +5,7 @@ import axios from 'axios'
 import jaxios from '../util/jwtUtil';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import s from "../style/notice/Notice.module.css"
+import s from "../style/notice/notice.module.css"
 
 function NPolicy() {
     const [npolicyList, setNPolicyList] = useState([]);
@@ -54,7 +54,7 @@ function NPolicy() {
                                     
                                         <main className={s.content} key={idx} onClick={()=>{navigate(`/npolicyView/${npolicy.npnum}`)}}>
                                             <article className={s.post} onClick={()=>{
-                                            navigate(`/ncareerView/${ncareer.ncnum}`)}}>
+                                            navigate(`/npolicyView/${npolicy.npnum}`)}}>
                                                 <div className={s.post_rank}>{npolicy.npnum}</div>
                                                 <div className={s.post_details}>
                                                     <div className={s.post_author}>

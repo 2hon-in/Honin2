@@ -5,7 +5,7 @@ import axios from 'axios'
 import jaxios from '../util/jwtUtil';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import s from "../style/notice/Notice.module.css"
+import s from "../style/notice/notice.module.css"
 
 function NCareer() {
     const [ncareerList, setNcareerList] = useState([]);

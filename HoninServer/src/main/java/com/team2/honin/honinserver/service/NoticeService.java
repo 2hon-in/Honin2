@@ -31,4 +31,8 @@ public class NoticeService {
     public NCareer getNcareer(int ncnum) {
         return ncr.findByNcnum(ncnum);
     }
+
+    public NPolicy getNpolicy(int npnum) {
+        return npr.findByNpnum(npnum);
+    }
 }

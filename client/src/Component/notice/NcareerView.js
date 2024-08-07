@@ -5,11 +5,11 @@ import axios from 'axios';
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import jaxios from '../util/jwtUtil';
 import { useSelector, useDispatch } from 'react-redux';
-import s from "../style/notice/NoticeView.module.css"
+import s from "../style/notice/noticeView.module.css"
 
 function NcareerView() {
 
-    const [ncareer, setNcaree] = useState({});
+    const [ncareer, setNcareer] = useState({});
     const loginUser = useSelector( state => state.user );
     const {ncnum} = useParams();
     const navigate = useNavigate();
@@ -18,7 +18,8 @@ function NcareerView() {
         ()=>{
             axios.get(`/api/notice/getNcareer/${ncnum}`)
             .then((result)=>{
-                setProduct( result.data.ncareer );
+                console.log(result.data.ncareer);
+                setNcareer( result.data.ncareer );
             })
             .catch((err)=>{
                 console.error(err);
@@ -31,7 +32,7 @@ function NcareerView() {
             <Header></Header>
                 <div className={s.container}>
                     <hr/>
-                        <h1 className={s.title}>제목 - [보도자료] 2023년도 청년정책 우수기관 발표</h1>
+                        <h1 className={s.title}>{ncareer.title}</h1>
                         <div className={s.date}>2024-06-28</div>
                     <hr/>
 

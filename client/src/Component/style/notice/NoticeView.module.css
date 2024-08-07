@@ -3,17 +3,18 @@ body{
 }
 .container {
     /* display: flex; */
-    width: 100%;
+    width: 60%;
     /* max-width: 1200px; */
     height: 100vh;
     margin: 0 auto;
     padding: 20px;
     background-color: white;
+    /* box-shadow: 1px 1px 10px rgb(139, 139, 139); */
+    /* background-color: #f9f9f9; */
     /* background-color: #fff; */
     /* border: 1px solid #ddd; */
     border-radius: 5px;
-    position: relative;
-    top: 5.6rem;
+    margin-bottom: 5.6rem;
 }
 
 .title {
