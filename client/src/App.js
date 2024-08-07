@@ -12,6 +12,7 @@ import Mypage from "./Component/member/Mypage";
 import NPolicy from "./Component/notice/NPolicy";
 import SecondhandView from "./Component/secondhand/SeconhandView";
 import CommunityView from "./Component/community/CommunityView";
+import UpdateSecondhand from './Component/secondhand/UpdateSecondhand';
 
 
 
@@ -42,6 +43,7 @@ function App() {
           {/* 중고거래 */}
           <Route path="/secondhand" element={<Secondhand />} />
           <Route path="/secondhandView/:num" element={<SecondhandView />} />
+          <Route path="/updateSecondhand/:num" element={<UpdateSecondhand />} />
 
           {/* 마이페이지 */}
           <Route path="/mypage" element={<Mypage />} />

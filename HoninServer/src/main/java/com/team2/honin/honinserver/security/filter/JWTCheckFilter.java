@@ -74,7 +74,6 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         log.info("check uri.............." + path);
 
         if (request.getMethod().equals("OPTIONS")
-                || request.getMethod().equals("GET")
                 || path.startsWith("/member/loginlocal")
                 || path.startsWith("/member/refresh")
                 || path.startsWith("/images")
@@ -92,8 +91,10 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 || path.startsWith("/member/naverLogin")
                 || path.startsWith("/secondhand/getSecondhandList")
                 || path.startsWith("/community/getPostList")
-                || path.startsWith("/community/getCommunityCategoryList")) {
-
+                || path.startsWith("/community/getCommunityCategoryList"))
+                || path.startsWith("/secondhand/getSecondHand")
+                || path.startsWith("/secondhand/updateReadCount")
+                {
             return true;
         }
         return false;

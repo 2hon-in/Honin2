@@ -19,13 +19,16 @@ function SecondhandView() {
 
     const {num} = useParams();
 
+    
+
     useEffect(
         ()=>{
 
             // 게시물 조회
             jaxios.get(`/api/secondhand/getSecondHand/${num}`)
             .then((result)=>{
-                setSecondhand( result.data.secondhand );
+                setSecondhand(result.data.secondhand);
+                console.log("secondhand + ", result.data.secondhand);
             })
             .catch((err)=>{console.log(err)})
 
@@ -53,7 +56,7 @@ function SecondhandView() {
             setCurDataTime(`${months}/${days} ${hours}:${minutes}`);
 
 
-        },[]
+        },[num]
     );
 
     async function addReply(){
@@ -88,7 +91,7 @@ function SecondhandView() {
     function deleteSecondHand( num ){
         const pass = window.prompt('삭제할 패스워드를 입력하세요');
         if(secondhand.pass != pass){return alert('패스워드가 일치하지 않습니다')}
-        axios.get(`/api/secondhand/deleteSecondHand/${secondhand.snum}`)
+        jaxios.get(`/api/secondhand/deleteSecondHand/${secondhand.snum}`)
         .then(()=>{ 
             window.alert("삭제가 정상적으로 완료되었습니다.");
             navigate('/main'); 
@@ -102,17 +105,22 @@ function SecondhandView() {
         <div className={s.section}>
         <div className={s.block}></div>
         <div className={s.SecondhandView}>
-            <h2>SecondHand View</h2>
+            <div className={s.field_title}>
+                <div>{secondhand.title}</div>
+            </div>
             <div className={s.mainfield}>
                 <div>
-                    <img src={`http://localhost:8070/images/${secondhand.savefilename}` } style={{width:"400px"}} />
+                    <img src={`http://localhost:8070/uploads/${secondhand.savefilename}`} style={{width:"400px"}} />
                 </div>
             </div>
             <div className={s.field}>
                 <label>작성자</label><div>{secondhand.seller}</div>
             </div>
             <div className={s.field}>
-                <label>판매상태</label><div>{secondhand.state}</div>
+                <label>판매상태</label>
+                {
+                    (secondhand.state=='Y')?(<div>판매중</div>):(<div>거래완료</div>)
+                }
             </div>
             <div className={s.field}>
                 <label>가격</label><div>{secondhand.price}</div>
@@ -124,14 +132,11 @@ function SecondhandView() {
                 <label>작성일자</label><div>{secondhand.writedate}</div>
             </div>
             <div className={s.field}>
-                <label>제목</label><div>{secondhand.title}</div>
-            </div>
-            <div className={s.field}>
                 <label>내용</label><div><pre>{secondhand.content}</pre></div>
             </div>
 
             <div className={s.btns}>
-                <button onClick={()=>{ navigate(`/updateSecondHand/${secondhand.snum}`) }}>수정</button>
+                <button onClick={()=>{ navigate(`/updateSecondhand/${secondhand.snum}`) }}>수정</button>
                 <button onClick={()=>{ deleteSecondHand( secondhand.snum ) }}>삭제</button>
                 <button onClick={()=>{ navigate('/') }}>돌아가기</button>
             </div><br /><br />
@@ -147,7 +152,7 @@ function SecondhandView() {
                         (e)=>{ setRContent( e.currentTarget.value ) }
                     }/>
                 </div>
-                <div class={s.new_reply_col}>
+                <div className={s.new_reply_col}>
                     <button onClick={ ()=>{  addReply(); } }>댓글작성</button>
                 </div>
             </div>
@@ -169,7 +174,7 @@ function SecondhandView() {
                             </div>
                         )
                     })
-                ):null
+                ):(null)
             }
 
         </div>
