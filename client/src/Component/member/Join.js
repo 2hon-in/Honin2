@@ -119,7 +119,7 @@ function Join() {
     }
 
     return (
-        <>
+        <div className={s.container}>
         <Header/>
         <div className={s.section}>
         <div className={s.form}>
@@ -203,7 +203,7 @@ function Join() {
         </div>
         </div>
         <Footer/>
-        </>
+        </div>
     )
 
 }

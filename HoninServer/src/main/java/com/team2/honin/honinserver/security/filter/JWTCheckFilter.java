@@ -47,8 +47,8 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             MemberDTO memberDTO = new MemberDTO(password, nickname, email, phone, profileimg,
                     profilemsg, provider, snsid, indate, address1, address2, address3, userstate, zipnum, roleNames);
             log.info("-----------------------------------");
-            log.info(memberDTO);
-            log.info(memberDTO.getAuthorities()); // 권한 추출
+            log.info("memberDTO" + memberDTO);
+            log.info("추출된 권한 : " + memberDTO.getAuthorities()); // 권한 추출
 
             UsernamePasswordAuthenticationToken authenticationToken
                     = new UsernamePasswordAuthenticationToken(memberDTO, password, memberDTO.getAuthorities());
@@ -74,28 +74,30 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         log.info("check uri.............." + path);
 
         if (request.getMethod().equals("OPTIONS")
+                /* 회원 관리 */
                 || path.startsWith("/member/loginlocal")
                 || path.startsWith("/member/refresh")
-                || path.startsWith("/images")
-                || path.startsWith("/uploads")
                 || path.startsWith("/member/sendMail")
                 || path.startsWith("/member/codeCheck")
-                || path.startsWith("/member/join")
                 || path.startsWith("/member/emailCheck")
                 || path.startsWith("/member/nickNameCheck")
+                || path.startsWith("/member/join")
                 || path.startsWith("/member/fileupload")
                 || path.startsWith("/member/kakaostart")
                 || path.startsWith("/member/kakaoLogin")
-                || path.startsWith("/favicon.ico")
                 || path.startsWith("/member/naverstart")
                 || path.startsWith("/member/naverLogin")
-                || path.startsWith("/secondhand/getSecondhandList")
+                || path.startsWith("/images")
+                || path.startsWith("/uploads")
+                || path.startsWith("/favicon.ico")
                 || path.startsWith("/community/getPostList")
-                || path.startsWith("/secondhand/getSecondHand")
-                || path.startsWith("/secondhand/updateReadCount")
                 || path.startsWith("/community/getCommunityCategoryList")
+                || path.startsWith("/community/getPostOne")
                 || path.startsWith("/notice/getNcareerList")
                 || path.startsWith("/notice/getNpolicyList")
+                || path.startsWith("/secondhand/getSecondhandList")
+                || path.startsWith("/secondhand/getSecondHand")
+                || path.startsWith("/secondhand/updateReadCount")
         )
         {
             return true;
