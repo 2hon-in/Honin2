@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Header from '../layout/Header'
 import Footer from '../layout/Footer'
 import axios from 'axios'
+import jaxios from '../util/jwtUtil';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import s from "../style/notice/Notice.module.css"
@@ -14,7 +15,7 @@ function NCareer() {
 
     useEffect(
         ()=>{
-            axios.get('/api/notice/getNcareerList')
+            jaxios.get('/api/notice/getNcareerList')
             .then((result)=>{
                 setNcareerList(result.data.ncareerList);
                 // setPaging(result.data.paging);
@@ -54,7 +55,8 @@ function NCareer() {
                             ncareerList.map((ncareer, idx)=>{
                                 return(
                                     
-                                        <main className={s.content} key={idx}>
+                                        <main className={s.content} key={idx} onClick={()=>{
+                                            navigate(`/ncareerView/${ncareer.ncnum}`)}}>
                                             <article className={s.post}>
                                                 <div className={s.post_rank}>{ncareer.ncnum}</div>
                                                 <div className={s.post_details}>

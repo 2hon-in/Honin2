@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Header from '../layout/Header'
 import Footer from '../layout/Footer'
 import axios from 'axios'
+import jaxios from '../util/jwtUtil';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import s from "../style/notice/Notice.module.css"
@@ -13,7 +14,7 @@ function NPolicy() {
 
     useEffect(
         ()=>{
-            axios.get('/api/notice/getNpolicyList')
+            jaxios.get('/api/notice/getNpolicyList')
             .then((result)=>{
                 setNPolicyList(result.data.npolicyList);
             })
@@ -51,7 +52,7 @@ function NPolicy() {
                             npolicyList.map((npolicy, idx)=>{
                                 return(
                                     
-                                        <main className={s.content} key={idx}>
+                                        <main className={s.content} key={idx} onClick={()=>{navigate(`/npolicyView/${npolicy.npnum}`)}}>
                                             <article className={s.post}>
                                                 <div className={s.post_rank}>{npolicy.npnum}</div>
                                                 <div className={s.post_details}>
@@ -65,7 +66,7 @@ function NPolicy() {
                                                         <span>조회수 {npolicy.readcount}</span><img src = "/api/images/eye.png" />
                                                     </div>
                                                 </div>
-                                                <div className={s.imageDiv}>
+                                                <div className={s.imageDiv} onClick={()=>{}}>
                                                     <img src={`/api/images/${npolicy.savefilename}`} /> 
                                                 </div>
                                             </article>

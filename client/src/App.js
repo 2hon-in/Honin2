@@ -13,9 +13,8 @@ import NPolicy from "./Component/notice/NPolicy";
 import SecondhandView from "./Component/secondhand/SeconhandView";
 import CommunityView from "./Component/community/CommunityView";
 import UpdateSecondhand from './Component/secondhand/UpdateSecondhand';
-
-
-
+import NcareerView from "./Component/notice/NcareerView";
+import NpolicyView from "./Component/notice/NpolicyView";
 
 function App() {
   return (
@@ -35,7 +34,9 @@ function App() {
 
           {/* 소식지 */}
           <Route path="/ncareer" element={<NCareer />} />
+          <Route path="/ncareerView/:ncnum" element={<NcareerView />} />
           <Route path="/npolicy" element={<NPolicy />} />
+          <Route path="/npolicyView/:npnum" element={<NpolicyView />} />
 
           {/* 우리동네맛집 */}
           <Route path="/restaurant" element={<Restaurant />} />

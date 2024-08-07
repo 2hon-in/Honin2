@@ -91,10 +91,13 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 || path.startsWith("/member/naverLogin")
                 || path.startsWith("/secondhand/getSecondhandList")
                 || path.startsWith("/community/getPostList")
-                || path.startsWith("/community/getCommunityCategoryList"))
                 || path.startsWith("/secondhand/getSecondHand")
                 || path.startsWith("/secondhand/updateReadCount")
-                {
+                || path.startsWith("/community/getCommunityCategoryList")
+                || path.startsWith("/notice/getNcareerList")
+                || path.startsWith("/notice/getNpolicyList")
+        )
+        {
             return true;
         }
         return false;

@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NcareerRepository extends JpaRepository<NCareer, Integer> {
 
+    NCareer findByNcnum(int ncnum);
 }
