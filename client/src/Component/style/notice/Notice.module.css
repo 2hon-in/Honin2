@@ -17,12 +17,12 @@ body {
     background-color: #f4f4f4;
 }
 
-.content {
+.post {
     transition: background-color 0.3s ease;
     cursor: pointer;
 }
 
-.content:hover {
+.post:hover {
     background-color: #FCF6BD !important;
 }
 

@@ -6,6 +6,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import s from "../style/notice/NoticeView.module.css"
 
 function NpolicyView() {
+    
+    const [npolicy, setNpolicy] = useState({});
+    const loginUser = useSelector( state => state.user );
+    const {npnum} = useParams();
+    const navigate = useNavigate();
+
+    useEffect(
+        ()=>{
+            axios.get(`/api/notice/getNpolicy/${npnum}`)
+            .then((result)=>{
+                setProduct( result.data.npolicy );
+            })
+            .catch((err)=>{
+                console.error(err);
+            })
+        },[]
+    )
+
     return (
         <div className={s.container}>
             <hr/>
@@ -61,7 +79,9 @@ function NpolicyView() {
                     고용노동부는 “이번 평가 결과가 향후 청년 정책 개선에 기여할 것으로 기대된다. 청년들이 정책과정에 참여할 수 있는 창의적 프로그램을 지속적으로 발굴하여, 공공기관과 협업을 통해 청년정책 확대에 기여할 것”이라 밝혔다.
                 </p>
             </div>
-            <button className={s.button} onClick={()=>{Navigate('/NPolicy')}}>목록</button>
+            <button className={s.button} onClick={()=>{
+                navigate('/npolicy')
+            }}>목록</button>
         </div>
     )
 }

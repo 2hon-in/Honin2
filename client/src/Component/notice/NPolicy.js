@@ -53,7 +53,8 @@ function NPolicy() {
                                 return(
                                     
                                         <main className={s.content} key={idx} onClick={()=>{navigate(`/npolicyView/${npolicy.npnum}`)}}>
-                                            <article className={s.post}>
+                                            <article className={s.post} onClick={()=>{
+                                            navigate(`/ncareerView/${ncareer.ncnum}`)}}>
                                                 <div className={s.post_rank}>{npolicy.npnum}</div>
                                                 <div className={s.post_details}>
                                                     <div className={s.post_author}>

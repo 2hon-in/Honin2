@@ -55,9 +55,9 @@ function NCareer() {
                             ncareerList.map((ncareer, idx)=>{
                                 return(
                                     
-                                        <main className={s.content} key={idx} onClick={()=>{
+                                        <main className={s.content} key={idx} >
+                                            <article className={s.post} onClick={()=>{
                                             navigate(`/ncareerView/${ncareer.ncnum}`)}}>
-                                            <article className={s.post}>
                                                 <div className={s.post_rank}>{ncareer.ncnum}</div>
                                                 <div className={s.post_details}>
                                                     <div className={s.post_author}>
