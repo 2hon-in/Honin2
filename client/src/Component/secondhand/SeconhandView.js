@@ -25,7 +25,7 @@ function SecondhandView() {
         ()=>{
 
             // 게시물 조회
-            jaxios.get(`/api/secondhand/getSecondHand/${num}`)
+            axios.get(`/api/secondhand/getSecondHand/${num}`)
             .then((result)=>{
                 setSecondhand(result.data.secondhand);
                 console.log("secondhand + ", result.data.secondhand);
@@ -33,20 +33,13 @@ function SecondhandView() {
             .catch((err)=>{console.log(err)})
 
             // 댓글 조회
-            jaxios.get(`/api/secondhand/getReplyList/${num}`)
+            axios.get(`/api/secondhand/getReplyList/${num}`)
             .then((result)=>{
                 setSreplyList( [... result.data.sreply ] );
                 console.log(result.data);
             })
             .catch((err)=>{console.log(err)})
 
-            // 로그인유저 조회
-            // axios.get('/api/members/getLoginUser')
-            // .then((result)=>{
-            //     setLoginUser(result.data);
-            // })
-            // .catch((err)=>{console.log(err)}); 
-            
             // 댓글 작성에 표시될 데이터(날짜) 생성
             const date = new Date();
             const months = String( date.getMonth()+1 ).padStart(2, '0');
@@ -136,8 +129,14 @@ function SecondhandView() {
             </div>
 
             <div className={s.btns}>
-                <button onClick={()=>{ navigate(`/updateSecondhand/${secondhand.snum}`) }}>수정</button>
-                <button onClick={()=>{ deleteSecondHand( secondhand.snum ) }}>삭제</button>
+                {
+                    (loginUser.nickname==secondhand.seller)?(<button onClick={()=>{ navigate(`/updateSecondhand/${secondhand.snum}`)}}>수정</button>):
+                    (null)
+                }
+                {
+                    (loginUser.nickname==secondhand.seller)?(<button onClick={()=>{ deleteSecondHand(secondhand.snum)}}>삭제</button>):
+                    (null)
+                }
                 <button onClick={()=>{ navigate('/') }}>돌아가기</button>
             </div><br /><br />
             <div className={s.head_row}>

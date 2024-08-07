@@ -15,7 +15,7 @@ class HoninServerApplicationTests {
     @Test
     void contextLoads() {
         PasswordEncoder pe = cc.passwordEncoder();
-        System.out.println(pe.encode("1234"));
+        System.out.println(pe.encode("123"));
     }
 
 }

@@ -5,9 +5,11 @@ const jaxios = axios.create();
 
 const beforeReq = async (config) => {
     const loginUserStr = getCookie('user');
+    console.log(loginUserStr);
+    console.log("loginUser.accessToken"+loginUserStr.accessToken);
     if (loginUserStr) {
         const loginUser = JSON.parse(loginUserStr);
-        const { accessToken } = loginUser;
+        const { accessToken } = loginUser.accessToken;
         if (accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`;
         }

@@ -131,3 +131,8 @@
 .new_reply_col button:hover {
     background-color: #c82333;
 }
+
+textarea{
+    width: 100%;
+    border-style: none;
+}

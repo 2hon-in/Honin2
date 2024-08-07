@@ -12,43 +12,41 @@ function UpdateSecondhand() {
     const navigate = useNavigate();
     const [secondhand, setSecondhand] = useState({});
     const [imgList, setImgList] = useState([]);
-    const loginUser = useSelector(state=>state.user.accessToken);
+    const loginUser = useSelector(state=>state.user);
     const {num} = useParams();
 
-    // useEffect(()=>{
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    const [price, setPrice] = useState("");
+    const [savefilename, setSavefilename] = useState("");
+    
 
-    //     if(loginUser.accessToken==null){
-    //         alert("로그인이 필요한 서비스입니다");
-    //         navigate('/login')
-    //     }
+    useEffect(
+        ()=>{
+            axios.get(`/api/secondhand/getSecondHand/${num}`)
+            .then((result)=>{
+                setSecondhand(result.data.secondhand);
+            })
+            .catch((err)=>{console.log(err)})
 
-    // }, [])
+        },[num]
+    );
 
     async function onsubmit(){
-        if(!title){
-            return window.alert("내용을 입력하세요");
-        }
+        if(!title){return window.alert("내용을 입력하세요");}
+        if(!price){return window.alert("내용을 입력하세요");}
+        if(!content){return window.alert("내용을 입력하세요");}
+        if(!imgList){return window.alert("사진을 선택하세요");}
 
-        if(!price){
-            return window.alert("내용을 입력하세요");
-        }
-
-        if(!content){
-            return window.alert("내용을 입력하세요");
-        }
-
-        if(!imgList){
-            return window.alert("");
-        }
-        const result = await jaxios.post("/api/posts/insertPost", {content:content, writer:lUser.nickname})
+        const result = await jaxios.post("/api/secondhand/insertSecondhand", {content:content, seller:loginUser.nickname})
         let postid = result.data.id;
         console.log(`result.data.postid : ${postid}`);
 
         for(let i=0; i<imgList.length; i++){
-           const res = await jaxios.post("/api/posts/insertImages", null, {postid:postid, savefilename:imgList[i]})
+           const res = await jaxios.post("/api/secondhand/insertSImages", null, {postid:postid, savefilename:imgList[i]})
         }
         window.alert("");
-        navigate("/main");
+        navigate("/secondhand");
     }
 
 
@@ -60,11 +58,12 @@ function UpdateSecondhand() {
         <div className={s.block}></div>
         <div className={s.UpdateSecondhand}>
             <div className={s.field_title}>
-                <div>{secondhand.title}</div>
+                <input type='text' value={secondhand.title} onChange={(e)=>{ setTitle( e.currentTarget.value ) }} />
             </div>
             <div className={s.mainfield}>
                 <div>
                     <img src={`http://localhost:8070/uploads/${secondhand.savefilename}`} style={{width:"400px"}} />
+                    <input type='file' />
                 </div>
             </div>
             <div className={s.field}>
@@ -77,16 +76,20 @@ function UpdateSecondhand() {
                 }
             </div>
             <div className={s.field}>
-                <label>가격</label><div>{secondhand.price}</div>
+                <label>가격</label>
+                <input type='text' value={secondhand.price} onChange={(e)=>{ setPrice( e.currentTarget.value ) }}/>
             </div>
             <div className={s.field}>
-                <label>조회수</label><div>{secondhand.readcount}</div>
+                <label>조회수</label>
+                <div>{secondhand.readcount}</div>
             </div>
             <div className={s.field}>
-                <label>작성일자</label><div>{secondhand.writedate}</div>
+                <label>작성일자</label>
+                <div>{secondhand.writedate}</div>
             </div>
             <div className={s.field}>
-                <label>내용</label><div><pre>{secondhand.content}</pre></div>
+                <label>내용</label>
+                <textarea rows="20" value={secondhand.content}/>
             </div>
 
             <div className={s.btns}>
