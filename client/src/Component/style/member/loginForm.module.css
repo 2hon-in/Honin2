@@ -51,7 +51,7 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   transform: scale(0);
   transition: .5s ease-in-out;
-  transition-delay: 1s;
+  transition-delay: .7s;
 }
 
 .form.sign_in{
@@ -67,17 +67,10 @@
   margin: 1rem 0;
 }
 
-.input_group input {
-  width: 60%;
-  padding: 1rem 3rem;
-  font-size: 1rem;
-  background-color: var(--gray);
-  border-radius: .5rem;
-  border: 0.125rem solid var(--white);
-  outline: none;
-}
 
-.input_group input:focus {
+
+.input_group.sign_up input:focus,
+.input_group.sign_in input:focus {
   border: 0.125rem solid var(--primary-color);
 }
 
@@ -189,49 +182,15 @@
   right: 50%;
 }
 
-.form .login_btn{
-  border: 2px solid var(--primary-color);
-  cursor: pointer;
-  width: 100%;
-  padding: .6rem 0;
+/* join-form -------------------------------> */
+.input_group.sign_up input {
+  /* width: 60%; */
+  padding: 1rem 3rem;
+  font-size: 1rem;
+  background-color: var(--gray);
   border-radius: .5rem;
-  background-color: var(--white);
-  color: var(--primary-color);
-  font-size: 1.1rem;
+  border: 0.125rem solid var(--white);
   outline: none;
-  box-sizing: border-box;
-}
-
-.snslogin{
-  margin: 1rem 0;
-  /* display: flex; */
-  /* justify-content: space-between; */
-}
-
-.snslogin .kakao{
-  /* width: 49%; */
-  border: 2px solid var(--kakao-color);
-  background-color: var(--kakao-color);
-  color: var(--kakao-color);
-  font-weight: bold;
-}
-.kakao img{
-  width: 15%;
-}
-
-.snslogin .naver{
-  /* width: 49%; */
-  margin-top: 1rem;
-  border: 2px solid var(--naver-color);
-  background-color: var(--naver-color);
-  color: var(--white)
-}
-.naver img{
-  width: 15%;
-}
-.join_btn, .login_btn{
-  font-family: "Noto Sans KR";
-  /* font-weight: bold; */
 }
 
 .flex_box_col{
@@ -247,9 +206,68 @@
 .email_box input{
   flex: 2;
 }
+
 .email_box button{
   flex: 1;
 }
+/* <----------------------------------------- */
+
+/* login-form ------------------------------>*/
+.input_group.sign_in input{
+  width: calc(100% - 3rem);
+  padding: 1rem 0 1rem 3rem;
+  font-size: 1rem;
+  background-color: var(--gray);
+  border-radius: .5rem;
+  border: 0.125rem solid var(--white);
+  outline: none;
+}
+.form .login_btn{
+  border: 2px solid var(--primary-color);
+  cursor: pointer;
+  width: 100%;
+  padding: .6rem 0;
+  border-radius: .5rem;
+  background-color: var(--white);
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.snslogin{
+  margin: 1rem 0;
+}
+
+.snslogin .kakao{
+  border: 2px solid var(--kakao-color);
+  background-color: var(--kakao-color);
+  color: var(--kakao-color);
+  font-weight: bold;
+}
+
+.kakao img{
+  width: 15%;
+}
+
+.snslogin .naver{
+  margin-top: 1rem;
+  border: 2px solid var(--naver-color);
+  background-color: var(--naver-color);
+  color: var(--white)
+}
+
+.naver img{
+  width: 15%;
+}
+
+.join_btn, .login_btn{
+  font-family: "Noto Sans KR";
+  /* font-weight: bold; */
+}
+/* <----------------------------------------- */
+
+
 /* RESPONSIVE */
 
 @media only screen and (max-width: 425px) {

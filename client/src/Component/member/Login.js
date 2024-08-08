@@ -220,7 +220,7 @@ function Login() {
             <div className={`${s.form_wrapper} ${s.align_items_center}`}>
               <div className={`${s.form} ${s.sign_up}`}>
                 <div className={s.flex_box_col}>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Id"
@@ -230,7 +230,7 @@ function Login() {
                       }}
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="password"
                       placeholder="Password"
@@ -240,7 +240,7 @@ function Login() {
                       }}
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="password"
                       placeholder="Retype Pass"
@@ -250,7 +250,7 @@ function Login() {
                       }}
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Phone"
@@ -260,7 +260,7 @@ function Login() {
                       }}
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <div className={`${s.flex_box_row} ${s.email_box}`}>
                       <input
                         type="text"
@@ -270,16 +270,12 @@ function Login() {
                           setEmail(e.currentTarget.value);
                         }}
                       />
-                      <button
-                        onClick={() => {
-                          sendMail();
-                        }}
-                      >
-                        SEND MAIL
+                      <button onClick={() => {sendMail()}}>
+                        이메일 인증
                       </button>
                     </div>
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <div className={`${s.flex_box_row} ${s.email_box}`}>
                       <input
                         type="text"
@@ -303,7 +299,7 @@ function Login() {
                   </div>
                 </div>
                 <div className="form_flex">
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Post number"
@@ -343,7 +339,7 @@ function Login() {
                       </button>
                     </Modal>
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Address"
@@ -354,7 +350,7 @@ function Login() {
                       readOnly
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Detail Address"
@@ -364,7 +360,7 @@ function Login() {
                       }}
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Extra Address"
@@ -374,7 +370,7 @@ function Login() {
                       }}
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Profile Message"
@@ -403,7 +399,7 @@ function Login() {
                       </div>
                     </div>
                   </div>
-                  <button>Sign up</button>
+                  <button onClick={()=>onSubmit()}>회원가입</button>
                 </div>
               </div>
             </div>
@@ -415,7 +411,7 @@ function Login() {
           >
             <div className={`${s.form_wrapper} ${s.align_items_center}`}>
               <div className={`${s.form} ${s.sign_in}`}>
-                <div className={s.input_group}>
+                <div className={`${s.input_group} ${s.sign_in}`}>
                   <input
                     type="text"
                     placeholder="아이디"
@@ -425,7 +421,7 @@ function Login() {
                     }}
                   />
                 </div>
-                <div className={s.input_group}>
+                <div className={`${s.input_group} ${s.sign_in}`}>
                   <input
                     type="password"
                     placeholder="비밀번호"
