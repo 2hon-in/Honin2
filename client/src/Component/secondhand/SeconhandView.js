@@ -136,7 +136,7 @@ function SecondhandView() {
                     (loginUser.nickname==secondhand.seller)?(<button onClick={()=>{ deleteSecondHand(secondhand.snum)}}>삭제</button>):
                     (null)
                 }
-                <button onClick={()=>{ navigate('/') }}>돌아가기</button>
+                <button onClick={()=>{ navigate('/secondhand') }}>돌아가기</button>
             </div><br /><br />
             <div className={s.head_row}>
                 <div className={s.head_col}>작성일시</div><div className={s.head_col}>작성자</div><div className={s.head_col}>내용</div><div className={s.head_col}>&nbsp;</div>

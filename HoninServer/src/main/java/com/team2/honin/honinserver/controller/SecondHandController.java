@@ -1,5 +1,7 @@
 package com.team2.honin.honinserver.controller;
 
+import com.team2.honin.honinserver.entity.SImages;
+import com.team2.honin.honinserver.entity.SecondHand;
 import com.team2.honin.honinserver.entity.view.SecondhandImagesSelectView;
 import com.team2.honin.honinserver.service.SImagesService;
 import com.team2.honin.honinserver.service.SecondHandService;
@@ -49,5 +51,30 @@ public class SecondHandController {
         return result;
     }
 
+    @PostMapping("/updateSecondhand")
+    public HashMap<String, Object> updateSecondhand(
+            @RequestBody SecondhandImagesSelectView shiv,
+            SecondHand SecondHand,
+            SImages SImages) {
+        HashMap<String, Object> result = new HashMap<>();
+
+        SecondHand secondHand = shs.updateSecondhand(SecondHand, shiv.getSnum());
+        SImages sImages = sis.updateSecondhand(SImages, shiv.getSnum());
+
+        result.put("msg", "ok");
+        result.put("secondHand", secondHand);
+        result.put("sImages", sImages);
+
+        return result;
+    }
+    @PostMapping("/insertSecondhand")
+    public HashMap<String, Object> insertSecondhand(@RequestBody SecondHand sh) {
+        HashMap<String, Object> result = new HashMap<>();
+        shs.insertSecondHand(sh);
+        result.put("msg", "ok");
+        return result;
+    }
+
 
 }
+

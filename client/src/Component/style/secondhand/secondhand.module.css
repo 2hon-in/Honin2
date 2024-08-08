@@ -4,6 +4,10 @@
     position: relative;
     width: 100%;
     top: 5.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 
 .container {
@@ -17,7 +21,7 @@
 .block {
     width: 100%;
     height: 20rem;
-    background-color: #FAFAD2;
+    background-color: var(--primary-color);
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -25,9 +29,14 @@
     font-family: "Noto Sans KR", sans-serif;
 }
 
+.block button{
+    display: flex;
+}
+
 h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
+    color: white;
 }
 
 .gridcontainer {

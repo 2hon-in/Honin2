@@ -98,7 +98,7 @@ public class MemberController {
     ServletContext context;
 
     @PostMapping("/fileupload")
-    public HashMap<String, Object> fileup(@RequestParam("image") MultipartFile file) {
+    public HashMap<String, Object> fileupload(@RequestParam("image") MultipartFile file) {
 
         HashMap<String, Object> result = new HashMap<String, Object>();
         String path = context.getRealPath("/uploads");

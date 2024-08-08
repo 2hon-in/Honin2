@@ -18,8 +18,18 @@ function UpdateSecondhand() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [price, setPrice] = useState("");
-    const [imgSrc, setImgSrc] = useState('http://via.placeholder.com/200x150');
+
+    const [imgSrc, setImgSrc] = useState("")
+    const[imgSrc1, setImgSrc1] = useState("");
+    const[imgSrc2, setImgSrc2] = useState("");
+    const[imgSrc3, setImgSrc3] = useState("");
+    const[imgSrc4, setImgSrc4] = useState("");
     const [imgStyle, setImgStyle] = useState({ display: 'block' });
+
+    const [divStyle2, setDivStyle2] = useState({display:"none"});
+    const [divStyle3, setDivStyle3] = useState({display:"none"});
+    const [divStyle4, setDivStyle4] = useState({display:"none"});
+
 
     useEffect(() => {
         jaxios.get(`/api/secondhand/getSecondHand/${num}`)
@@ -48,7 +58,7 @@ function UpdateSecondhand() {
         }
 
         const result = await jaxios.post("/api/secondhand/updateSecondhand", {
-            id: secondhand.id,
+            num: secondhand.snum,
             title,
             content,
             price,
@@ -66,18 +76,39 @@ function UpdateSecondhand() {
         navigate("/secondhand");
     }
 
-    async function onFileUpload(e) {
-        const files = Array.from(e.target.files);
+    async function onFileUpload(e, n) {
         let formData = new FormData();
-        files.forEach(file => {
-            formData.append("images", file);
-        });
+        formData.append("image", e.target.files[0]);
+        const result = await jaxios.post("/api/secondhand/uploadImages", formData);
 
-        const result = await jaxios.post("/api/secondhand/uploadImage", formData);
+        if(n == 1){
+            setImgSrc1(`http://localhost:8070/uploads/${result.data.savefilename}`);
+        }else if(n == 2){
+            setImgSrc2(`http://localhost:8070/uploads/${result.data.savefilename}`);
+        }else if(n == 3){
+            setImgSrc3(`http://localhost:8070/uploads/${result.data.savefilename}`);
+        }else if(n == 4){
+            setImgSrc4(`http://localhost:8070/uploads/${result.data.savefilename}`);
+        }
 
-        setImgSrc(`http://localhost:8070/uploads/${result.data.savefilenames[0]}`);
-        setImgList([...imgList, ...result.data.savefilenames]);
+        let arr = [...imgList];
+        arr.push(result.data.savefilename);
+        setImgList([...arr]);
+        console.log(imgList);
+
     }
+
+    async function onSubmit(){
+
+        // 리턴된 아이디와 이미지 이름들로 images 테이블에 레코드들을 추가
+        for(let i=0; i<imgList.length; i++){
+           const res = await jaxios.post("/api/secondhand/insertImages", null, {snum:num, savefilename:imgList[i]})
+        }
+        window.alert("작성이 정상적으로 완료되었습니다.");
+        navigate("/secondhand");
+    }
+
+
 
     return (
         <>
@@ -90,8 +121,38 @@ function UpdateSecondhand() {
                     </div>
                     <div className={s.mainfield}>
                         <div>
+                            <img src={`http://localhost:8070/uploads/${secondhand.savefilename}`} style={{width:"400px"}} />
+                        </div>
+                        <div>
                             <img src={imgSrc} style={{ width: "400px" }} alt="상품 이미지" />
                         </div>
+                        <div className={s.field} id="img1">
+                            <input type="file" onChange={(e)=>{
+                                onFileUpload(e, 1) // 첫번째 이미지라는 의미에서 파라미터로 1을 같이 보냄
+                            }}></input>
+                        </div>
+                        <img src={imgSrc1} height="50"></img>
+
+                        <div className={s.field} id="img2" style={divStyle2}>
+                            <input type="file" onChange={(e)=>{
+                                onFileUpload(e, 2) // 첫번째 이미지라는 의미에서 파라미터로 1을 같이 보냄
+                            }}></input>
+                        </div>
+                        <img src={imgSrc2} height="50"></img>
+
+                        <div className={s.field} id="img3" style={divStyle3}>
+                            <input type="file" onChange={(e)=>{
+                                onFileUpload(e, 3) // 첫번째 이미지라는 의미에서 파라미터로 1을 같이 보냄
+                            }}></input>
+                        </div>
+                        <img src={imgSrc3} height="50"></img>
+
+                        <div className={s.field} id="img4" style={divStyle4}>
+                            <input type="file" onChange={(e)=>{
+                                onFileUpload(e, 4) // 첫번째 이미지라는 의미에서 파라미터로 1을 같이 보냄
+                            }}></input>
+                        </div>
+                        <img src={imgSrc4} height="50"></img>
                         <div>
                             <input type="file" multiple onChange={(e) => onFileUpload(e)} />
                         </div>
@@ -122,7 +183,7 @@ function UpdateSecondhand() {
                     </div>
 
                     <div className={s.btns}>
-                        <button onClick={onSubmit}>수정완료</button>
+                        <button onClick={()=>{ onSubmit()}}>수정완료</button>
                         <button onClick={() => navigate('/secondhand')}>돌아가기</button>
                     </div>
                 </div>

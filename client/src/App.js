@@ -15,6 +15,7 @@ import NcareerView from "./Component/notice/NcareerView";
 import NpolicyView from "./Component/notice/NpolicyView";
 import Login from "./Component/member/Login";
 import Join from "./Component/member/Join";
+import SecondhandWrite from "./Component/secondhand/SecondhandWrite";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path="/secondhand" element={<Secondhand />} />
           <Route path="/secondhandView/:num" element={<SecondhandView />} />
           <Route path="/updateSecondhand/:num" element={<UpdateSecondhand />} />
+          <Route path="/secondhandWrite" element={<SecondhandWrite />} />
 
           {/* 마이페이지 */}
           <Route path="/mypage" element={<Mypage />} />

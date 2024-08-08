@@ -68,6 +68,9 @@ public class JWTCheckFilter extends OncePerRequestFilter {
 
     }
 
+
+
+
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getRequestURI();
@@ -98,6 +101,8 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 || path.startsWith("/secondhand/getSecondhandList")
                 || path.startsWith("/secondhand/getSecondHand")
                 || path.startsWith("/secondhand/updateReadCount")
+                || path.startsWith("/secondhand/insertImages")
+                || path.startsWith("/secondhand/uploadImages")
                 || path.startsWith("/notice/getNcareer")
                 || path.startsWith("/notice/getNpolicy")
         )
