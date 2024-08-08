@@ -14,7 +14,6 @@ import UpdateSecondhand from './Component/secondhand/UpdateSecondhand';
 import NcareerView from "./Component/notice/NcareerView";
 import NpolicyView from "./Component/notice/NpolicyView";
 import Login from "./Component/member/Login";
-import Join from "./Component/member/Join";
 import SecondhandWrite from "./Component/secondhand/SecondhandWrite";
 
 function App() {
