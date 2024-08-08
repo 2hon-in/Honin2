@@ -41,19 +41,22 @@ public class SecondHandService {
         return sh;
     }
 
-    public SecondHand insertSecondHand(SecondHand sh, List<String> savefilename) {
+    public SecondHand insertSecondHand(SecondHand secondHand, List<String> savefilename) {
         // 게시물 저장
-        SecondHand savedSecondHand = shr.save(sh);
+        SecondHand savedSecondHand = shr.save(secondHand);
 
         // 이미지 정보 저장
-        for (String filename : savefilename) {
-            SImages sImages = new SImages();
-            sImages.setSnum(savedSecondHand.getSnum());  // 게시물 번호 설정
-            sImages.setSavefilename(filename);
-            sis.insertSecondHandImages(sImages);
+        if (savefilename != null && !savefilename.isEmpty()) {
+            savefilename.forEach(filename -> {
+                SImages sImages = new SImages();
+                sImages.setSecondhand(savedSecondHand); // 게시물과의 연관 관계 설정
+                sImages.setSavefilename(filename);
+                sis.insertSecondHandImages(sImages);
+            });
         }
-        return savedSecondHand;
 
+        return savedSecondHand;
     }
+
 
 }

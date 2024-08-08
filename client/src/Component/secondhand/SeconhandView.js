@@ -102,7 +102,7 @@ function SecondhandView() {
             </div>
             <div className={s.mainfield}>
                 <div>
-                    <img src={`http://localhost:8070/uploads/${secondhand.savefilename}`} style={{width:"400px"}} />
+                    <img src={`http://localhost:8070/uploads/secondhand/${secondhand.savefilename}`} style={{width:"400px"}} />
                 </div>
             </div>
             <div className={s.field}>

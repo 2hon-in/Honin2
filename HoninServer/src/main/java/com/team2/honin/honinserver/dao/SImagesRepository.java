@@ -14,6 +14,7 @@ import java.util.Optional;
 public interface SImagesRepository extends JpaRepository<SImages, Integer> {
 
     Optional<SImages> findBySnum(int num);
+
 }
 
 

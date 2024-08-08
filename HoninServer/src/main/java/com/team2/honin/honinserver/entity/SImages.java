@@ -14,4 +14,8 @@ public class SImages {
 
     @Column(length = 1000)
     private String savefilename;
+
+    public void setSecondhand(SecondHand savedSecondHand) {
+        setSecondhand(savedSecondHand);
+    }
 }

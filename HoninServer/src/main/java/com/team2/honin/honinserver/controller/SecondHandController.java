@@ -1,5 +1,6 @@
 package com.team2.honin.honinserver.controller;
 
+import com.team2.honin.honinserver.dto.SecondhandRequestDTO;
 import com.team2.honin.honinserver.entity.SImages;
 import com.team2.honin.honinserver.entity.SecondHand;
 import com.team2.honin.honinserver.entity.view.SecondhandImagesSelectView;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @Log4j2
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/secondhand")
 public class SecondHandController {
 
@@ -52,48 +54,44 @@ public class SecondHandController {
         return result;
     }
 
-    @PostMapping("/updateSecondhand")
-    public HashMap<String, Object> updateSecondhand(
-            @RequestBody SecondhandImagesSelectView shiv,
-            SecondHand SecondHand,
-            SImages SImages) {
-        HashMap<String, Object> result = new HashMap<>();
-
-        SecondHand secondHand = shs.updateSecondhand(SecondHand, shiv.getSnum());
-        SImages sImages = sis.updateSecondhand(SImages, shiv.getSnum());
-
-        result.put("msg", "ok");
-        result.put("secondHand", secondHand);
-        result.put("sImages", sImages);
-
-        return result;
-    }
+//    @PostMapping("/updateSecondhand")
+//    public HashMap<String, Object> updateSecondhand(
+//            @RequestBody SecondhandImagesSelectView shiv,
+//            SecondHand SecondHand,
+//            SImages SImages) {
+//        HashMap<String, Object> result = new HashMap<>();
+//
+//        SecondHand secondHand = shs.updateSecondhand(SecondHand, shiv.getSnum());
+//        SImages sImages = sis.updateSecondhand(SImages, shiv.getSnum());
+//
+//        result.put("msg", "ok");
+//        result.put("secondHand", secondHand);
+//        result.put("sImages", sImages);
+//
+//        return result;
+//    }
 
 
     @PostMapping("/insertSecondhand")
-    public HashMap<String, Object> insertSecondhand(
-            @RequestParam("title") String title,
-            @RequestParam("content") String content,
-            @RequestParam("price") int price,
-            @RequestParam("seller") String seller,
-            @RequestParam("savefilename") List<String> savefilename) {
-
+    public HashMap<String, Object> insertSecondhand(@RequestBody SecondhandRequestDTO request) {
         HashMap<String, Object> result = new HashMap<>();
 
-        // 게시물 객체 생성
-        SecondHand secondHand = new SecondHand();
-        secondHand.setTitle(title);
-        secondHand.setContent(content);
-        secondHand.setPrice(price);
-        secondHand.setSeller(seller);
+        try {
+            // 게시물과 이미지 저장
+            shs.insertSecondHand(request.toEntity(), request.getSavefilename());
+            result.put("msg", "ok");
+        } catch (Exception e) {
+            log.error("Failed to insert secondhand", e);
+            result.put("msg", "error");
+            result.put("error", e.getMessage());
+        }
 
-        // 게시물과 이미지 저장
-        shs.insertSecondHand(secondHand, savefilename);
-
-        result.put("msg", "ok");
         return result;
     }
 
 
 }
+
+
+
 

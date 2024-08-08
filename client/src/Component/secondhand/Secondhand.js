@@ -60,6 +60,7 @@ function Secondhand() {
                                         <div className={s.info}>
                                             <div className={s.content}>
                                                 <div className={s.description}>{sh.content}</div>
+                                                <div className={s.price}>{sh.price}</div>
                                                 <div className={s.seller}>{sh.seller}</div>
                                             </div>
                                         </div>

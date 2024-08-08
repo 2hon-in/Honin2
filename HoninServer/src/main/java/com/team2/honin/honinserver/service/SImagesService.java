@@ -17,24 +17,24 @@ public class SImagesService {
     @Autowired
     SImagesRepository sir;
 
-    public void insertImages(SImages simages) {
-        sir.save(simages);
-    }
-
-    public SImages updateSecondhand(SImages si, int num) {
-        Optional<SImages> sImages = sir.findBySnum(num);
-
-        if(sImages.isPresent()) {
-            SImages newsi = sImages.get();
-            newsi.setSavefilename(newsi.getSavefilename());
-
-            sir.save(newsi);
-        }
-        return si;
-    }
-
 
     public void insertSecondHandImages(SImages sImages) {
         sir.save(sImages);
+    }
+
+    public Optional<SImages> findBySnum(int num) {
+        return sir.findBySnum(num);
+    }
+
+    public Optional<SImages> findById(int num) {
+        return sir.findById(num);
+    }
+
+    public void deleteImage(int num) {
+        sir.deleteById(num);
+    }
+
+    public SImages updateSecondhand(SImages sImages) {
+        return sir.save(sImages);
     }
 }
