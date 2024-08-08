@@ -34,4 +34,7 @@ public class SImagesService {
     }
 
 
+    public void insertSecondHandImages(SImages sImages) {
+        sir.save(sImages);
+    }
 }

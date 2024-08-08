@@ -1,6 +1,7 @@
 package com.team2.honin.honinserver.service.viewService;
 
 import com.team2.honin.honinserver.dao.viewDao.SecondhandImagesSelectViewRepository;
+import com.team2.honin.honinserver.entity.SImages;
 import com.team2.honin.honinserver.entity.view.SecondhandImagesSelectView;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -28,4 +29,5 @@ public class SecondhandImagesSelectViewService {
     public SecondhandImagesSelectView getSecondhand(int num) {
         return shivr.findBySnum(num);
     }
+
 }

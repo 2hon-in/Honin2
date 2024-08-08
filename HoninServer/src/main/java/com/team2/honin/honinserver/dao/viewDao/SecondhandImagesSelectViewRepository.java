@@ -19,4 +19,8 @@ public interface SecondhandImagesSelectViewRepository extends JpaRepository<Seco
     void updateReadCount(int num);
 
     SecondhandImagesSelectView findBySnum(int num);
+
+    List<SecondhandImagesSelectView> findBySavefilename(String savefilename);
+
+
 }
