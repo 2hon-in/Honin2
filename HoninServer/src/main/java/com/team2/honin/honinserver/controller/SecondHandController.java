@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -67,10 +68,28 @@ public class SecondHandController {
 
         return result;
     }
+
+
     @PostMapping("/insertSecondhand")
-    public HashMap<String, Object> insertSecondhand(@RequestBody SecondHand sh) {
+    public HashMap<String, Object> insertSecondhand(
+            @RequestParam("title") String title,
+            @RequestParam("content") String content,
+            @RequestParam("price") int price,
+            @RequestParam("seller") String seller,
+            @RequestParam("savefilename") List<String> savefilename) {
+
         HashMap<String, Object> result = new HashMap<>();
-        shs.insertSecondHand(sh);
+
+        // 게시물 객체 생성
+        SecondHand secondHand = new SecondHand();
+        secondHand.setTitle(title);
+        secondHand.setContent(content);
+        secondHand.setPrice(price);
+        secondHand.setSeller(seller);
+
+        // 게시물과 이미지 저장
+        shs.insertSecondHand(secondHand, savefilename);
+
         result.put("msg", "ok");
         return result;
     }

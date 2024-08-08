@@ -28,44 +28,60 @@ function SecondhandWrite() {
 
     const {num} = useParams();
 
-    async function insertProduct(){
-        jaxios.post('/api/secondhand/insertSecondhand', {seller:loginUser.nickname, email:loginUser.email, title, content, savefilename:imgList})
-        .then((result)=>{
-            if(result.data.msg=="ok"){
+    async function insertProduct() {
+        try {
+            // 게시물 정보를 서버로 전송
+            const result = await jaxios.post('/api/secondhand/insertSecondhand', {
+                nickname: loginUser.nickname,
+                email: loginUser.email,
+                title,
+                content,
+                savefilename: imgList // 이미지 파일명 리스트
+            });
+    
+            if (result.data.msg === "ok") {
                 window.alert("정상적으로 게시물 등록이 완료되었습니다.");
-                navigate('/secondhand')
-            }else{
+                navigate('/secondhand');
+            } else {
                 window.alert("게시물 등록에 실패하였습니다. 다시 시도해주세요");
-                navigate('/secondhandWrite')
+                navigate('/secondhandWrite');
             }
-            
-        })
-        .catch((err)=>{
+        } catch (err) {
             console.error(err);
-        })
+        }
     }
-
+    
     async function onFileUpload(e, n) {
         let formData = new FormData();
         formData.append("image", e.target.files[0]);
         const result = await jaxios.post("/api/secondhand/uploadImages", formData);
-
-        if(n == 1){
-            setImgSrc1(`http://localhost:8070/uploads/${result.data.savefilename}`);
-        }else if(n == 2){
-            setImgSrc2(`http://localhost:8070/uploads/${result.data.savefilename}`);
-        }else if(n == 3){
-            setImgSrc3(`http://localhost:8070/uploads/${result.data.savefilename}`);
-        }else if(n == 4){
-            setImgSrc4(`http://localhost:8070/uploads/${result.data.savefilename}`);
-        }
-
+        // 결과에서 파일명 가져오기
+        const filename = result.data.savefilename;
+    
+        // 이미지 파일명을 상태에 추가
         let arr = [...imgList];
-        arr.push(result.data.savefilename);
-        setImgList([...arr]);
-        console.log(imgList);
-
+        arr.push(filename);
+        setImgList(arr);
+    
+        // 이미지 미리보기 설정 (옵션)
+        switch (n) {
+            case 1:
+                setImgSrc1(`http://localhost:8070/uploads/${filename}`);
+                break;
+            case 2:
+                setImgSrc2(`http://localhost:8070/uploads/${filename}`);
+                break;
+            case 3:
+                setImgSrc3(`http://localhost:8070/uploads/${filename}`);
+                break;
+            case 4:
+                setImgSrc4(`http://localhost:8070/uploads/${filename}`);
+                break;
+            default:
+                break;
+        }
     }
+    
 
     return (
         <>
