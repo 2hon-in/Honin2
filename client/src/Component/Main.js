@@ -3,13 +3,12 @@ import Header from './layout/Header'
 import Footer from './layout/Footer'
 import "./style/main.css"
 import "./style/reset.css"
-import jpg from "./images/골목.jpg"
 function Main() {
   return (
     <>
       <Header></Header>
       <div className="main-banner">
-        <img src={jpg}/>
+        <img src = "/api/images/main.jpg" />
       </div>
       <section>
           <div className="container">

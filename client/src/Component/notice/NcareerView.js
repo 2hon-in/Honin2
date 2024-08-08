@@ -46,6 +46,10 @@ function NcareerView() {
                     </div>
                     <br />
 
+                    <div className={s.imageDiv}>
+                        <img src={`/api/images/${ncareer.savefilename}`}></img>
+                    </div>
+
                     <div className={s.content}>
                         <p style={{color:"red"}}>
                             {ncareer.content}
