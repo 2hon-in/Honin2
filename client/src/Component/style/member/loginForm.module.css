@@ -40,7 +40,7 @@
 
 .form_wrapper {
   width: 100%;
-  max-width: 28rem;
+  max-width: 50rem;
 }
 
 .form {
@@ -52,6 +52,13 @@
   transform: scale(0);
   transition: .5s ease-in-out;
   transition-delay: 1s;
+}
+
+.form.sign_in{
+  width: 50%;
+}
+.form.sign_up{
+  display: flex;
 }
 
 .input_group {
@@ -260,7 +267,7 @@
       right: 0;
   }
 
-  /* .container.sign_in .col.sign-up {
+  /* .container.sign_in .col.sign_up {
       transform: translateY(100%);
   } */
 

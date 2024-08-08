@@ -9,6 +9,7 @@ import { setCookie, getCookie } from "../util/cookieUtil";
 import s from "../style/member/loginForm.module.css";
 import Footer from "../layout/Footer";
 import Header from "../layout/Header";
+import axios from "axios";
 // import "../style/member/login.css";
 
 function Login() {
@@ -46,7 +47,7 @@ function Login() {
   //로그인용 state 변수
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
-  const [toggleClass, setToggleClass] = useState(`{s.container}`);
+  const [toggleClass, setToggleClass] = useState(`{${s.container} ${s.sign_up}}`);
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -77,7 +78,7 @@ function Login() {
       return window.alert("이메일을 입력해주세요");
     }
     try {
-      const result = await jaxios.post("/api/member/sendMail", null, {
+      const result = await axios.post("/api/member/sendMail", null, {
         params: { email: email },
       });
       if (result.data.message == "OK") {
@@ -94,7 +95,7 @@ function Login() {
 
   const codeCheck = async () => {
     try {
-      const result = await jaxios.post("/api/member/codeCheck", null, {
+      const result = await axios.post("/api/member/codeCheck", null, {
         params: { userCode: userCode },
       });
       setMsg(result.data.message);
@@ -209,205 +210,200 @@ function Login() {
           >
             <div className={`${s.form_wrapper} ${s.align_items_center}`}>
               <div className={`${s.form} ${s.sign_up}`}>
-                <div className={s.input_group}>
-                  <button onClick={() => toggleClassName()}>Login</button>
-                  <i className={`${s.bx} ${s.bxs_user}`}></i>
-                  <input
-                    type="text"
-                    placeholder="Nickname"
-                    value={nickname}
-                    onChange={(e) => {
-                      setNickname(e.currentTarget.value);
-                    }}
-                  />
-                </div>
-                <div className={s.input_group}>
-                  <i className={`${s.bx} ${s.bx_mail_send}`}></i>
-                  <input
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.currentTarget.value);
-                    }}
-                  />
-                  <button
-                    onClick={() => {
-                      sendMail();
-                    }}
-                  >
-                    SEND MAIL
-                  </button>
-                </div>
-                <div className={s.input_group}>
-                  <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
-                  <input
-                    type="text"
-                    placeholder="Email Confirm"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.currentTarget.value);
-                    }}
-                  />
-                </div>
-                <div className={s.input_group}>
-                  <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
-                  <input
-                    type="text"
-                    placeholder="User code"
-                    value={userCode}
-                    onChange={(e) => {
-                      setUsercode(e.currentTarget.value);
-                    }}
-                  />
-                  <button
-                    onClick={() => {
-                      codeCheck();
-                    }}
-                  >
-                    코드확인
-                  </button>
-                </div>
-                <div style={{ flex: "1", color: "blue", fontSize: "0.8rem" }}>
-                    &nbsp;&nbsp;{msg}
-                  </div>
-                <div className={s.input_group}>
-                  <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => {
-                      setPassword(e.currentTarget.value);
-                    }}
-                  />
-                </div>
-                <div className={s.input_group}>
-                  <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
-                  <input
-                    type="password"
-                    placeholder="Retype Pass"
-                    value={pwdChk}
-                    onChange={(e) => {
-                      setPwdChk(e.currentTarget.value);
-                    }}
-                  />
-                </div>
-                <div className={s.input_group}>
-                  <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
-                  <input
-                    type="text"
-                    placeholder="Phone"
-                    value={phone}
-                    onChange={(e) => {
-                      setPhone(e.currentTarget.value);
-                    }}
-                  />
-                </div>
-                <div className={s.input_group}>
-                  <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
-                  <input
-                    type="text"
-                    placeholder="Post number"
-                    style={{ flex: "2" }}
-                    value={zipnum}
-                    onChange={(e) => {
-                      setZipnum(e.currentTarget.value);
-                    }}
-                    readOnly
-                  />
-                  <button
-                    style={{ flex: "1" }}
-                    onClick={() => {
-                      toggle();
-                    }}
-                  >
-                    우편번호 찾기
-                  </button>
-                </div>
-                <div className={s.field}>
-                  <div style={{ flex: "2" }}></div>
-                </div>
-                <div>
-                  <Modal
-                    isOpen={isOpen}
-                    ariaHideApp={false}
-                    style={customStyles}
-                  >
-                    <DaumPostcode onComplete={completeHandler}></DaumPostcode>
-                    <br></br>
-                    <button
-                      onClick={() => {
-                        setIsOpen(!isOpen);
-                      }}
-                    >
-                      닫기
-                    </button>
-                  </Modal>
-                </div>
-                <div className={s.field}>
-                  <label>Address</label>
-                  <input
-                    type="text"
-                    value={address1}
-                    onChange={(e) => {
-                      setAddress1(e.currentTarget.value);
-                    }}
-                    readOnly
-                  />
-                </div>
-                <div className={s.field}>
-                  <label>Detail Address</label>
-                  <input
-                    type="text"
-                    value={address2}
-                    onChange={(e) => {
-                      setAddress2(e.currentTarget.value);
-                    }}
-                    placeholder="상세주소 입력"
-                  />
-                </div>
-                <div className={s.field}>
-                  <label>Extra Address</label>
-                  <input
-                    type="text"
-                    value={address3}
-                    onChange={(e) => {
-                      setAddress3(e.currentTarget.value);
-                    }}
-                  />
-                </div>
-                <div className={s.input_group}>
-                  <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
-                  <input
-                    type="text"
-                    placeholder="Profile Message"
-                    value={profilemsg}
-                    onChange={(e) => {
-                      setprofilemsg(e.currentTarget.value);
-                    }}
-                  />
-                </div>
-                <div className={s.field}>
-                  <label>Profile img</label>
-                  <div className={s.field}>
+                <div className="form_flex">
+                  <div className={s.input_group}>
+                    <button onClick={() => toggleClassName()}>Login</button>
+                    <i className={`${s.bx} ${s.bxs_user}`}></i>
                     <input
-                      type="file"
+                      type="text"
+                      placeholder="Nickname"
+                      value={nickname}
                       onChange={(e) => {
-                        fileupload(e);
+                        setNickname(e.currentTarget.value);
                       }}
                     />
                   </div>
-                </div>
-                <div className={s.field} style={{ alignItems: "flex-start" }}>
-                  <label>Profile img preview</label>
-                  <div className={s.field}>
-                    <div>
-                      <img src={imgSrc} style={imgStyle} />
-                    </div>
+                  <div className={s.input_group}>
+                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.currentTarget.value);
+                      }}
+                    />
+                  </div>
+                  <div className={s.input_group}>
+                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                    <input
+                      type="password"
+                      placeholder="Retype Pass"
+                      value={pwdChk}
+                      onChange={(e) => {
+                        setPwdChk(e.currentTarget.value);
+                      }}
+                    />
+                  </div>
+                  <div className={s.input_group}>
+                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                    <input
+                      type="text"
+                      placeholder="Phone"
+                      value={phone}
+                      onChange={(e) => {
+                        setPhone(e.currentTarget.value);
+                      }}
+                    />
+                  </div>
+                  <div className={s.input_group}>
+                    <i className={`${s.bx} ${s.bx_mail_send}`}></i>
+                    <input
+                      type="text"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.currentTarget.value);
+                      }}
+                    />
+                    <button
+                      onClick={() => {
+                        sendMail();
+                      }}
+                    >
+                      SEND MAIL
+                    </button>
+                  </div>
+                  <div className={s.input_group}>
+                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                    <input
+                      type="text"
+                      placeholder="User code"
+                      value={userCode}
+                      onChange={(e) => {
+                        setUsercode(e.currentTarget.value);
+                      }}
+                    />
+                    <button
+                      onClick={() => {
+                        codeCheck();
+                      }}
+                    >
+                      코드확인
+                    </button>
+                  </div>
+                  <div style={{ flex: "1", color: "blue", fontSize: "1rem" }}>
+                      &nbsp;&nbsp;{msg}
                   </div>
                 </div>
-                <button>Sign up</button>
+                <div className="form_flex">
+                  <div className={s.input_group}>
+                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                    <input
+                      type="text"
+                      placeholder="Post number"
+                      style={{ flex: "2" }}
+                      value={zipnum}
+                      onChange={(e) => {
+                        setZipnum(e.currentTarget.value);
+                      }}
+                      readOnly
+                    />
+                    <button
+                      style={{ flex: "1" }}
+                      onClick={() => {
+                        toggle();
+                      }}
+                    >
+                      우편번호 찾기
+                    </button>
+                  </div>
+                  <div className={s.field}>
+                    <div style={{ flex: "2" }}></div>
+                  </div>
+                  <div>
+                    <Modal
+                      isOpen={isOpen}
+                      ariaHideApp={false}
+                      style={customStyles}
+                    >
+                      <DaumPostcode onComplete={completeHandler}></DaumPostcode>
+                      <br></br>
+                      <button
+                        onClick={() => {
+                          setIsOpen(!isOpen);
+                        }}
+                      >
+                        닫기
+                      </button>
+                    </Modal>
+                  </div>
+                  <div className={s.input_group}>
+                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                    <input
+                      type="text"
+                      placeholder="Address"
+                      value={address1}
+                      onChange={(e) => {
+                        setAddress1(e.currentTarget.value);
+                      }}
+                      readOnly
+                    />
+                  </div>
+                  <div className={s.input_group}>
+                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                    <input
+                      type="text"
+                      placeholder="Detail Address"
+                      value={address2}
+                      onChange={(e) => {
+                        setAddress2(e.currentTarget.value);
+                      }}
+                    />
+                  </div>
+                  <div className={s.input_group}>
+                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                    <input
+                      type="text"
+                      placeholder="Extra Address"
+                      value={address3}
+                      onChange={(e) => {
+                        setAddress3(e.currentTarget.value);
+                      }}
+                    />
+                  </div>
+                  <div className={s.input_group}>
+                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
+                    <input
+                      type="text"
+                      placeholder="Profile Message"
+                      value={profilemsg}
+                      onChange={(e) => {
+                        setprofilemsg(e.currentTarget.value);
+                      }}
+                    />
+                  </div>
+                  <div className={s.field}>
+                    <label>Profile img</label>
+                    <div className={s.field}>
+                      <input
+                        type="file"
+                        onChange={(e) => {
+                          fileupload(e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className={s.field} style={{ alignItems: "flex-start" }}>
+                    <label>Profile img preview</label>
+                    <div className={s.field}>
+                      <div>
+                        <img src={imgSrc} style={imgStyle} />
+                      </div>
+                    </div>
+                  </div>
+                  <button>Sign up</button>
+                </div>
               </div>
             </div>
           </div>
