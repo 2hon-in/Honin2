@@ -244,7 +244,7 @@
 .snslogin .kakao{
   /* width: 49%; */
   border: 2px solid var(--kakao-color);
-  background-color: var(--white);
+  background-color: var(--kakao-color);
   color: var(--kakao-color);
   font-weight: bold;
 }
@@ -256,9 +256,17 @@
   /* width: 49%; */
   margin-top: 1rem;
   border: 2px solid var(--naver-color);
-  background-color: var(--white);
-  color: var(--naver-color)
+  background-color: var(--naver-color);
+  color: var(--white)
 }
+.naver img{
+  width: 15%;
+}
+.join_btn, .login_btn{
+  font-family: "Noto Sans KR";
+  /* font-weight: bold; */
+}
+
 /* RESPONSIVE */
 
 @media only screen and (max-width: 425px) {

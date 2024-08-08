@@ -224,7 +224,7 @@ function Login() {
                     <i className={`${s.bx} ${s.bxs_user}`}></i>
                     <input
                       type="text"
-                      placeholder="Nickname"
+                      placeholder="Id"
                       value={nickname}
                       onChange={(e) => {
                         setNickname(e.currentTarget.value);
@@ -467,12 +467,13 @@ function Login() {
                       window.location.href = "/api/member/naverstart";
                     }}
                   >
-                    NAVER
+                    <img src="/api/images/login/naver_white.png" alt="네이버 로그인" />
                   </button>
                 </div>
                 <button
                   className={s.join_btn}
-                  onClick={() => toggleClassName()}
+                  // onClick={() => toggleClassName()}
+                  onClick={() =>navigate("/join/:sign_up")}
                 >
                   회원가입
                 </button>

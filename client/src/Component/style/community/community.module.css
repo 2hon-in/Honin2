@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  font-family: 'Roboto', 'Noto Sans KR', AppleSDGothicNeo-Regular, 'Malgun Gothic', '맑은 고딕', dotum, '돋움', sans-serif;
+  font-family: "Noto Sans KR";
 }
 
 .main{

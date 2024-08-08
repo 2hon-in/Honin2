@@ -1,10 +1,5 @@
-@font-face {
-    font-family: 'CustomFont';
-    src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap') format('truetype');
-}
-
 .container {
-    font-family: 'CustomFont', 'Malgun Gothic', sans-serif;
+    font-family: "Noto Sans KR";
     display: flex;
     justify-content: center;
     align-items: start;
@@ -69,7 +64,7 @@
 
 .menu_bar>.buttons >button {
     color: var(--primary-color);
-
+    font-family: "Noto Sans KR";
 }
 
 .menu_bar>.buttons>button {

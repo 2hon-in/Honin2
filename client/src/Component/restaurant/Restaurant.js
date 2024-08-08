@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import Header from '../layout/Header'
 import Footer from '../layout/Footer'
+import s from "../style/restaurant/restaurant.module.css"
 const { kakao } = window;
 function Restaurant() {
   useEffect(() => {
     let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
     let options = { //지도를 생성할 때 필요한 기본 옵션
-      center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+      center: new kakao.maps.LatLng(37.57188903486235, 126.98721142956846), //지도의 중심좌표.
       level: 3 //지도의 레벨(확대, 축소 정도)
     };
-
     let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
     var marker = new kakao.maps.Marker({
@@ -40,9 +40,9 @@ function Restaurant() {
   return (
     <>
       <Header></Header>
-      <div className="container">
-        <div className="store_list"></div>
-        <div id="map" style={{ width: "500px", height: "400px", marginTop: "5.6rem" }}></div>
+      <div className={s.container}>
+        {/* <div className="store_list"></div> */}
+        <div id="map" style={{ width: "100vw", height: "100%" }}></div>
       </div>
       <Footer></Footer>
     </>
