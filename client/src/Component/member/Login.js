@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginAction, setFollowers, setFollowings } from "../store/userSlice";
 import jaxios from "../util/jwtUtil";
@@ -15,13 +15,22 @@ import axios from "axios";
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const {state} = useParams();
+  
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setToggleClass(`${s.container} ${s.sign_up}`);
-    }, 200);
-    return () => clearTimeout(timer);
-  }, []);
+    console.log("전달받은 state : ", state);
+    if(state === "sign_in"){
+      const timer = setTimeout(() => {
+        setToggleClass(`${s.container} ${s.sign_in}`);
+      }, 200);
+      return () => clearTimeout(timer);
+    }else{
+      const timer = setTimeout(() => {
+        setToggleClass(`${s.container} ${s.sign_up}`);
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [state]);
 
   //회원가입용 state 변수
   const [email, setEmail] = useState("");
@@ -47,7 +56,7 @@ function Login() {
   //로그인용 state 변수
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
-  const [toggleClass, setToggleClass] = useState(`{${s.container} ${s.sign_up}}`);
+  const [toggleClass, setToggleClass] = useState("s.container");
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -212,7 +221,6 @@ function Login() {
               <div className={`${s.form} ${s.sign_up}`}>
                 <div className="form_flex">
                   <div className={s.input_group}>
-                    <button onClick={() => toggleClassName()}>Login</button>
                     <i className={`${s.bx} ${s.bxs_user}`}></i>
                     <input
                       type="text"
@@ -418,7 +426,7 @@ function Login() {
                   <i className={`${s.bx} ${s.bxs_user}`}></i>
                   <input
                     type="text"
-                    placeholder="Username"
+                    placeholder="아이디"
                     value={nickname}
                     onChange={(e) => {
                       setNickname(e.currentTarget.value);
@@ -429,7 +437,7 @@ function Login() {
                   <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
                   <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="비밀번호"
                     value={password}
                     onChange={(e) => {
                       setPassword(e.currentTarget.value);
@@ -442,7 +450,7 @@ function Login() {
                     onLoginLocal();
                   }}
                 >
-                  LOGIN
+                  로그인
                 </button>
                 <div className={s.snslogin}>
                   <button
@@ -451,7 +459,7 @@ function Login() {
                       window.location.href = "/api/member/kakaostart";
                     }}
                   >
-                    KAKAO
+                    <img src="/api/images/login/kakao_brown.png" alt="카카오 로그인" />
                   </button>
                   <button
                     className={s.naver}
@@ -466,7 +474,7 @@ function Login() {
                   className={s.join_btn}
                   onClick={() => toggleClassName()}
                 >
-                  JOIN
+                  회원가입
                 </button>
               </div>
             </div>

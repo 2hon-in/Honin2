@@ -14,7 +14,7 @@ import UpdateSecondhand from './Component/secondhand/UpdateSecondhand';
 import NcareerView from "./Component/notice/NcareerView";
 import NpolicyView from "./Component/notice/NpolicyView";
 import Login from "./Component/member/Login";
-import Join from "./Component/member/Join";
+
 
 function App() {
   return (
@@ -23,8 +23,8 @@ function App() {
           <Route path='/' element={<Main></Main>} />
 
           {/* 회원관리 */}
-          <Route path='/login' element={<Login></Login>} />
-          <Route path='/join' element={<Join></Join>} />
+          <Route path='/login/:state' element={<Login></Login>} />
+          <Route path='/join/:state' element={<Login></Login>} />
           <Route path="/kakaosaveinfo/:nickname" element={<Kakaosaveinfo />} />
           <Route path="/naversaveinfo/:nickname" element={<Naversaveinfo />} />
 

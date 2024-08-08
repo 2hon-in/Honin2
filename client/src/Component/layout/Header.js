@@ -28,15 +28,19 @@ function Header() {
                         <li><div className={s.menu_item} onClick={() => { navigate("/ncareer") }}>소식지</div></li>
                         <li><div className={s.menu_item} onClick={() => { navigate("/restaurant") }}>맛집지도</div></li>
                         <li><div className={s.menu_item} onClick={() => { navigate('/secondhand') }}>중고거래</div></li>
-                        <li><div className={s.menu_item} onClick={() => { navigate('/mypage') }}>마이페이지</div></li>
                     </ul>
                     <div className={s.buttons}>
                         {!loginUser ? (
-                            <button className={s.login} onClick={() => { navigate('/login') }}>로그인</button>
+                            <>
+                                <button className={s.login} onClick={() => { navigate('/login/sign_in') }}>로그인</button>
+                                <button className={s.signup} onClick={() => { navigate('/join/sign_up') }}>회원가입</button>
+                            </>
                         ) : (
-                            <button className={s.login} onClick={() => { onLogout() }}>로그아웃</button>
+                            <>
+                                <button className={s.login} onClick={() => { onLogout() }}>로그아웃</button>
+                                <button className={s.signup} onClick={() => { navigate('') }}>마이페이지</button>
+                            </>
                         )}
-                        <button className={s.signup} onClick={() => { navigate('/join') }}>회원가입</button>
                     </div>
                 </div>
             </div>

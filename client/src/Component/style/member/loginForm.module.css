@@ -237,20 +237,27 @@
 
 .snslogin{
   margin: 1rem 0;
-  display: flex;
-  justify-content: space-between;
+  /* display: flex; */
+  /* justify-content: space-between; */
 }
 
 .snslogin .kakao{
-  width: 49%;
-  background-color: var(--kakao-color);
-  color: var(--black);
+  /* width: 49%; */
+  border: 2px solid var(--kakao-color);
+  background-color: var(--white);
+  color: var(--kakao-color);
+  font-weight: bold;
+}
+.kakao img{
+  width: 15%;
 }
 
 .snslogin .naver{
-  width: 49%;
-  background-color: var(--naver-color);
-  color: var(--white)
+  /* width: 49%; */
+  margin-top: 1rem;
+  border: 2px solid var(--naver-color);
+  background-color: var(--white);
+  color: var(--naver-color)
 }
 /* RESPONSIVE */
 
