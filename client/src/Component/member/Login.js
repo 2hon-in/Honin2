@@ -219,9 +219,8 @@ function Login() {
           >
             <div className={`${s.form_wrapper} ${s.align_items_center}`}>
               <div className={`${s.form} ${s.sign_up}`}>
-                <div className="form_flex">
+                <div className={s.flex_box_col}>
                   <div className={s.input_group}>
-                    <i className={`${s.bx} ${s.bxs_user}`}></i>
                     <input
                       type="text"
                       placeholder="Id"
@@ -232,7 +231,6 @@ function Login() {
                     />
                   </div>
                   <div className={s.input_group}>
-                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
                     <input
                       type="password"
                       placeholder="Password"
@@ -243,7 +241,6 @@ function Login() {
                     />
                   </div>
                   <div className={s.input_group}>
-                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
                     <input
                       type="password"
                       placeholder="Retype Pass"
@@ -254,7 +251,6 @@ function Login() {
                     />
                   </div>
                   <div className={s.input_group}>
-                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
                     <input
                       type="text"
                       placeholder="Phone"
@@ -265,40 +261,42 @@ function Login() {
                     />
                   </div>
                   <div className={s.input_group}>
-                    <i className={`${s.bx} ${s.bx_mail_send}`}></i>
-                    <input
-                      type="text"
-                      placeholder="Email"
-                      value={email}
-                      onChange={(e) => {
-                        setEmail(e.currentTarget.value);
-                      }}
-                    />
-                    <button
-                      onClick={() => {
-                        sendMail();
-                      }}
-                    >
-                      SEND MAIL
-                    </button>
+                    <div className={`${s.flex_box_row} ${s.email_box}`}>
+                      <input
+                        type="text"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.currentTarget.value);
+                        }}
+                      />
+                      <button
+                        onClick={() => {
+                          sendMail();
+                        }}
+                      >
+                        SEND MAIL
+                      </button>
+                    </div>
                   </div>
                   <div className={s.input_group}>
-                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
-                    <input
-                      type="text"
-                      placeholder="User code"
-                      value={userCode}
-                      onChange={(e) => {
-                        setUsercode(e.currentTarget.value);
-                      }}
-                    />
-                    <button
-                      onClick={() => {
-                        codeCheck();
-                      }}
-                    >
-                      코드확인
-                    </button>
+                    <div className={`${s.flex_box_row} ${s.email_box}`}>
+                      <input
+                        type="text"
+                        placeholder="User code"
+                        value={userCode}
+                        onChange={(e) => {
+                          setUsercode(e.currentTarget.value);
+                        }}
+                      />
+                      <button
+                        onClick={() => {
+                          codeCheck();
+                        }}
+                      >
+                        코드확인
+                      </button>
+                    </div>
                   </div>
                   <div style={{ flex: "1", color: "blue", fontSize: "1rem" }}>
                       &nbsp;&nbsp;{msg}
@@ -306,7 +304,6 @@ function Login() {
                 </div>
                 <div className="form_flex">
                   <div className={s.input_group}>
-                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
                     <input
                       type="text"
                       placeholder="Post number"
@@ -347,7 +344,6 @@ function Login() {
                     </Modal>
                   </div>
                   <div className={s.input_group}>
-                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
                     <input
                       type="text"
                       placeholder="Address"
@@ -359,7 +355,6 @@ function Login() {
                     />
                   </div>
                   <div className={s.input_group}>
-                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
                     <input
                       type="text"
                       placeholder="Detail Address"
@@ -370,7 +365,6 @@ function Login() {
                     />
                   </div>
                   <div className={s.input_group}>
-                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
                     <input
                       type="text"
                       placeholder="Extra Address"
@@ -381,7 +375,6 @@ function Login() {
                     />
                   </div>
                   <div className={s.input_group}>
-                    <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
                     <input
                       type="text"
                       placeholder="Profile Message"
@@ -423,7 +416,6 @@ function Login() {
             <div className={`${s.form_wrapper} ${s.align_items_center}`}>
               <div className={`${s.form} ${s.sign_in}`}>
                 <div className={s.input_group}>
-                  <i className={`${s.bx} ${s.bxs_user}`}></i>
                   <input
                     type="text"
                     placeholder="아이디"
@@ -434,7 +426,6 @@ function Login() {
                   />
                 </div>
                 <div className={s.input_group}>
-                  <i className={`${s.bx} ${s.bxs_lock_alt}`}></i>
                   <input
                     type="password"
                     placeholder="비밀번호"
