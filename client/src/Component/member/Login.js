@@ -10,6 +10,8 @@ import s from "../style/member/loginForm.module.css";
 import Footer from "../layout/Footer";
 import Header from "../layout/Header";
 import axios from "axios";
+import kakaoLogo from "../../assets/images/kakao_brown.png"
+import naverLogo from "../../assets/images/naver_white.png"
 // import "../style/member/login.css";
 
 function Login() {
@@ -446,7 +448,7 @@ function Login() {
                       window.location.href = "/api/member/kakaostart";
                     }}
                   >
-                    <img src="/api/images/login/kakao_brown.png" alt="카카오 로그인" />
+                    <img src={kakaoLogo} alt="카카오 로그인" />
                   </button>
                   <button
                     className={s.naver}
@@ -454,7 +456,7 @@ function Login() {
                       window.location.href = "/api/member/naverstart";
                     }}
                   >
-                    <img src="/api/images/login/naver_white.png" alt="네이버 로그인" />
+                    <img src={naverLogo} alt="네이버 로그인" />
                   </button>
                 </div>
                 <button
