@@ -175,3 +175,85 @@ ADD CONSTRAINT `sreply_f2`
   REFERENCES `honin`.`secondhand` (`snum`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
+
+-- like 테이블들의 외래키설정
+
+ALTER TABLE `honin`.`canonymouslike`
+ADD INDEX `canonymouslike_f1_idx` (`likenick` ASC) VISIBLE,
+ADD INDEX `canonymouslike_f2_idx` (`canum` ASC) VISIBLE;
+;
+ALTER TABLE `honin`.`canonymouslike`
+ADD CONSTRAINT `canonymouslike_f1`
+  FOREIGN KEY (`likenick`)
+  REFERENCES `honin`.`member` (`nickname`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `canonymouslike_f2`
+  FOREIGN KEY (`canum`)
+  REFERENCES `honin`.`canonymous` (`canum`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+ALTER TABLE `honin`.`cfreelike`
+ADD INDEX `cfreelike_f1_idx` (`likenick` ASC) VISIBLE,
+ADD INDEX `cfreelike_f2_idx` (`cfnum` ASC) VISIBLE;
+;
+ALTER TABLE `honin`.`cfreelike`
+ADD CONSTRAINT `cfreelike_f1`
+  FOREIGN KEY (`likenick`)
+  REFERENCES `honin`.`member` (`nickname`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `cfreelike_f2`
+  FOREIGN KEY (`cfnum`)
+  REFERENCES `honin`.`cfree` (`cfnum`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+  ALTER TABLE `honin`.`crecommendedlike`
+  ADD INDEX `crecommendedlike_f1_idx` (`likenick` ASC) VISIBLE,
+  ADD INDEX `crecommendedlike_f2_idx` (`crnum` ASC) VISIBLE;
+  ;
+  ALTER TABLE `honin`.`crecommendedlike`
+  ADD CONSTRAINT `crecommendedlike_f1`
+    FOREIGN KEY (`likenick`)
+    REFERENCES `honin`.`member` (`nickname`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  ADD CONSTRAINT `crecommendedlike_f2`
+    FOREIGN KEY (`crnum`)
+    REFERENCES `honin`.`crecommended` (`crnum`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+ALTER TABLE `honin`.`ctiplike`
+ADD INDEX `ctiplike_f1_idx` (`likenick` ASC) VISIBLE,
+ADD INDEX `ctiplike_f2_idx` (`ctnum` ASC) VISIBLE;
+;
+ALTER TABLE `honin`.`ctiplike`
+ADD CONSTRAINT `ctiplike_f1`
+  FOREIGN KEY (`likenick`)
+  REFERENCES `honin`.`member` (`nickname`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `ctiplike_f2`
+  FOREIGN KEY (`ctnum`)
+  REFERENCES `honin`.`ctip` (`ctnum`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+ALTER TABLE `honin`.`slike`
+ADD INDEX `slike_f1_idx` (`likenick` ASC) VISIBLE,
+ADD INDEX `slike_f2_idx` (`snum` ASC) VISIBLE;
+;
+ALTER TABLE `honin`.`slike`
+ADD CONSTRAINT `slike_f1`
+  FOREIGN KEY (`likenick`)
+  REFERENCES `honin`.`member` (`nickname`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `slike_f2`
+  FOREIGN KEY (`snum`)
+  REFERENCES `honin`.`secondhand` (`snum`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
