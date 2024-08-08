@@ -16,7 +16,7 @@ function NcareerView() {
 
     useEffect(
         ()=>{
-            axios.get(`/api/notice/getNcareer/${ncnum}`)
+            jaxios.get(`/api/notice/getNcareer/${ncnum}`)
             .then((result)=>{
                 console.log(result.data.ncareer);
                 setNcareer( result.data.ncareer );

@@ -14,7 +14,7 @@ function NPolicy() {
 
     useEffect(
         ()=>{
-            axios.get('/api/notice/getNpolicyList')
+            jaxios.get('/api/notice/getNpolicyList')
             .then((result)=>{
                 setNPolicyList(result.data.npolicyList);
             })
