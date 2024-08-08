@@ -58,7 +58,7 @@ function Join() {
             return window.alert("이메일을 입력해주세요");
         }
         try {
-            const result = await axios.post("/api/member/sendMail", null, { params: { email: email } })
+            const result = await jaxios.post("/api/member/sendMail", null, { params: { email: email } })
             if (result.data.message == "OK") {
                 setUsercode(result.data.number);
                 window.alert("이메일이 전송되었습니다. 해당 이메일의 수신내역을 확인하세요.");
@@ -72,7 +72,7 @@ function Join() {
     async function codeCheck() {
 
         try {
-            const result = await axios.post("/api/member/codeCheck", null, { params: { userCode: userCode } })
+            const result = await jaxios.post("/api/member/codeCheck", null, { params: { userCode: userCode } })
             setMsg(result.data.message);
         } catch (err) {
             console.error(err);
@@ -87,17 +87,17 @@ function Join() {
         if (password !== pwdChk) { return alert('패스워드 확인이 일치하지 않습니다'); }
 
         try {
-            let result = await axios.post('/api/member/emailcheck', null, { params: { email } });
+            let result = await jaxios.post('/api/member/emailCheck', null, { params: { email } });
             if (result.data.msg === 'no') {
                 return alert('이메일이 중복됩니다');
             }
 
-            result = await axios.post('/api/member/nicknamecheck', null, { params: { nickname } });
+            result = await jaxios.post('/api/member/nicknameCheck', null, { params: { nickname } });
             if (result.data.msg === 'no') {
                 return alert('닉네임이 중복됩니다');
             }
 
-            result = await axios.post('/api/member/join',
+            result = await jaxios.post('/api/member/join',
                 {
                     email, password, nickname, phone, profilemsg, profileimg: imgSrc, address1, address2, address3, zipnum
                 });
@@ -136,8 +136,6 @@ function Join() {
                             <input type="text" value={email} onChange={(e) => { setEmail(e.currentTarget.value) }} />
                         </div>
                         <div className={s.field}>
-                            <label>Email Confirm</label>
-                            <input type="text" value={email} onChange={(e) => { setEmail(e.currentTarget.value) }} />
                             <button onClick={() => { sendMail() }}>SEND MAIL</button>
                             <input type="text" value={userCode} onChange={(e) => { setUsercode(e.currentTarget.value) }}></input>
                             <button onClick={() => { codeCheck() }}>코드확인</button>

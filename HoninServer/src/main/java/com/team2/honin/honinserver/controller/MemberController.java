@@ -119,7 +119,7 @@ public class MemberController {
         return result;
     }
 
-    @PostMapping("/emailcheck")
+    @PostMapping("/emailCheck")
     public HashMap<String, Object> emailcheck(@RequestParam("email") String email) {
         HashMap<String, Object> result = new HashMap<String, Object>();
         Member mem = ms.getMember(email);
@@ -128,8 +128,8 @@ public class MemberController {
         return result;
     }
 
-    @PostMapping("/nicknamecheck")
-    public HashMap<String, Object> nicknamecheck(@RequestParam("nickname") String nickname) {
+    @PostMapping("/nicknameCheck")
+    public HashMap<String, Object> nicknameCheck(@RequestParam("nickname") String nickname) {
         HashMap<String, Object> result = new HashMap<String, Object>();
         Member mem = ms.getMemberByNickname(nickname);
         if (mem != null) result.put("msg", "no");

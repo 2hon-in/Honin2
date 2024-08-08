@@ -80,7 +80,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 || path.startsWith("/member/sendMail")
                 || path.startsWith("/member/codeCheck")
                 || path.startsWith("/member/emailCheck")
-                || path.startsWith("/member/nickNameCheck")
+                || path.startsWith("/member/nicknameCheck")
                 || path.startsWith("/member/join")
                 || path.startsWith("/member/fileupload")
                 || path.startsWith("/member/kakaostart")
