@@ -13,14 +13,6 @@ function Secondhand() {
     const loginUser = useSelector(state=>state.user);
     const dispatch = useDispatch();
 
-    function test(){
-        console.log("loginUser.refreshToken : ", loginUser.refreshToken);
-        console.log("loginUser.accessToken : ", loginUser.accessToken);
-        if(loginUser.accessToken==null){
-            dispatch(test(loginUser.refreshToken))
-        }
-    }
-
     useEffect(() => {
         jaxios.get(`/api/secondhand/getSecondhandList`)
             .then((result) => {
@@ -42,6 +34,7 @@ function Secondhand() {
             });
     }
 
+
     return (
         <>
             <Header />
@@ -49,7 +42,7 @@ function Secondhand() {
                 <div className={s.container}>
                     <div className={s.block}>
                         <h1>중고거래</h1>
-                        <button onClick={()=>{test()}}></button>
+                        <button onClick={()=>{navigate('/secondhandWrite')}}>상품등록</button>
                     </div>
                     <div className={s.gridcontainer}>
                         <div className={s.gridblock}>

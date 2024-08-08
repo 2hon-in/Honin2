@@ -17,7 +17,11 @@ const beforeReq = async (config) => {
 const requestFail = (err) => Promise.reject(err);
 
 const beforeRes = async (response) => {
+    console.log(response);
     if (response.data && response.data.error === 'ERROR_ACCESS_TOKEN') {
+        if(response.config._retry = true){
+            return response;
+        }
         const loginUser = getCookie('user');
         if (loginUser) {
             const headers = { Authorization: `Bearer ${loginUser.accessToken}` };
@@ -28,6 +32,7 @@ const beforeRes = async (response) => {
                 setCookie('user', JSON.stringify(loginUser), 1);
 
                 // 요청을 재시도
+                response.config._retry = true;
                 response.config.headers.Authorization = `Bearer ${res.data.accessToken}`;
                 return jaxios(response.config);
             } catch (refreshError) {
