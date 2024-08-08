@@ -9,14 +9,16 @@ import s from "../style/notice/notice.module.css"
 
 function NPolicy() {
     const [npolicyList, setNPolicyList] = useState([]);
+    const [ paging, setPaging ] = useState({});
     const navigate = useNavigate();
     const maxLength = 100; // 최대 길이 설정
 
     useEffect(
         ()=>{
-            jaxios.get('/api/notice/getNpolicyList')
+            jaxios.get('/api/notice/getNpolicyList/1')
             .then((result)=>{
                 setNPolicyList(result.data.npolicyList);
+                setPaging(result.data.paging);
             })
             .catch((err)=>{console.error(err)})
         },[]
@@ -25,6 +27,37 @@ function NPolicy() {
     const truncateText = (text, maxLength) => {
         return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
     };
+
+    useEffect(
+        ()=>{
+            window.addEventListener("scroll", handleScroll);
+            return () => {
+                window.removeEventListener("scroll", handleScroll);
+            }
+        }
+    );
+
+    const handleScroll=()=>{
+        const scrollHeight = document.documentElement.scrollHeight - 10; // 스크롤이 가능한 크기
+        const scrollTop = document.documentElement.scrollTop;  // 현재 위치
+        const clientHeight = document.documentElement.clientHeight; // 내용물의 크기
+        if( paging.page && ( scrollTop + clientHeight >= scrollHeight ) ) {
+            onPageMove( Number(paging.page) + 1 );
+        }
+    }
+
+    function onPageMove(page){
+        //무한 스크롤
+        axios.get(`/api/notice/getNpolicyList/${page}`)
+        .then((result)=>{
+            setPaging( result.data.paging);
+            let npa=[]; 
+            npa = [...npolicyList];  // 현재 내용 복사
+            npa = [...npa, ...result.data.npolicyList ]; // 새로 조회한 페이지의 목록과 Merge
+            setNPolicyList( [...npa] ); // Merge 한 리스트를  복사
+        })
+        .catch((err)=>{console.error(err)})
+    }
 
     return (
       <>

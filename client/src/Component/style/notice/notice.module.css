@@ -33,18 +33,27 @@
     min-height: 100vh;
 }
 
+.sidebar {
+    /* flex: 1;
+    padding: 1.2rem;
+    margin-top: 2.1rem; */
+
+    position: fixed;
+    top: 7rem; 
+    left: 14rem; 
+    height: 100%; 
+    padding: 1.2rem;
+    /* overflow-y: auto;  */
+    border: none;
+    margin-left: 3rem;
+    /* background-color: white; */
+}
+
 .contentDiv{
     width: 62rem;
     /* overflow: auto; */
     border-left: 1px solid #ddd;
-}
-
-.sidebar {
-    flex: 1;
-    padding: 1.2rem;
-    margin-top: 2.1rem;
-    /* border-right: 1px solid #ddd; */
-    /* background-color: #fafafa; */
+    margin-left: 23rem;
 }
 
 .title + p{

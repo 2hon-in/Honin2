@@ -45,6 +45,10 @@ function NpolicyView() {
                     </div>
                     <br />
 
+                    <div className={s.imageDiv}>
+                        <img src={`/api/images/${npolicy.savefilename}`}></img>
+                    </div>
+
                     <div className={s.content}>
                         <p style={{color:"red"}}>
                             {npolicy.content}

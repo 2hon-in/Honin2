@@ -9,20 +9,51 @@ import s from "../style/notice/notice.module.css"
 
 function NCareer() {
     const [ncareerList, setNcareerList] = useState([]);
-    // const [ paging, setPaging ] = useState({});
+    const [ paging, setPaging ] = useState({});
     const navigate = useNavigate();
     const maxLength = 100; // 최대 길이 설정
 
     useEffect(
         ()=>{
-            jaxios.get('/api/notice/getNcareerList')
+            jaxios.get('/api/notice/getNcareerList/1')
             .then((result)=>{
                 setNcareerList(result.data.ncareerList);
-                // setPaging(result.data.paging);
+                setPaging(result.data.paging);
             })
             .catch((err)=>{console.error(err)})
         },[]
     )
+
+    useEffect(
+        ()=>{
+            window.addEventListener("scroll", handleScroll);
+            return () => {
+                window.removeEventListener("scroll", handleScroll);
+            }
+        }
+    );
+
+    const handleScroll=()=>{
+        const scrollHeight = document.documentElement.scrollHeight - 10; // 스크롤이 가능한 크기
+        const scrollTop = document.documentElement.scrollTop;  // 현재 위치
+        const clientHeight = document.documentElement.clientHeight; // 내용물의 크기
+        if( paging.page && ( scrollTop + clientHeight >= scrollHeight ) ) {
+            onPageMove( Number(paging.page) + 1 );
+        }
+    }
+
+    function onPageMove(page){
+        //무한 스크롤
+        axios.get(`/api/notice/getNcareerList/${page}`)
+        .then((result)=>{
+            setPaging( result.data.paging);
+            let nca=[]; 
+            nca = [...ncareerList];  // 현재 내용 복사
+            nca = [...nca, ...result.data.ncareerList ]; // 새로 조회한 페이지의 목록과 Merge
+            setNcareerList( [...nca] ); // Merge 한 리스트를  복사
+        })
+        .catch((err)=>{console.error(err)})
+    }
 
     const truncateText = (text, maxLength) => {
         return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
@@ -35,7 +66,6 @@ function NCareer() {
             <div className={s.container}>
                 <div className={s.sidebarDiv}>
                     <aside className={s.sidebar}>
-                        {/* <h2 className={s.pClass}>취업정보 및 청년정책</h2> */}
                         <span className={s.pClass}>취업정보 및 청년정책</span>
                         <br /><br />
                         <p>취업정보와 청년정책에 대한 내용을 확인 가능합니다.</p>
@@ -83,7 +113,6 @@ function NCareer() {
                 </div>
             </div>
         </div>
-        {/* <Footer></Footer> */}
         </>
     )
 }

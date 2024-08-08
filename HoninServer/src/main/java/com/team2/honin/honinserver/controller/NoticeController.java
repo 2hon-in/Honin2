@@ -1,5 +1,6 @@
 package com.team2.honin.honinserver.controller;
 
+import com.team2.honin.honinserver.dto.Paging;
 import com.team2.honin.honinserver.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,17 +17,25 @@ public class NoticeController {
     @Autowired
     NoticeService ns;
 
-    @GetMapping("/getNcareerList")
-    public HashMap<String, Object> getNcareerList(){
+    @GetMapping("/getNcareerList/{page}")
+    public HashMap<String, Object> getNcareerList(@PathVariable("page") int page){
         HashMap<String, Object> result = new HashMap<>();
-        result.put("ncareerList", ns.getNcareerList());
+        Paging paging = new Paging();
+        paging.setPage( page );
+        paging.calPaging();
+        result.put("ncareerList", ns.getNcareerList(paging));
+        result.put("paging", paging);
         return result;
     }
 
-    @GetMapping("/getNpolicyList")
-    public HashMap<String, Object> getNpolicyList(){
+    @GetMapping("/getNpolicyList/{page}")
+    public HashMap<String, Object> getNpolicyList(@PathVariable("page") int page){
         HashMap<String, Object> result = new HashMap<>();
-        result.put("npolicyList", ns.getNpolicyList());
+        Paging paging = new Paging();
+        paging.setPage( page );
+        paging.calPaging();
+        result.put("npolicyList", ns.getNpolicyList(paging));
+        result.put("paging", paging);
         return result;
     }
 
