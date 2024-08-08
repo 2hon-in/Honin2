@@ -15,7 +15,7 @@ function NCareer() {
 
     useEffect(
         ()=>{
-            axios.get('/api/notice/getNcareerList')
+            jaxios.get('/api/notice/getNcareerList')
             .then((result)=>{
                 setNcareerList(result.data.ncareerList);
                 // setPaging(result.data.paging);
