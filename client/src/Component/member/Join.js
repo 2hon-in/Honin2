@@ -6,6 +6,7 @@ import jaxios from '../util/jwtUtil'
 import s from "../style/member/join.module.css"
 import Header from '../layout/Header';
 import Footer from '../layout/Footer';
+import axios from 'axios';
 
 function Join() {
 
@@ -86,12 +87,12 @@ function Join() {
         if (password !== pwdChk) { return alert('패스워드 확인이 일치하지 않습니다'); }
 
         try {
-            let result = await jaxios.post('/api/member/emailcheck', null, { params: { email } });
+            let result = await jaxios.post('/api/member/emailCheck', null, { params: { email } });
             if (result.data.msg === 'no') {
                 return alert('이메일이 중복됩니다');
             }
 
-            result = await jaxios.post('/api/member/nicknamecheck', null, { params: { nickname } });
+            result = await jaxios.post('/api/member/nicknameCheck', null, { params: { nickname } });
             if (result.data.msg === 'no') {
                 return alert('닉네임이 중복됩니다');
             }
@@ -135,8 +136,6 @@ function Join() {
                             <input type="text" value={email} onChange={(e) => { setEmail(e.currentTarget.value) }} />
                         </div>
                         <div className={s.field}>
-                            <label>Email Confirm</label>
-                            <input type="text" value={email} onChange={(e) => { setEmail(e.currentTarget.value) }} />
                             <button onClick={() => { sendMail() }}>SEND MAIL</button>
                             <input type="text" value={userCode} onChange={(e) => { setUsercode(e.currentTarget.value) }}></input>
                             <button onClick={() => { codeCheck() }}>코드확인</button>

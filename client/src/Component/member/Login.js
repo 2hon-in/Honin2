@@ -78,7 +78,7 @@ function Login() {
       return window.alert("이메일을 입력해주세요");
     }
     try {
-      const result = await axios.post("/api/member/sendMail", null, {
+      const result = await jaxios.post("/api/member/sendMail", null, {
         params: { email: email },
       });
       if (result.data.message == "OK") {
@@ -95,7 +95,7 @@ function Login() {
 
   const codeCheck = async () => {
     try {
-      const result = await axios.post("/api/member/codeCheck", null, {
+      const result = await jaxios.post("/api/member/codeCheck", null, {
         params: { userCode: userCode },
       });
       setMsg(result.data.message);

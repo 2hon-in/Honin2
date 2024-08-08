@@ -32,7 +32,7 @@ function Secondhand() {
             });
     }, []);
 
-    function onSBoardView(num) {
+    function SecondhandView(num) {
         jaxios.get(`/api/secondhand/updateReadCount/${num}`)
             .then(() => {
                 navigate(`/secondhandView/${num}`);
@@ -55,7 +55,7 @@ function Secondhand() {
                         <div className={s.gridblock}>
                             <div className={s.grid}>
                                 {secondhandList.map((sh) => (
-                                    <div className={s.card} key={sh.snum} onClick={() => onSBoardView(sh.snum)}>
+                                    <div className={s.card} key={sh.snum} onClick={() => SecondhandView(sh.snum)}>
                                         <div className={s.imageblock}>
                                             {sh.savefilename ? (
                                                 <img src={`http://localhost:8070/uploads/${sh.savefilename}`} alt="중고거래 아이템 이미지" />

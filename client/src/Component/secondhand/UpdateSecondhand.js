@@ -46,9 +46,6 @@ function UpdateSecondhand() {
         if (!content) {
             return window.alert("내용을 입력하세요");
         }
-        if (!imgList.length) {
-            return window.alert("사진을 선택하세요");
-        }
 
         const result = await jaxios.post("/api/secondhand/updateSecondhand", {
             id: secondhand.id,
