@@ -1,0 +1,107 @@
+.main_banner{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 90vh;
+}
+/* .main_banner .text_container{
+    font-size: 4rem;  
+    line-height: 40rem;
+} */
+.main_banner img{
+    width: 100%;
+    object-fit: cover;
+}
+
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.communityTitle{
+    display: flex;
+    /* width: 100vw; */
+}
+
+.communityTitle > span{
+    font-family: Pretendard-Regular;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: #fff;
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+.section {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    background-color: #fff;
+    flex-direction: column; 
+    align-items: center; /* 수평 가운데 정렬 */
+}
+
+.communityTitle {
+    font-size: 1.2rem;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #817f7f;
+}
+
+.columns {
+    display: flex;
+    width: 100%;
+}
+
+.leftColumn, .rightColumn {
+    flex: 1;
+    padding: 1rem;
+}
+
+.leftColumn {
+    border-right: 1px solid #ddd;
+}
+
+.rightColumn {
+    flex: 0.4;
+    margin-left: 1rem;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+}
+
+.listItem {
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.listItem span {
+    color: #999;
+}
+
+.listItem .category {
+    color: red;
+    font-weight: bold;
+}
