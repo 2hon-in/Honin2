@@ -1,10 +1,10 @@
 package com.team2.honin.honinserver.controller;
 
 import com.team2.honin.honinserver.entity.SImages;
+import com.team2.honin.honinserver.entity.SecondHand;
 import com.team2.honin.honinserver.service.SImagesService;
 import jakarta.servlet.ServletContext;
 import lombok.extern.log4j.Log4j2;
-import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,10 +29,9 @@ public class SImagesController {
     private ServletContext servletContext;
 
     @PostMapping("/uploadImages")
-    public HashMap<String, Object> uploadImages(@RequestParam("image") MultipartFile[] files) {
+    public HashMap<String, Object> uploadImages(@RequestParam("image") List<MultipartFile> files) {
         HashMap<String, Object> result = new HashMap<>();
         List<String> savedFileNames = new ArrayList<>();
-        List<String> thumbnailFileNames = new ArrayList<>();
 
         String path = servletContext.getRealPath("/uploads/secondhand");
 
@@ -45,9 +44,6 @@ public class SImagesController {
                 file.transferTo(new File(uploadPath));
                 savedFileNames.add(filename);
 
-                // 썸네일 생성 및 저장
-                String thumbnailFilename = createThumbnail(uploadPath, filename);
-                thumbnailFileNames.add(thumbnailFilename);
 
             } catch (IOException e) {
                 log.error("File upload failed", e);
@@ -57,7 +53,6 @@ public class SImagesController {
         }
 
         result.put("savefilename", savedFileNames);
-        result.put("thumbnailfilenames", thumbnailFileNames);
         return result;
     }
 
@@ -70,21 +65,10 @@ public class SImagesController {
         return filenameWithoutExtension + dt + extension;
     }
 
-    private String createThumbnail(String uploadPath, String filename) throws IOException {
-        String path = servletContext.getRealPath("/uploads/secondhand");
-        String thumbnailFilename = filename.replace(".", "_thumbnail.");
-
-        Thumbnails.of(uploadPath)
-                .size(1920, 1080)
-                .toFile(path + "/" + thumbnailFilename);
-
-        return thumbnailFilename;
-    }
-
 
     @GetMapping("/getImages/{num}")
-    public Optional<SImages> getImagesBySecondhandSnum(@PathVariable int num) {
-        return sis.findBySnum(num);
+    public List<SImages> getImagesBySecondhand(SecondHand secondHand) {
+        return sis.findBySecondhand(secondHand);
     }
 
     @DeleteMapping("/deleteImage/{num}")

@@ -14,6 +14,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,8 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             String profilemsg = (String) claims.get("profilemsg");
             String provider = (String) claims.get("provider");
             String snsid = (String) claims.get("snsid");
-            Date indate = (Date) claims.get("indate");
+            Long timeInMillis = (Long) claims.get("indate");
+            Timestamp indate = new Timestamp(timeInMillis);
             String address1 = (String) claims.get("address1");
             String address2 = (String) claims.get("address2");
             String address3 = (String) claims.get("address3");
@@ -103,7 +105,6 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 || path.startsWith("/secondhand/getSecondHand")
                 || path.startsWith("/secondhand/updateReadCount")
                 || path.startsWith("/secondhand/uploadImages")
-                || path.startsWith("/secondhand/insertSecondhand")
                 || path.startsWith("/notice/getNcareer")
                 || path.startsWith("/notice/getNpolicy")
         )

@@ -2,11 +2,13 @@ package com.team2.honin.honinserver.service;
 
 import com.team2.honin.honinserver.dao.SImagesRepository;
 import com.team2.honin.honinserver.entity.SImages;
+import com.team2.honin.honinserver.entity.SecondHand;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,10 +24,6 @@ public class SImagesService {
         sir.save(sImages);
     }
 
-    public Optional<SImages> findBySnum(int num) {
-        return sir.findBySnum(num);
-    }
-
     public Optional<SImages> findById(int num) {
         return sir.findById(num);
     }
@@ -36,5 +34,9 @@ public class SImagesService {
 
     public SImages updateSecondhand(SImages sImages) {
         return sir.save(sImages);
+    }
+
+    public List<SImages> findBySecondhand(SecondHand secondHand) {
+        return sir.findBySecondHand(secondHand);
     }
 }

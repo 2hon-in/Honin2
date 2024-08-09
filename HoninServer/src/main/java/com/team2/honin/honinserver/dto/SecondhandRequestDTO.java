@@ -13,7 +13,7 @@ public class SecondhandRequestDTO {
     private String title;
     private String content;
     private Date writedate;
-    private Integer readcount;
+    private Integer readcount = 0;
     private String state = "Y";
     private int price;
     private String seller;

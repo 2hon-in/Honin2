@@ -150,11 +150,11 @@ ADD CONSTRAINT `secondhand_f1`
   ON UPDATE CASCADE;
 
 ALTER TABLE `honin`.`simages`
-ADD INDEX `simages_f1_idx` (`snum` ASC) VISIBLE;
+ADD INDEX `simages_f1_idx` (`sinum` ASC) VISIBLE;
 ;
 ALTER TABLE `honin`.`simages`
 ADD CONSTRAINT `simages_f1`
-  FOREIGN KEY (`snum`)
+  FOREIGN KEY (`sinum`)
   REFERENCES `honin`.`secondhand` (`snum`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;

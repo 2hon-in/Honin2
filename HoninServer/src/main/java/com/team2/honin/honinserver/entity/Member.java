@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +47,7 @@ public class Member {
 
     @CreationTimestamp
     @Column(name = "indate", columnDefinition = "timestamp default now()")
-    private Date indate;
+    private Timestamp indate;
 
     @Column(name = "address1", length = 100)
     private String address1;

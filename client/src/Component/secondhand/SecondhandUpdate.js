@@ -18,6 +18,7 @@ function UpdateSecondhand() {
     const [price, setPrice] = useState("");
     const [imgPreviews, setImgPreviews] = useState([]);
     
+    
     useEffect(() => {
         jaxios.get(`/api/secondhand/getSecondHand/${num}`)
             .then(result => {

@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ public class MemberDTO extends User {
             String profilemsg,
             String provider,
             String snsid,
-            Date indate,
+            Timestamp indate,
             String address1,
             String address2,
             String address3,
@@ -58,7 +59,7 @@ public class MemberDTO extends User {
     private String profilemsg;
     private String provider;
     private String snsid;
-    private Date indate;
+    private Timestamp indate;
     private String address1;
     private String address2;
     private String address3;

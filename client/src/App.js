@@ -8,13 +8,13 @@ import NCareer from "./Component/notice/NCareer";
 import Restaurant from "./Component/restaurant/Restaurant";
 import Mypage from "./Component/member/Mypage";
 import NPolicy from "./Component/notice/NPolicy";
-import SecondhandView from "./Component/secondhand/SeconhandView";
+import SecondhandView from "./Component/secondhand/SecondhandView";
 import CommunityView from "./Component/community/CommunityView";
-import UpdateSecondhand from './Component/secondhand/UpdateSecondhand';
 import NcareerView from "./Component/notice/NcareerView";
 import NpolicyView from "./Component/notice/NpolicyView";
 import Login from "./Component/member/Login";
 import SecondhandWrite from "./Component/secondhand/SecondhandWrite";
+import SecondhandUpdate from './Component/secondhand/SecondhandUpdate';
 
 function App() {
   return (
@@ -44,7 +44,7 @@ function App() {
           {/* 중고거래 */}
           <Route path="/secondhand" element={<Secondhand />} />
           <Route path="/secondhandView/:num" element={<SecondhandView />} />
-          <Route path="/updateSecondhand/:num" element={<UpdateSecondhand />} />
+          <Route path="/secondhandUpdate/:num" element={<SecondhandUpdate />} />
           <Route path="/secondhandWrite" element={<SecondhandWrite />} />
 
           {/* 마이페이지 */}

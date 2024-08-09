@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,13 +51,19 @@ public class SecondHandService {
             savefilename.forEach(filename -> {
                 SImages sImages = new SImages();
                 sImages.setSecondhand(savedSecondHand); // 게시물과의 연관 관계 설정
-                sImages.setSavefilename(filename);
-                sis.insertSecondHandImages(sImages);
+                sImages.setSavefilename(filename); // 이미지 파일 이름 저장
+                sis.insertSecondHandImages(sImages); // 이미지 정보 저장
             });
         }
 
         return savedSecondHand;
     }
+
+
+
+
+
+
 
 
 }

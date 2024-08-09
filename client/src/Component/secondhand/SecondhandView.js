@@ -129,7 +129,7 @@ function SecondhandView() {
 
             <div className={s.btns}>
                 {
-                    (loginUser.nickname==secondhand.seller)?(<button onClick={()=>{ navigate(`/updateSecondhand/${secondhand.snum}`)}}>수정</button>):
+                    (loginUser.nickname==secondhand.seller)?(<button onClick={()=>{ navigate(`/secondhandUpdate/${secondhand.snum}`)}}>수정</button>):
                     (null)
                 }
                 {

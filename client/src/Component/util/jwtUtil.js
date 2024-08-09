@@ -6,7 +6,7 @@ const jaxios = axios.create();
 const beforeReq = async (config) => {
     const loginUser = getCookie('user');
     if (loginUser) {
-        const { accessToken } = loginUser.accessToken;
+        const accessToken  = loginUser.accessToken;
         if (accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`;
         }
@@ -14,36 +14,46 @@ const beforeReq = async (config) => {
     return config;
 };
 
-const requestFail = (err) => Promise.reject(err);
+const requestFail = (err) => {
+    console.error(err);
+    Promise.reject(err);
+}
+    
 
 const beforeRes = async (response) => {
     console.log(response);
     if (response.data && response.data.error === 'ERROR_ACCESS_TOKEN') {
-        if(response.config._retry = true){
-            return response;
-        }
+        
         const loginUser = getCookie('user');
         if (loginUser) {
             const headers = { Authorization: `Bearer ${loginUser.accessToken}` };
             try {
-                const res = await axios.get(`/api/member/refresh/${loginUser.refreshToken}`, { headers });
+                const res = await axios.get(`/api/member/refresh/${loginUser.refreshToken}` , {headers:{"Authorization":"Bearer "+loginUser.accessToken}});
+                console.log("res.data.accessToken"+res.data.accessToken);
+                console.log("res.data.refreshToken"+res.data.refreshToken);
                 loginUser.accessToken = res.data.accessToken;
                 loginUser.refreshToken = res.data.refreshToken;
                 setCookie('user', JSON.stringify(loginUser), 1);
 
                 // 요청을 재시도
-                response.config._retry = true;
+                // response.config._retry = true;
                 response.config.headers.Authorization = `Bearer ${res.data.accessToken}`;
                 return jaxios(response.config);
             } catch (refreshError) {
                 return Promise.reject(refreshError);
             }
+               
         }
     }
     return response;
 };
 
-const responseFail = (err) => Promise.reject(err);
+
+
+const responseFail = (err) => {
+    Promise.reject(err)
+    console.log(err);
+};
 
 jaxios.interceptors.request.use(beforeReq, requestFail);
 jaxios.interceptors.response.use(beforeRes, responseFail);

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import jaxios from '../util/jwtUtil';
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 import s from '../style/secondhand/secondhandview.module.css';
+import { useParams } from 'react-router-dom';
 
 function SecondhandWrite() {
     const navigate = useNavigate();
@@ -15,9 +16,53 @@ function SecondhandWrite() {
     const [imgPreviews, setImgPreviews] = useState([]);
     const loginUser = useSelector(state => state.user);
 
-    // 게시물 등록 함수
+    useEffect(() => {
+        if (!loginUser.accessToken) {
+            window.alert("로그인이 필요한 서비스입니다");
+            navigate(`/login/sign_in`);
+        }
+    }, [loginUser, navigate]);
+    
+
+    async function onFileUpload(e) {
+        const files = Array.from(e.target.files);
+        const newImgList = [...imgList];
+        const newImgPreviews = [...imgPreviews];
+    
+        for (let i = 0; i < files.length; i++) {
+            const formData = new FormData();
+            formData.append("image", files[i]);
+    
+            try {
+                const result = await jaxios.post("/api/secondhand/uploadImages", formData);
+                console.log("Upload result:", result.data); // 서버 응답 확인
+    
+                // 서버 응답이 배열인 경우
+                const filenames = result.data.savefilename; // 배열로 처리
+                filenames.forEach(filename => {
+                    newImgList.push(filename);
+                    newImgPreviews.push(`http://localhost:8070/uploads/secondhand/${filename}`);
+                });
+            } catch (err) {
+                console.error("파일 업로드 실패:", err);
+            }
+        }
+    
+        setImgList(newImgList);
+        setImgPreviews(newImgPreviews);
+    }
+    
+    
     async function insertSecondhand() {
         try {
+            console.log("Sending data:", {
+                seller: loginUser.nickname,
+                title,
+                content,
+                price,
+                savefilename: imgList
+            }); // JSON 데이터 확인
+            
             const result = await jaxios.post('/api/secondhand/insertSecondhand', {
                 seller: loginUser.nickname,
                 title,
@@ -25,45 +70,21 @@ function SecondhandWrite() {
                 price,
                 savefilename: imgList // 이미지 파일명 리스트 전송
             });
-            console.log("insertSecondhand", result.data); // 서버 응답 확인
-
+    
+            console.log("Insert result:", result.data); // 서버 응답 확인
+    
             if (result.data.msg === "ok") {
                 alert("정상적으로 게시물 등록이 완료되었습니다.");
                 navigate('/secondhand');
-                
             } else {
                 alert("게시물 등록에 실패하였습니다. 다시 시도해주세요.");
                 navigate('/secondhandWrite');
             }
         } catch (err) {
-            console.error(err);
+            console.error("게시물 등록 실패:", err);
         }
     }
-
-    // 파일 업로드 및 이미지 미리보기 처리
-    async function onFileUpload(e) {
-        const files = Array.from(e.target.files);
-        const newImgList = [...imgList];
-        const newImgPreviews = [...imgPreviews];
-
-        for (let i = 0; i < files.length; i++) {
-            const formData = new FormData();
-            formData.append("image", files[i]);
-            
-            try {
-                const result = await jaxios.post("/api/secondhand/uploadImages", formData);
-                const filename = result.data.savefilename;
-                
-                newImgList.push(filename);
-                newImgPreviews.push(`http://localhost:8070/uploads/secondhand/${filename}`);
-            } catch (err) {
-                console.error("파일 업로드 실패:", err);
-            }
-        }
-
-        setImgList(newImgList);
-        setImgPreviews(newImgPreviews);
-    }
+    
 
     return (
         <>

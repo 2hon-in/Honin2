@@ -20,7 +20,6 @@ public interface SecondhandImagesSelectViewRepository extends JpaRepository<Seco
 
     SecondhandImagesSelectView findBySnum(int num);
 
-    List<SecondhandImagesSelectView> findBySavefilename(String savefilename);
 
 
 }
