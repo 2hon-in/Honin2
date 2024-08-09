@@ -26,7 +26,7 @@ ADD CONSTRAINT `canonymousreply_f2`
 
 ALTER TABLE `honin`.`cfree`
 ADD INDEX `cfree_f1_idx` (`writer` ASC) VISIBLE;
-;
+
 ALTER TABLE `honin`.`cfree`
 ADD CONSTRAINT `cfree_f1`
   FOREIGN KEY (`writer`)
@@ -374,3 +374,30 @@ VALUES
     (9, 'F5FAA616-4532-4BB6-97C1-0779662EA3B01722678034984.jpeg'),
     (10, 'F5FAA616-4532-4BB6-97C1-0779662EA3B01722678034984.jpeg');
 
+INSERT INTO cfreelike (cflnum, cfnum, likenick) VALUES
+(1, 1, 'user01'),
+(2, 1, 'user02'),
+(3, 2, 'user03'),
+(4, 2, 'user04'),
+(5, 3, 'user05');
+
+INSERT INTO canonymouslike (calnum, canum, likenick) VALUES
+(1, 1, 'user01'),
+(2, 1, 'user02'),
+(3, 1, 'user03'),
+(4, 2, 'user04'),
+(5, 3, 'user05');
+
+INSERT INTO crecommendedlike (crlnum, crnum, likenick) VALUES
+(1, 1, 'user01'),
+(2, 1, 'user02'),
+(3, 2, 'user03'),
+(4, 2, 'user04'),
+(5, 3, 'user05');
+
+INSERT INTO ctiplike (ctlnum, ctnum, likenick) VALUES
+(1, 1, 'user01'),
+(2, 2, 'user02'),
+(3, 2, 'user03'),
+(4, 3, 'user04'),
+(5, 4, 'user05');
