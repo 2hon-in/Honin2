@@ -31,6 +31,11 @@ public class CommunityController {
         return result;
     }
 
+    @PostMapping("/updateReadCount/{seq}/{seqNum}")
+    public void updateReadCount(@PathVariable("seq") String seq, @PathVariable("seqNum") Integer seqNum){
+        cs.updateReadCount(seq, seqNum);
+    }
+
     @GetMapping("/getCommunityCategoryList")
     public HashMap<String, Object> getCommunityCategoryList(){
         HashMap<String, Object> result = new HashMap<>();

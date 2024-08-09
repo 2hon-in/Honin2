@@ -15,6 +15,7 @@ import NcareerView from "./Component/notice/NcareerView";
 import NpolicyView from "./Component/notice/NpolicyView";
 import Login from "./Component/member/Login";
 import SecondhandWrite from "./Component/secondhand/SecondhandWrite";
+import CommunityWrite from "./Component/community/CommunityWrite";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           {/* 커뮤니티 */}
           <Route path="/community" element={<Community />} />
           <Route path="/communityView/:seq/:seqNum" element={<CommunityView />} />
+          <Route path="/communityWrite" element={<CommunityWrite />} />
 
           {/* 소식지 */}
           <Route path="/ncareer" element={<NCareer />} />

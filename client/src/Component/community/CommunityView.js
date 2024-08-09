@@ -8,19 +8,22 @@ import CommunityViewSide from './CommunityViewSide';
 import axios from 'axios';
 
 function CommunityView() {
+    // seq : 각 테이블의 기본키 컬럼명 (cfnum, crnum, ...)
     const { seq, seqNum } = useParams();
     const [post, setPost] = useState({});
 
     useEffect(() => {
         console.log("seq, seqNum : ", seq, " ", seqNum);
+        
+        // seq로 테이블을 구분하여 접근, seqNum으로 데이터를 조회
         jaxios.get(`/api/community/getPostOne/${seq}/${seqNum}`)
             .then(res => {
                 setPost(res.data.post);
                 console.log("res.data.post : ", res.data.post);
             })
             .catch(err => console.error(err));
-
-
+        
+        jaxios.post(`/api/community/updateReadCount/${seq}/${seqNum}`)
     }, [])
 
     return (

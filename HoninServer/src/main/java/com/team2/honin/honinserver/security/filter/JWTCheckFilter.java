@@ -96,6 +96,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 || path.startsWith("/community/getPostList")
                 || path.startsWith("/community/getCommunityCategoryList")
                 || path.startsWith("/community/getPostOne")
+                || path.startsWith("/community/updateReadCount")
                 || path.startsWith("/notice/getNcareerList")
                 || path.startsWith("/notice/getNpolicyList")
                 || path.startsWith("/secondhand/getSecondhandList")

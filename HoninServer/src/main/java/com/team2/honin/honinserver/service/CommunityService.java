@@ -4,12 +4,18 @@ import com.team2.honin.honinserver.dao.CanonymousRepository;
 import com.team2.honin.honinserver.dao.CfreeRepository;
 import com.team2.honin.honinserver.dao.CrecommendedRepository;
 import com.team2.honin.honinserver.dao.CtipRepository;
+import com.team2.honin.honinserver.entity.Canonymous;
+import com.team2.honin.honinserver.entity.Cfree;
+import com.team2.honin.honinserver.entity.Crecommended;
+import com.team2.honin.honinserver.entity.Ctip;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -53,4 +59,32 @@ public class CommunityService {
                 return null;
         }
     }
+
+    public void updateReadCount(String seq, Integer seqNum) {
+        switch (seq) {
+            case "cfnum":
+                Cfree cfree = (Cfree) cfr.findByCfnum(seqNum);
+                cfree.setReadcount(cfree.getReadcount() + 1);
+                cfr.save(cfree);
+                break;
+            case "ctnum":
+                Ctip ctip = (Ctip) ctr.findByCtnum(seqNum);
+                ctip.setReadcount(ctip.getReadcount() + 1);
+                ctr.save(ctip);
+                break;
+            case "crnum":
+                Crecommended crec = (Crecommended) crr.findByCrnum(seqNum);
+                crec.setReadcount(crec.getReadcount() + 1);
+                crr.save(crec);
+                break;
+            case "canum":
+                Canonymous cano = (Canonymous) car.findByCanum(seqNum);
+                cano.setReadcount(cano.getReadcount() + 1);
+                car.save(cano);
+                break;
+            default:
+                break;
+        }
+    }
+
 }

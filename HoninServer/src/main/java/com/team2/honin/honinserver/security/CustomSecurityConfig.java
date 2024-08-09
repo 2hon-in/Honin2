@@ -58,6 +58,7 @@ public class CustomSecurityConfig {
             config.failureHandler(new APILoginFailHandler());
         });
 
+
         // JWT 엑세스 토큰  체크
         http.addFilterBefore(new JWTCheckFilter(),
                 UsernamePasswordAuthenticationFilter.class);
