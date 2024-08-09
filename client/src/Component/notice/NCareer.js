@@ -13,6 +13,16 @@ function NCareer() {
     const navigate = useNavigate();
     const maxLength = 100; // 최대 길이 설정
 
+    function NCareerView(ncnum) {
+        jaxios.get(`/api/notice/updateReadCount/${ncnum}`)
+        .then(() => {
+            navigate(`/ncareerView/${ncnum}`)
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+    }
+
     useEffect(
         ()=>{
             jaxios.get('/api/notice/getNcareerList/1')
@@ -87,7 +97,9 @@ function NCareer() {
                                     
                                         <main className={s.content} key={idx} >
                                             <article className={s.post} onClick={()=>{
-                                            navigate(`/ncareerView/${ncareer.ncnum}`)}}>
+                                            // navigate(`/ncareerView/${ncareer.ncnum}`)}
+                                            NCareerView(ncareer.ncnum)
+                                            }}>
                                                 <div className={s.post_rank}>{ncareer.ncnum}</div>
                                                 <div className={s.post_details}>
                                                     <div className={s.post_author}>
