@@ -52,4 +52,14 @@ public class NoticeController {
         result.put("npolicy",ns.getNpolicy(npnum));
         return result;
     }
+
+    @GetMapping("/updateReadCount/{ncnum}")
+    public void updateReadCount(@PathVariable("ncnum") int ncnum){
+        ns.updateReadCount(ncnum);
+    }
+
+    @GetMapping("/updateReadCountNP/{npnum}")
+    public void updateReadCountNP(@PathVariable("npnum") int npnum){
+        ns.updateReadCountNP(npnum);
+    }
 }

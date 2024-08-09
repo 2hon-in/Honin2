@@ -45,4 +45,16 @@ public class NoticeService {
     public NPolicy getNpolicy(int npnum) {
         return npr.findByNpnum(npnum);
     }
+
+    public void updateReadCount(int ncnum) {
+        NCareer nc = ncr.findByNcnum(ncnum);
+        nc.setReadcount( nc.getReadcount()+1 );
+        ncr.save(nc);
+    }
+
+    public void updateReadCountNP(int npnum) {
+        NPolicy np = npr.findByNpnum(npnum);
+        np.setReadcount( np.getReadcount()+1 );
+        npr.save(np);
+    }
 }

@@ -1,4 +1,5 @@
 .main_banner{
+    position: relative;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -39,6 +40,31 @@
     align-items: center; /* 수직 가운데 정렬 */
 }
 
+.replyCount > span{
+    margin-left: 0.7rem;
+    font-size: 0.7rem;
+    color: red;
+    /* font-weight: bold; */
+}
+
+.imageMain{
+    /* opacity: 0.5; */
+}
+
+.imageSpan{
+    position: absolute;
+    top: 10rem; /* 상단에서 10px 떨어진 위치에 배치 */
+    left: 20rem; /* 좌측에서 10px 떨어진 위치에 배치 */
+    z-index: 10; /* 우선순위 높이기 */
+    /* color: rgb(243, 229, 229); 텍스트 색상을 하얀색으로 설정 */
+    color: var(--primary-color);
+    /* background-color: rgba(0, 0, 0, 0.5); 반투명한 배경 추가 (선택 사항) */
+    padding: 5px; /* 텍스트 주변에 여백 추가 */
+    border-radius: 5px; /* 둥근 모서리 추가 */
+    font-size: 2rem;
+    font-weight: bold;
+}
+
 .section {
     display: flex;
     width: 100%;
@@ -64,7 +90,7 @@
 }
 
 .leftColumn, .rightColumn {
-    flex: 1;
+    flex: 0.7;
     padding: 1rem;
 }
 
@@ -73,7 +99,7 @@
 }
 
 .rightColumn {
-    flex: 0.4;
+    flex: 0.3;
     margin-left: 1rem;
 }
 
@@ -105,3 +131,117 @@
     color: red;
     font-weight: bold;
 }
+
+.contentTitle {
+    font-size: 1rem;
+    /* font-weight: bold; */
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.category_btn{
+    display: flex;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.category_btn > button{
+    cursor: pointer;
+    background-color: white;
+    font-size: 1.1rem;
+}
+
+.flag{
+    width: 4rem;
+    margin-left: 1rem;
+}
+
+.category_btn .selected_btn{
+    color: red;
+    font-weight: bold;
+  }
+
+.hot {
+    font-size: 0.8rem;
+    background-color: red;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    padding: 2px;
+    margin-right: 2rem;
+}
+
+.normal{
+    margin-right: 2rem;
+}
+
+.post{
+    display: flex;
+}
+
+
+/* 수정 */
+
+.bannerContainer {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .bannerImage {
+    width: 100%;
+    height: auto;
+  }
+  
+  .textOverlay {
+    position: absolute;
+    top: 18rem;
+    left: 20rem;
+    transform: translateY(-50%);
+    /* color: white; */
+    /* color: var(--primary-color); */
+    color: black;
+    background-color: rgba(255, 255, 255, 0.712);
+    z-index: 10;
+    text-align: left;
+
+    border-radius: 15px; /* 모서리 둥글게 */
+    box-shadow: 4px 4px 15px black;
+    padding : 2rem;
+  }
+  
+  .textOverlay h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .textOverlay p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .spanColor{
+    color: var(--primary-color);
+  }
+  
+  .button {
+    background-color:var(--primary-color);
+    
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }

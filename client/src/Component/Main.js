@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import Header from './layout/Header'
 import Footer from './layout/Footer'
 import s from "./style/main.module.css"
 import "./style/reset.css"
+import jaxios from "./util/jwtUtil";
+import { useNavigate } from "react-router-dom";
+
 function Main() {
 
-  const leftList = [
-        { category: '일반', text: '(힙X) 방시혁 근황..', comments: 2 },
-        { category: '음악', text: '스티키마피아', comments: 1 },
-        { category: '일반', text: '노래방에서 부를 노래 추천좀요', comments: 1 },
-        { category: '음악', text: '빈지노 작업물 뜬거같은데요', comments: 3 },
-        { category: '일반', text: '그냥벌언', comments: 4 },
-        { category: '음악', text: '저만 화나랑 화지랑 헷갈리나요', comments: 8 },
-        { category: '음악', text: '챗 지피티 이상네요', comments: 1 },
-        { category: '인증/후기', text: 'bomm cd 샀는데', comments: 1 }
-    ];
+//   const leftList = [
+//         { category: '일반', text: '(힙X) 방시혁 근황..', comments: 2 },
+//         { category: '음악', text: '스티키마피아', comments: 1 },
+//         { category: '일반', text: '노래방에서 부를 노래 추천좀요', comments: 1 },
+//         { category: '음악', text: '빈지노 작업물 뜬거같은데요', comments: 3 },
+//         { category: '일반', text: '그냥벌언', comments: 4 },
+//         { category: '음악', text: '저만 화나랑 화지랑 헷갈리나요', comments: 8 },
+//         { category: '음악', text: '챗 지피티 이상네요', comments: 1 },
+//         { category: '인증/후기', text: 'bomm cd 샀는데', comments: 1 }
+//     ];
 
     const rightList = [
         { rank: 1, text: '솔직히 giggles는 트랩맨 보면 꽤 오글거림', comments: 6 },
@@ -29,11 +32,73 @@ function Main() {
         { rank: 10, text: '인스타 밴먹은 clayboi party', comments: 3 }
     ];
 
+    const navigate = useNavigate();
+    const [categoryList, setCategoryList] = useState([]);
+    const [category, setCategory] = useState("자유게시판");
+    const [postList, setPostList] = useState([]);
+    const [seq, setSeq] = useState("cfnum");
+
+    useEffect(() => {
+        jaxios.get("/api/community/getPostList/" + "자유게시판")
+          .then(res => {
+            setPostList(res.data.postList);
+          })
+          .catch(err => console.error(err));
+    
+        jaxios.get("/api/community/getCommunityCategoryList")
+          .then(res => {
+            setCategoryList(res.data.categoryList);
+          })
+          .catch(err => console.error(err));
+    },[]);
+
+    useEffect(() => {
+    jaxios.get(`/api/community/getPostList/${category}`)
+        .then(res => {
+        setPostList(res.data.postList);
+        })
+        .catch(err => console.error(err));
+
+    switch (category) {
+        case "자유게시판":
+        setSeq("cfnum")
+        break;
+        case "팁과노하우":
+        setSeq("ctnum")
+        break;
+        case "업체추천":
+        setSeq("crnum")
+        break;
+        case "고민상담":
+        setSeq("canum")
+        break;
+        default:
+        break;
+    }
+    }, [category])
+    
+    const changeCategory = (categoryName) => {
+    setCategory(categoryName);
+    }
+
     return (
       <>
         <Header></Header>
           <div className={s.main_banner}>
-            <img src = "/api/images/main.jpg" />
+            <img className={s.imageMain} src = "/api/images/main.jpg" />
+            {/* <span className={s.imageSpan}>
+                혼인 &nbsp; - &nbsp; 혼자사는 인싸들 <p /><br/>
+                혼자 사는 사람들을 위한 커뮤니티 사이트
+            </span> */}
+
+            <div className={s.textOverlay}>
+                <h1><span className={s.spanColor}>혼</span>자사는<br /> <span className={s.spanColor}>인</span>싸들</h1>
+                <p>혼자 사는 사람들을 위한 커뮤니티 사이트</p>
+                <div className={s.buttonContainer}>
+                    <button className={s.button}>맛집 추천 바로가기</button>
+                    <button className={s.button}>중고 거래 바로가기</button>
+                </div>
+            </div>
           </div>
 
           <section>
@@ -48,7 +113,53 @@ function Main() {
                     <div className={s.columns}>
                         <div className={s.leftColumn}>
                             <div className={s.title}>신규 게시글</div>
-                            <ul className={s.list}>
+
+                            <div className={s.category_btn}>
+                                {
+                                    categoryList.map((cList, idx) => {
+                                    return (
+                                        (
+                                        cList === category
+                                        ) ? (
+                                        <button className={s.selected_btn} onClick={() => changeCategory(cList)} key={idx}>
+                                            {cList} &nbsp; &nbsp; &nbsp;
+                                        </button>
+                                        ) : (
+                                        <button onClick={() => changeCategory(cList)} key={idx}>
+                                            {cList} &nbsp; &nbsp; &nbsp;
+                                        </button>
+                                        )
+                                    )
+                                    })
+                                }
+                            </div>
+
+                            {/* 추가 */}
+                            <div className={s.posts}>
+                                {
+                                    postList.map((list, idx) => {
+                                    return (
+                                        (
+                                        list.readcount > 300
+                                        ) ? (
+                                        <div className={s.post} key={idx} onClick={()=>navigate(`/communityView/${seq}/${list[seq]}`)}>
+                                            <div className={s.flag}><span className={s.hot}>HOT</span></div>
+                                            <div className={s.contentTitle}>{list.title}</div>
+                                            <div className={s.replyCount}><span>[{list.readcount}]</span></div>
+                                        </div>
+                                        ) : (
+                                        <div className={s.post} key={idx} onClick={()=>navigate(`/communityView/${seq}/${list[seq]}`)}>
+                                            <div className={s.flag}><span className={s.normal}>일반</span></div>
+                                            <div className={s.contentTitle}>{list.title}</div>
+                                            <div className={s.replyCount}><span>[{list.readcount}]</span></div>
+                                        </div>
+                                        )
+                                    )
+                                    })
+                                }
+                            </div>
+
+                            {/* <ul className={s.list}>
                                 {leftList.map((item, index) => (
                                     <li key={index} className={s.listItem}>
                                         <div>
@@ -59,7 +170,7 @@ function Main() {
                                         <span>[{item.comments}]</span>
                                     </li>
                                 ))}
-                            </ul>
+                            </ul> */}
                         </div>
                         <div className={s.rightColumn}>
                             <div className={s.title}>인기글</div>

@@ -13,6 +13,16 @@ function NPolicy() {
     const navigate = useNavigate();
     const maxLength = 100; // 최대 길이 설정
 
+    function NPolicyView(npnum) {
+        jaxios.get(`/api/notice/updateReadCountNP/${npnum}`)
+        .then(() => {
+            navigate(`/npolicyView/${npnum}`)
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+    }
+
     useEffect(
         ()=>{
             jaxios.get('/api/notice/getNpolicyList/1')
@@ -84,10 +94,10 @@ function NPolicy() {
                         (npolicyList)?(
                             npolicyList.map((npolicy, idx)=>{
                                 return(
-                                    
-                                        <main className={s.content} key={idx} onClick={()=>{navigate(`/npolicyView/${npolicy.npnum}`)}}>
+                                        <main className={s.content} key={idx}>
                                             <article className={s.post} onClick={()=>{
-                                            navigate(`/npolicyView/${npolicy.npnum}`)}}>
+                                                NPolicyView(npolicy.npnum)}
+                                            }>
                                                 <div className={s.post_rank}>{npolicy.npnum}</div>
                                                 <div className={s.post_details}>
                                                     <div className={s.post_author}>
@@ -105,7 +115,6 @@ function NPolicy() {
                                                 </div>
                                             </article>
                                         </main>
-                                    
                                 )
                             })
                         ):(null)
