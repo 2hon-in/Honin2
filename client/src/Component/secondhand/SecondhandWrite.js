@@ -19,7 +19,7 @@ function SecondhandWrite() {
     useEffect(() => {
         if (!loginUser.accessToken) {
             window.alert("로그인이 필요한 서비스입니다");
-            navigate(`/login/sign_in`);
+            navigate(`/login/sign_in`, { state: { from: location.pathname } });
         }
     }, [loginUser, navigate]);
     
@@ -35,8 +35,7 @@ function SecondhandWrite() {
     
             try {
                 const result = await jaxios.post("/api/secondhand/uploadImages", formData);
-                console.log("Upload result:", result.data); // 서버 응답 확인
-    
+
                 // 서버 응답이 배열인 경우
                 const filenames = result.data.savefilename; // 배열로 처리
                 filenames.forEach(filename => {
@@ -55,14 +54,6 @@ function SecondhandWrite() {
     
     async function insertSecondhand() {
         try {
-            console.log("Sending data:", {
-                seller: loginUser.nickname,
-                title,
-                content,
-                price,
-                savefilename: imgList
-            }); // JSON 데이터 확인
-            
             const result = await jaxios.post('/api/secondhand/insertSecondhand', {
                 seller: loginUser.nickname,
                 title,

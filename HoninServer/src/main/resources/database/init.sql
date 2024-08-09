@@ -254,7 +254,7 @@ ALTER TABLE `honin`.`simages`
 
   ALTER TABLE `honin`.`simages`
   ADD CONSTRAINT `simages_f1`
-    FOREIGN KEY (`sinum`)
+    FOREIGN KEY (`snum`)
     REFERENCES `honin`.`secondhand` (`snum`)
     ON DELETE CASCADE
     ON UPDATE CASCADE;
