@@ -1,5 +1,6 @@
 package com.team2.honin.honinserver.controller;
 
+import com.team2.honin.honinserver.dto.Paging;
 import com.team2.honin.honinserver.dto.Post;
 import com.team2.honin.honinserver.entity.Cfree;
 import com.team2.honin.honinserver.entity.category.CommunityCategory;
@@ -21,10 +22,15 @@ public class CommunityController {
     @Autowired
     CommunityService cs;
 
-    @GetMapping("/getPostList/{tableName}")
-    public HashMap<String, Object> getPostList(@PathVariable("tableName") String tableName){
+    @GetMapping("/getPostList/{page}/{tableName}")
+    public HashMap<String, Object> getPostList(@PathVariable("page") int page, @PathVariable("tableName") String tableName){
         HashMap<String, Object> result = new HashMap<>();
-        result.put("postList", cs.getPostList(tableName));
+        Paging paging = new Paging();
+        paging.setPage( page );
+        paging.setDisplayRow(6);
+        paging.calPaging();
+        result.put("postList", cs.getPostList(paging, tableName));
+        result.put("paging", paging);
         return result;
     }
 

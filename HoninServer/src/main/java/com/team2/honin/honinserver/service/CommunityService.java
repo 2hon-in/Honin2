@@ -1,9 +1,7 @@
 package com.team2.honin.honinserver.service;
 
-import com.team2.honin.honinserver.dao.CanonymousRepository;
-import com.team2.honin.honinserver.dao.CfreeRepository;
-import com.team2.honin.honinserver.dao.CrecommendedRepository;
-import com.team2.honin.honinserver.dao.CtipRepository;
+import com.team2.honin.honinserver.dao.*;
+import com.team2.honin.honinserver.dto.Paging;
 import com.team2.honin.honinserver.dto.Post;
 import com.team2.honin.honinserver.entity.Canonymous;
 import com.team2.honin.honinserver.entity.Cfree;
@@ -30,20 +28,11 @@ public class CommunityService {
     CrecommendedRepository crr;
     @Autowired
     CanonymousRepository car;
+    @Autowired
+    CommunityDao cdao;
 
-    public List<?> getPostList(String tableName) {
-        switch (tableName) {
-            case "자유게시판":
-                return cfr.findAll(Sort.by(Sort.Direction.DESC, "cfnum"));
-            case "팁과노하우":
-                return ctr.findAll(Sort.by(Sort.Direction.DESC, "ctnum"));
-            case "업체추천":
-                return crr.findAll(Sort.by(Sort.Direction.DESC, "crnum"));
-            case "고민상담":
-                return car.findAll(Sort.by(Sort.Direction.DESC, "canum"));
-            default:
-                return null;
-        }
+    public List<?> getPostList(Paging paging, String tableName) {
+        return cdao.getPostList(paging, tableName);
     }
 
     public Object getPostOne(String seq, Integer seqNum) {

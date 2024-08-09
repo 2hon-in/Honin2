@@ -42,7 +42,7 @@ function Main() {
     // }, []);
 
     useEffect(() => {
-        jaxios.get("/api/community/getPostList/" + "자유게시판")
+        jaxios.get("/api/community/getPostList/1/" + "자유게시판")
           .then(res => {
             setPostList(res.data.postList);
           })
@@ -56,7 +56,7 @@ function Main() {
     },[]);
 
     useEffect(() => {
-    jaxios.get(`/api/community/getPostList/${category}`)
+    jaxios.get(`/api/community/getPostList/1/${category}`)
         .then(res => {
         setPostList(res.data.postList);
         })
