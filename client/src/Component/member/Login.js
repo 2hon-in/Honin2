@@ -182,7 +182,6 @@ function Login() {
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
     const result = await jaxios.post("/api/member/fileupload", formData);
-    console.log(result.data);
     setImgSrc(`/api/uploads/${result.data.savefilename}`);
     setImgStyle({ display: "block", width: "200px" });
   }
@@ -211,7 +210,6 @@ function Login() {
       if (result.data.error == "ERROR_LOGIN") {
         return alert("이메일 또는 패스워드 오류입니다");
       } else {
-        console.log("result.data", result.data);
         dispatch(loginAction(result.data));
         setCookie("user", JSON.stringify(result.data), 1);
 

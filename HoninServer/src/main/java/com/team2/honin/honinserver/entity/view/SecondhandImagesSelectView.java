@@ -11,16 +11,17 @@ import java.sql.Date;
 
 @Getter
 @Immutable
-@View(query = "create view secondhandimagesselectview as" +
-        " select s.snum, s.content, s.price, s.readcount, s.seller, s.state, s.title," +
-        " s.writedate, i.sinum, i.savefilename from secondhand s join simages i on i.snum=s.snum;")
-@Table(name = "secondhandimagesselectview")
+@View(query = "CREATE VIEW secondhandimagesselectview AS " +
+        "SELECT s.snum, s.content, s.price, s.readcount, s.seller, s.state, s.title, s.writedate, " +
+        "    JSON_ARRAYAGG(i.savefilename) AS images " +
+        "FROM secondhand s LEFT JOIN simages i ON i.snum = s.snum " +
+        "GROUP BY s.snum, s.content, s.price, s.readcount, s.seller, s.state, s.title, s.writedate")
 @Entity
+@Table(name = "secondhandimagesselectview") // 뷰의 이름을 명시합니다.
 public class SecondhandImagesSelectView {
 
     @Id
     @Column(name = "snum")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer snum;
 
     @Column(name = "content", columnDefinition = "text")
@@ -46,11 +47,7 @@ public class SecondhandImagesSelectView {
     @CreationTimestamp
     private Date writedate;
 
-    @Column(name = "sinum")
-    private Integer sinum;
-
-    @Column(length = 1000)
-    private String savefilename;
+    @Column(name = "images", columnDefinition = "json")
+    private String images; // JSON 배열을 문자열로 저장합니다.
 
 }
-

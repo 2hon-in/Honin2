@@ -77,8 +77,13 @@ public class SecondHandController {
         HashMap<String, Object> result = new HashMap<>();
 
         try {
-            // 게시물과 이미지 저장
-            shs.insertSecondHand(request.toEntity(), request.getSavefilename());
+            // 게시물 저장
+            SecondHand secondHand = request.toEntity();
+            Integer snum = shs.insertSecondHand(secondHand); // 게시물 저장 및 ID 반환
+
+            // 이미지 저장
+            sis.insertSecondHandImages(snum, request.getSavefilename());
+
             result.put("msg", "ok");
         } catch (Exception e) {
             log.error("Failed to insert secondhand", e);
@@ -88,6 +93,10 @@ public class SecondHandController {
 
         return result;
     }
+
+
+
+
 
 
 

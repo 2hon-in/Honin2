@@ -14,7 +14,7 @@ public class SImages {
     private String savefilename;
 
     @ManyToOne
-    @JoinColumn(name = "secondhand_isnum") // 외래 키 열 이름 설정
+    @JoinColumn(name = "snum") // 외래 키 열 이름 설정
     private SecondHand secondHand;
 
     public void setSecondhand(SecondHand secondHand) {

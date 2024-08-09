@@ -47,7 +47,6 @@ public class MemberController {
             @RequestHeader("Authorization") String authHeader,
             @PathVariable("refreshToken") String refreshToken
     ) throws CustomJWTException {
-        System.out.println("토큰 재발급으로 가나유???" + refreshToken);
         if (refreshToken == null) throw new CustomJWTException("NULL_REFRASH");
         if (authHeader == null || authHeader.length() < 7)
             throw new CustomJWTException("INVALID_HEADER");

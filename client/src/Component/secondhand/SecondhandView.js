@@ -13,12 +13,19 @@ function SecondhandView() {
     const [sreplyList, setSreplyList] = useState([]);
     const [curDateTime, setCurDataTime]=useState("");
     const [rContent, setRContent] = useState("");
-    const dispatch = useDispatch(); // 쓰기를 위한 함수 생성**
+    const dispatch = useDispatch(); 
     const loginUser = useSelector(state=>state.user);
 
+    const [currentSlide, setCurrentSlide] = useState(0); 
     const {num} = useParams();
 
-    
+    const prevSlide = () => {
+        setCurrentSlide((prev) => (prev === 0 ? secondhand.images.length - 1 : prev - 1));
+    };
+
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev === secondhand.images.length - 1 ? 0 : prev + 1));
+    };
 
     useEffect(
         ()=>{
@@ -27,25 +34,24 @@ function SecondhandView() {
             jaxios.get(`/api/secondhand/getSecondHand/${num}`)
             .then((result)=>{
                 setSecondhand(result.data.secondhand);
-                console.log("secondhand + ", result.data.secondhand);
             })
             .catch((err)=>{console.log(err)})
 
             // 댓글 조회
-            jaxios.get(`/api/secondhand/getReplyList/${num}`)
-            .then((result)=>{
-                setSreplyList( [... result.data.sreply ] );
-                console.log(result.data);
-            })
-            .catch((err)=>{console.log(err)})
+            // jaxios.get(`/api/secondhand/getReplyList/${num}`)
+            // .then((result)=>{
+            //     setSreplyList( [... result.data.sreply ] );
+            //     console.log(result.data);
+            // })
+            // .catch((err)=>{console.log(err)})
 
-            // 댓글 작성에 표시될 데이터(날짜) 생성
-            const date = new Date();
-            const months = String( date.getMonth()+1 ).padStart(2, '0');
-            const days = String( date.getDate()+1 ).padStart(2, '0');
-            const hours = String(date.getHours()).padStart(2, "0");
-            const minutes = String(date.getMinutes()).padStart(2, "0");
-            setCurDataTime(`${months}/${days} ${hours}:${minutes}`);
+            // // 댓글 작성에 표시될 데이터(날짜) 생성
+            // const date = new Date();
+            // const months = String( date.getMonth()+1 ).padStart(2, '0');
+            // const days = String( date.getDate()+1 ).padStart(2, '0');
+            // const hours = String(date.getHours()).padStart(2, "0");
+            // const minutes = String(date.getMinutes()).padStart(2, "0");
+            // setCurDataTime(`${months}/${days} ${hours}:${minutes}`);
 
 
         },[num]
@@ -102,7 +108,23 @@ function SecondhandView() {
             </div>
             <div className={s.mainfield}>
                 <div>
-                    <img src={`http://localhost:8070/uploads/secondhand/${secondhand.savefilename}`} style={{width:"400px"}} />
+                {
+                    secondhand.savefilename && Array.isArray(secondhand.images) ? (
+                    <div className={s.slideshow}>
+                        <img 
+                        src={`http://localhost:8070/uploads/secondhand/${secondhand.images[currentSlide]}`} 
+                        style={{ width: "400px" }} 
+                        />
+                        <div className={s.prev} onClick={prevSlide}>&#10094;</div>
+                        <div className={s.next} onClick={nextSlide}>&#10095;</div>
+                    </div>
+                    ) : (
+                    <img 
+                        src={`http://localhost:8070/uploads/secondhand/${secondhand.images}`} 
+                        style={{ width: "400px" }} 
+                    />
+                    )
+                }
                 </div>
             </div>
             <div className={s.field}>

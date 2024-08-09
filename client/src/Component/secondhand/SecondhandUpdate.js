@@ -22,12 +22,12 @@ function UpdateSecondhand() {
     useEffect(() => {
         jaxios.get(`/api/secondhand/getSecondHand/${num}`)
             .then(result => {
-                const { title, content, price, savefilename } = result.data.secondhand;
+                const { title, content, price, images } = result.data.secondhand;
                 setSecondhand(result.data.secondhand);
                 setTitle(title);
                 setContent(content);
                 setPrice(price);
-                setImgPreviews([`http://localhost:8070/uploads/secondhand${savefilename}`]);
+                setImgPreviews([`http://localhost:8070/uploads/secondhand${images}`]);
             })
             .catch(err => {
                 console.error(err);
@@ -45,7 +45,7 @@ function UpdateSecondhand() {
 
             try {
                 const result = await jaxios.post("/api/secondhand/uploadImages", formData);
-                const filename = result.data.savefilename;
+                const filename = result.data.images;
                 
                 newImgList.push(filename);
                 newImgPreviews.push(`http://localhost:8070/uploads/${filename}`);
@@ -74,7 +74,7 @@ function UpdateSecondhand() {
             for (let filename of imgList) {
                 await jaxios.post("/api/secondhand/insertSImages", {
                     postid: result.data.id,
-                    savefilename: filename
+                    images: filename
                 });
             }
             window.alert("수정 완료되었습니다.");

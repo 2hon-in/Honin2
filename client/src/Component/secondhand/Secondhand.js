@@ -50,8 +50,8 @@ function Secondhand() {
                                 {secondhandList.map((sh) => (
                                     <div className={s.card} key={sh.snum} onClick={() => SecondhandView(sh.snum)}>
                                         <div className={s.imageblock}>
-                                            {sh.savefilename ? (
-                                                <img src={`http://localhost:8070/uploads/secondhand/${sh.savefilename}`} alt="중고거래 아이템 이미지" />
+                                            {sh.images ? (
+                                                <img src={`http://localhost:8070/uploads/secondhand/${sh.images}`} alt="중고거래 아이템 이미지" />
                                             ) : (
                                                 <div className={s.imagePlaceholder}>사진 없음</div>
                                             )}
