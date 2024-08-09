@@ -1,7 +1,17 @@
 import React from 'react'
 import s from "../style/layout/footer.module.css"
+import axios from 'axios'
 
 function Footer() {
+
+    const initializeDB = () => {
+        axios.post("/api/community/initDb")
+        .then(res => alert(res.data.msg))
+    }
+    const createView = () => {
+        axios.post("/api/community/createView")
+        .then(res => alert(res.data.msg))
+    }
     return (
         <div className={s.footerClass}>
             <p />
@@ -27,7 +37,9 @@ function Footer() {
                     <p>&copy; 2024 TeamHonin. Inc</p>
                 </div>
                 <div className={s.footer_buttons}>
-                    <button onclick="window.location.href='/'">관리자</button>
+                    <button onClick="window.location.href='/'">관리자</button>
+                    <button onClick={()=>{initializeDB()}}>Insert data</button>
+                    <button onClick={()=>{createView()}}>Create view</button>
                 </div>
             </footer>
         </div>

@@ -110,6 +110,8 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 || path.startsWith("/notice/getNpolicy")
                 || path.startsWith("/notice/updateReadCount")
                 || path.startsWith("/notice/updateReadCountNP")
+                || path.startsWith("/community/initDb")
+                || path.startsWith("/community/createView")
         )
         {
             return true;

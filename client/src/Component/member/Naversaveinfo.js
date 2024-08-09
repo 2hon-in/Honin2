@@ -15,7 +15,7 @@ function Kakaosaveinfo() {
         axios.post('/api/member/loginlocal', null, {params:{ username: nickname, password: 'naver' }})
             .then(result => {
                 if (result.data.error === 'ERROR_LOGIN') {
-                    console.log("naver : "+result.data)
+                    // console.log("naver : "+result.data)
                     alert("이메일 또는 패스워드 오류입니다");
                 } else {
                     dispatch(loginAction(result.data));

@@ -17,7 +17,7 @@ function Secondhand() {
         jaxios.get(`/api/secondhand/getSecondhandList`)
             .then((result) => {
                 setSecondhandList(result.data.secondhandList);
-                console.log(result.data.secondhandList);
+                // console.log(result.data.secondhandList);
             })
             .catch((err) => {
                 console.error(err);

@@ -4,6 +4,7 @@ import com.team2.honin.honinserver.dao.CanonymousRepository;
 import com.team2.honin.honinserver.dao.CfreeRepository;
 import com.team2.honin.honinserver.dao.CrecommendedRepository;
 import com.team2.honin.honinserver.dao.CtipRepository;
+import com.team2.honin.honinserver.dto.Post;
 import com.team2.honin.honinserver.entity.Canonymous;
 import com.team2.honin.honinserver.entity.Cfree;
 import com.team2.honin.honinserver.entity.Crecommended;
@@ -87,4 +88,30 @@ public class CommunityService {
         }
     }
 
+    public int writePost(Post post) {
+        switch (post.getSeqname()) {
+            case "cfnum":
+                Cfree cfree = (Cfree) cfr.findByCfnum(1);
+                cfree.setReadcount(cfree.getReadcount() + 1);
+                cfr.save(cfree);
+                return cfree.getCfnum();
+            case "ctnum":
+                Ctip ctip = (Ctip) ctr.findByCtnum(1);
+                ctip.setReadcount(ctip.getReadcount() + 1);
+                ctr.save(ctip);
+                return ctip.getCtnum();
+            case "crnum":
+                Crecommended crec = (Crecommended) crr.findByCrnum(1);
+                crec.setReadcount(crec.getReadcount() + 1);
+                crr.save(crec);
+                return crec.getCrnum();
+            case "canum":
+                Canonymous cano = (Canonymous) car.findByCanum(1);
+                cano.setReadcount(cano.getReadcount() + 1);
+                car.save(cano);
+                return cano.getCanum();
+            default:
+                return 1;
+        }
+    }
 }

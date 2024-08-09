@@ -28,7 +28,6 @@ function Login() {
   // state변수의 값에 따라 어떤 화면을 표시할지 결정합니다.
   // 헤더의 로그인, 회원가입 버튼을 누를때마다 각각 sign_in, sign_up이 전달됩니다.
   useEffect(() => {
-    console.log("전달받은 state : ", state);
     if(state === "sign_in"){
       const timer = setTimeout(() => {
         setToggleClass(`${s.container} ${s.sign_in}`);
@@ -107,7 +106,7 @@ function Login() {
         window.alert(
           "이메일이 전송되었습니다. 해당 이메일의 수신내역을 확인하세요."
         );
-        console.log(`result.data.number : ` + result.data.number);
+        // console.log(`result.data.number : ` + result.data.number);
       }
     } catch (err) {
       console.error(err);
@@ -182,7 +181,7 @@ function Login() {
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
     const result = await jaxios.post("/api/member/fileupload", formData);
-    console.log(result.data);
+    // console.log(result.data);
     setImgSrc(`/api/uploads/${result.data.savefilename}`);
     setImgStyle({ display: "block", width: "200px" });
   }
@@ -211,7 +210,7 @@ function Login() {
       if (result.data.error == "ERROR_LOGIN") {
         return alert("이메일 또는 패스워드 오류입니다");
       } else {
-        console.log("result.data", result.data);
+        // console.log("result.data", result.data);
         dispatch(loginAction(result.data));
         setCookie("user", JSON.stringify(result.data), 1);
 

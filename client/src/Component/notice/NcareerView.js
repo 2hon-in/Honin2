@@ -18,7 +18,6 @@ function NcareerView() {
         ()=>{
             jaxios.get(`/api/notice/getNcareer/${ncnum}`)
             .then((result)=>{
-                console.log(result.data.ncareer);
                 setNcareer( result.data.ncareer );
             })
             .catch((err)=>{

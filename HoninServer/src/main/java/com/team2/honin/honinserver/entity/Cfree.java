@@ -2,7 +2,9 @@ package com.team2.honin.honinserver.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.sql.Date;
 
@@ -27,8 +29,8 @@ public class Cfree {
     @CreationTimestamp
     private Date writedate;
 
-    @Column(name = "readcount", columnDefinition = "Integer default 0")
-    private Integer readcount;
+    @Column(name = "readcount")
+    private Integer readcount = 0;
 
     @Column(name = "image", length = 1000)
     private String image;

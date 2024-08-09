@@ -95,8 +95,8 @@ function Main() {
                 <h1><span className={s.spanColor}>혼</span>자사는<br /> <span className={s.spanColor}>인</span>싸들</h1>
                 <p>혼자 사는 사람들을 위한 커뮤니티 사이트</p>
                 <div className={s.buttonContainer}>
-                    <button className={s.button}>맛집 추천 바로가기</button>
-                    <button className={s.button}>중고 거래 바로가기</button>
+                    <button className={s.button} onClick={()=>{navigate("/restaurant")}}>맛집 추천 바로가기</button>
+                    <button className={s.button} onClick={()=>{navigate("/secondhand")}}>중고 거래 바로가기</button>
                 </div>
             </div>
           </div>
