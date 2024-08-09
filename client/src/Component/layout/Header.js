@@ -27,7 +27,7 @@ function Header() {
                     <ul className={s.menu}>
                         <li><div className={s.menu_item} onClick={() => { navigate("/community") }}>커뮤니티</div></li>
                         <li><div className={s.menu_item} onClick={() => { navigate("/ncareer") }}>소식지</div></li>
-                        <li><div className={s.menu_item} onClick={() => { navigate("/restaurant") }}>맛집지도</div></li>
+                        <li><div className={s.menu_item} onClick={() => { navigate("/restaurant") }}>맛집추천</div></li>
                         <li><div className={s.menu_item} onClick={() => { navigate('/secondhand') }}>중고거래</div></li>
                     </ul>
                     <div className={s.buttons}>

@@ -1,6 +1,9 @@
 package com.team2.honin.honinserver.controller;
 
+//import com.team2.honin.honinserver.dao.viewDao.Top10PostsRepository;
 import com.team2.honin.honinserver.dto.Paging;
+import com.team2.honin.honinserver.entity.view.SecondhandImagesSelectView;
+//import com.team2.honin.honinserver.entity.view.Top10Posts;
 import com.team2.honin.honinserver.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/notice")
@@ -62,4 +66,12 @@ public class NoticeController {
     public void updateReadCountNP(@PathVariable("npnum") int npnum){
         ns.updateReadCountNP(npnum);
     }
+
+//    @GetMapping("/getLikesTopList")
+//    public HashMap<String, Object> getLikesTopList() {
+//        HashMap<String, Object> result = new HashMap<>();
+//        List<Top10PostsRepository> topPostList = ns.getLikesTopList();
+//        result.put("topPostList", topPostList);
+//        return result;
+//    }
 }

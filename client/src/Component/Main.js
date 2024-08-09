@@ -5,20 +5,10 @@ import s from "./style/main.module.css"
 import "./style/reset.css"
 import jaxios from "./util/jwtUtil";
 import { useNavigate } from "react-router-dom";
+import main from "../assets/images/main.jpg";
+import banner from "../assets/images/banner.jpg";
 
 function Main() {
-
-//   const leftList = [
-//         { category: '일반', text: '(힙X) 방시혁 근황..', comments: 2 },
-//         { category: '음악', text: '스티키마피아', comments: 1 },
-//         { category: '일반', text: '노래방에서 부를 노래 추천좀요', comments: 1 },
-//         { category: '음악', text: '빈지노 작업물 뜬거같은데요', comments: 3 },
-//         { category: '일반', text: '그냥벌언', comments: 4 },
-//         { category: '음악', text: '저만 화나랑 화지랑 헷갈리나요', comments: 8 },
-//         { category: '음악', text: '챗 지피티 이상네요', comments: 1 },
-//         { category: '인증/후기', text: 'bomm cd 샀는데', comments: 1 }
-//     ];
-
     const rightList = [
         { rank: 1, text: '솔직히 giggles는 트랩맨 보면 꽤 오글거림', comments: 6 },
         { rank: 2, text: '"unreviewable 2"', comments: 3 },
@@ -34,9 +24,22 @@ function Main() {
 
     const navigate = useNavigate();
     const [categoryList, setCategoryList] = useState([]);
+    const [topPostList, setTopPostList] = useState([]);
     const [category, setCategory] = useState("자유게시판");
     const [postList, setPostList] = useState([]);
     const [seq, setSeq] = useState("cfnum");
+    const maxLength = 30; // 최대 길이 설정
+
+    // useEffect(() => {
+    //     jaxios.get(`/api/notice/getLikesTopList`)
+    //         .then((result) => {
+    //             console.log(result.data.topPostList);
+    //             setTopPostList(result.data.topPostList);
+    //         })
+    //         .catch((err) => {
+    //             console.error(err);
+    //         });
+    // }, []);
 
     useEffect(() => {
         jaxios.get("/api/community/getPostList/" + "자유게시판")
@@ -78,18 +81,19 @@ function Main() {
     }, [category])
     
     const changeCategory = (categoryName) => {
-    setCategory(categoryName);
+        setCategory(categoryName);
     }
+
+    const truncateText = (text, maxLength) => {
+        return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
+    };
 
     return (
       <>
         <Header></Header>
           <div className={s.main_banner}>
-            <img className={s.imageMain} src = "/api/images/main.jpg" />
-            {/* <span className={s.imageSpan}>
-                혼인 &nbsp; - &nbsp; 혼자사는 인싸들 <p /><br/>
-                혼자 사는 사람들을 위한 커뮤니티 사이트
-            </span> */}
+            {/* <img className={s.imageMain} src = "/api/images/main.jpg" /> */}
+            <img src={main} alt="main"/>
 
             <div className={s.textOverlay}>
                 <h1><span className={s.spanColor}>혼</span>자사는<br /> <span className={s.spanColor}>인</span>싸들</h1>
@@ -142,15 +146,19 @@ function Main() {
                                         (
                                         list.readcount > 300
                                         ) ? (
-                                        <div className={s.post} key={idx} onClick={()=>navigate(`/communityView/${seq}/${list[seq]}`)}>
+                                        <div className={s.post} key={idx}>
                                             <div className={s.flag}><span className={s.hot}>HOT</span></div>
-                                            <div className={s.contentTitle}>{list.title}</div>
+                                            <div className={s.contentTitle} onClick={()=>navigate(`/communityView/${seq}/${list[seq]}`)}>
+                                                {truncateText(list.title, maxLength)}
+                                            </div>
                                             <div className={s.replyCount}><span>[{list.readcount}]</span></div>
                                         </div>
                                         ) : (
-                                        <div className={s.post} key={idx} onClick={()=>navigate(`/communityView/${seq}/${list[seq]}`)}>
+                                        <div className={s.post} key={idx} >
                                             <div className={s.flag}><span className={s.normal}>일반</span></div>
-                                            <div className={s.contentTitle}>{list.title}</div>
+                                            <div className={s.contentTitle} onClick={()=>navigate(`/communityView/${seq}/${list[seq]}`)}>
+                                                 {truncateText(list.title, maxLength)}
+                                            </div>
                                             <div className={s.replyCount}><span>[{list.readcount}]</span></div>
                                         </div>
                                         )
@@ -158,22 +166,11 @@ function Main() {
                                     })
                                 }
                             </div>
-
-                            {/* <ul className={s.list}>
-                                {leftList.map((item, index) => (
-                                    <li key={index} className={s.listItem}>
-                                        <div>
-                                            <span className={`${s.category}`}>{item.category}</span> &nbsp; &nbsp; &nbsp;
-                                            {item.text} 
-                                        </div>
-                                        
-                                        <span>[{item.comments}]</span>
-                                    </li>
-                                ))}
-                            </ul> */}
                         </div>
+
                         <div className={s.rightColumn}>
-                            <div className={s.title}>인기글</div>
+                            <div className={s.title}><span className={s.spanHot}>HOT</span> 게시글</div>
+                            {/* 라이크 4개 테이블 조회 [뷰로 만들어서] 전체 순위 매기기 (1~10등) */}
                             <ul className={s.list}>
                                 {rightList.map((item, index) => (
                                     <li key={index} className={s.listItem}>
@@ -190,7 +187,8 @@ function Main() {
             </div>
 
             <div className={s.imageDiv}>
-                <img src = "/api/images/banner.jpg" />  
+                {/* <img src = "/api/images/banner.jpg" />   */}
+                <img src={banner} alt="banner"/>
                 <br /><br />
             </div>
           </section>
