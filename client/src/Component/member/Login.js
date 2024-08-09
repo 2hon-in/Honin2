@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginAction, setFollowers, setFollowings } from "../store/userSlice";
 import jaxios from "../util/jwtUtil";
@@ -10,13 +10,23 @@ import s from "../style/member/loginForm.module.css";
 import Footer from "../layout/Footer";
 import Header from "../layout/Header";
 import axios from "axios";
+import kakaoLogo from "../../assets/images/kakao_brown.png"
+import naverLogo from "../../assets/images/naver_white.png"
 // import "../style/member/login.css";
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // 로그인 성공 후 로그인을 요청한 페이지로 돌아가기 위해 사용하는 기능입니다.
+  const location = useLocation();
+  // state에 로그인을 요청한 페이지의 주소를 갖는 객체를 설정합니다.
+  // state값이 존재한다면 state 객체의 from에 담겨진 주소를 from 변수에 저장합니다.
+  // state값이 없다면 "/" 메인으로 이동합니다.
+  const from = location.state?.from|| '/';
   const {state} = useParams();
   
+  // state변수의 값에 따라 어떤 화면을 표시할지 결정합니다.
+  // 헤더의 로그인, 회원가입 버튼을 누를때마다 각각 sign_in, sign_up이 전달됩니다.
   useEffect(() => {
     console.log("전달받은 state : ", state);
     if(state === "sign_in"){
@@ -62,6 +72,7 @@ function Login() {
     setIsOpen(!isOpen);
   };
 
+  // 우편검색 모달창의 스타일을 설정하는 객체
   const customStyles = {
     overlay: {
       backgroundColor: "rgba( 0 , 0 , 0 , 0.5)",
@@ -82,6 +93,7 @@ function Login() {
     setIsOpen(false);
   };
 
+  // 이메일 인증코드를 발신하는 함수
   const sendMail = async () => {
     if (!email) {
       return window.alert("이메일을 입력해주세요");
@@ -102,6 +114,7 @@ function Login() {
     }
   };
 
+  // 이메일 인증코드를 검증하는 함수
   const codeCheck = async () => {
     try {
       const result = await jaxios.post("/api/member/codeCheck", null, {
@@ -113,6 +126,7 @@ function Login() {
     }
   };
 
+  // 로그인 검증 함수
   const onSubmit = async () => {
     if (nickname === "") {
       return alert("닉네임을 입력하세요");
@@ -163,12 +177,13 @@ function Login() {
     }
   };
 
+  // 회원가입시 프로필 이미지사진을 올리는 함수
   async function fileupload(e) {
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
     const result = await jaxios.post("/api/member/fileupload", formData);
     console.log(result.data);
-    setImgSrc(`http://localhost:8070/uploads/${result.data.savefilename}`);
+    setImgSrc(`/api/uploads/${result.data.savefilename}`);
     setImgStyle({ display: "block", width: "200px" });
   }
 
@@ -200,7 +215,7 @@ function Login() {
         dispatch(loginAction(result.data));
         setCookie("user", JSON.stringify(result.data), 1);
 
-        navigate("/");
+        navigate(from);
       }
     } catch (err) {
       console.error(err);
@@ -220,7 +235,7 @@ function Login() {
             <div className={`${s.form_wrapper} ${s.align_items_center}`}>
               <div className={`${s.form} ${s.sign_up}`}>
                 <div className={s.flex_box_col}>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Id"
@@ -230,7 +245,7 @@ function Login() {
                       }}
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="password"
                       placeholder="Password"
@@ -240,7 +255,7 @@ function Login() {
                       }}
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="password"
                       placeholder="Retype Pass"
@@ -250,7 +265,7 @@ function Login() {
                       }}
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Phone"
@@ -260,7 +275,7 @@ function Login() {
                       }}
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <div className={`${s.flex_box_row} ${s.email_box}`}>
                       <input
                         type="text"
@@ -270,16 +285,12 @@ function Login() {
                           setEmail(e.currentTarget.value);
                         }}
                       />
-                      <button
-                        onClick={() => {
-                          sendMail();
-                        }}
-                      >
-                        SEND MAIL
+                      <button onClick={() => {sendMail()}}>
+                        이메일 인증
                       </button>
                     </div>
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <div className={`${s.flex_box_row} ${s.email_box}`}>
                       <input
                         type="text"
@@ -303,7 +314,7 @@ function Login() {
                   </div>
                 </div>
                 <div className="form_flex">
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Post number"
@@ -343,7 +354,7 @@ function Login() {
                       </button>
                     </Modal>
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Address"
@@ -354,7 +365,7 @@ function Login() {
                       readOnly
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Detail Address"
@@ -364,7 +375,7 @@ function Login() {
                       }}
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Extra Address"
@@ -374,7 +385,7 @@ function Login() {
                       }}
                     />
                   </div>
-                  <div className={s.input_group}>
+                  <div className={`${s.input_group} ${s.sign_up}`}>
                     <input
                       type="text"
                       placeholder="Profile Message"
@@ -403,7 +414,7 @@ function Login() {
                       </div>
                     </div>
                   </div>
-                  <button>Sign up</button>
+                  <button onClick={()=>onSubmit()}>회원가입</button>
                 </div>
               </div>
             </div>
@@ -415,26 +426,26 @@ function Login() {
           >
             <div className={`${s.form_wrapper} ${s.align_items_center}`}>
               <div className={`${s.form} ${s.sign_in}`}>
-                <div className={s.input_group}>
-                  <input
-                    type="text"
-                    placeholder="아이디"
-                    value={nickname}
-                    onChange={(e) => {
-                      setNickname(e.currentTarget.value);
-                    }}
-                  />
-                </div>
-                <div className={s.input_group}>
-                  <input
-                    type="password"
-                    placeholder="비밀번호"
-                    value={password}
-                    onChange={(e) => {
-                      setPassword(e.currentTarget.value);
-                    }}
-                  />
-                </div>
+                  <div className={`${s.input_group} ${s.sign_in}`}>
+                      <input
+                        type="text"
+                        placeholder="아이디"
+                        value={nickname}
+                        onChange={(e) => {
+                          setNickname(e.currentTarget.value);
+                        }}
+                      />
+                  </div>
+                  <div className={`${s.input_group} ${s.sign_in}`}>
+                      <input
+                        type="password"
+                        placeholder="비밀번호"
+                        value={password}
+                        onChange={(e) => {
+                          setPassword(e.currentTarget.value);
+                        }}
+                      />
+                  </div>
                 <button
                   className={s.login_btn}
                   onClick={() => {
@@ -450,7 +461,7 @@ function Login() {
                       window.location.href = "/api/member/kakaostart";
                     }}
                   >
-                    <img src="/api/images/login/kakao_brown.png" alt="카카오 로그인" />
+                    <img src={kakaoLogo} alt="카카오 로그인" />
                   </button>
                   <button
                     className={s.naver}
@@ -458,7 +469,7 @@ function Login() {
                       window.location.href = "/api/member/naverstart";
                     }}
                   >
-                    <img src="/api/images/login/naver_white.png" alt="네이버 로그인" />
+                    <img src={naverLogo} alt="네이버 로그인" />
                   </button>
                 </div>
                 <button

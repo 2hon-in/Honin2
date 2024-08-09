@@ -5,6 +5,7 @@ import s from "../style/community/community.module.css";
 import axios from "axios";
 import jaxios from "../util/jwtUtil";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Community() {
   const navigate = useNavigate();
@@ -13,8 +14,8 @@ function Community() {
   const [category, setCategory] = useState("자유게시판");
   const [postList, setPostList] = useState([]);
   const [seq, setSeq] = useState("cfnum");
+  const lUser = useSelector(state => state.user);
   const currentTime = new Date().getTime();
-
   
   useEffect(() => {
     jaxios.get("/api/community/getPostList/" + "자유게시판")
@@ -59,6 +60,7 @@ function Community() {
     setCategory(categoryName);
   }
 
+  
   return (
     <div className={s.wrap}>
       <Header></Header>
@@ -80,6 +82,9 @@ function Community() {
               )
             })
           }
+        </div>
+        <div style={{width:"60%", margin:"1rem auto", display:"flex", justifyContent:"end"}} className={s.category_btn}>
+          <button onClick={()=>{navigate("/communityWrite")}}>글쓰기</button>
         </div>
         <div className={s.posts}>
           {

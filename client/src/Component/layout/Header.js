@@ -4,6 +4,7 @@ import { loginAction, logoutAction } from '../store/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeCookie } from '../util/cookieUtil';
 import s from "../style/layout/header.module.css";
+import logo from "../../assets/images/honin.PNG";
 
 function Header() {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ function Header() {
             <div className={s.container}>
                 <div className={s.menu_bar}>
                     <div className={s.logo} onClick={() => { navigate("/") }}>
-                        <img src="/api/images/honin.png" alt="logo"/>
+                        <img src={logo} alt="logo"/>
                     </div>
                     <ul className={s.menu}>
                         <li><div className={s.menu_item} onClick={() => { navigate("/community") }}>커뮤니티</div></li>
