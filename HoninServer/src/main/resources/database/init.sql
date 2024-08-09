@@ -149,15 +149,6 @@ ADD CONSTRAINT `secondhand_f1`
   ON DELETE CASCADE
   ON UPDATE CASCADE;
 
-ALTER TABLE `honin`.`simages`
-ADD INDEX `simages_f1_idx` (`sinum` ASC) VISIBLE;
-;
-ALTER TABLE `honin`.`simages`
-ADD CONSTRAINT `simages_f1`
-  FOREIGN KEY (`sinum`)
-  REFERENCES `honin`.`secondhand` (`snum`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE;
 
 
 ALTER TABLE `honin`.`sreply`
@@ -257,3 +248,13 @@ ADD CONSTRAINT `slike_f2`
   REFERENCES `honin`.`secondhand` (`snum`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
+
+  ADD INDEX `simages_f1_idx` (`sinum` ASC) VISIBLE;
+  ;ALTER TABLE `honin`.`simages`
+
+  ALTER TABLE `honin`.`simages`
+  ADD CONSTRAINT `simages_f1`
+    FOREIGN KEY (`sinum`)
+    REFERENCES `honin`.`secondhand` (`snum`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
