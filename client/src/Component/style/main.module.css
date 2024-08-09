@@ -51,20 +51,6 @@
     /* opacity: 0.5; */
 }
 
-.imageSpan{
-    position: absolute;
-    top: 10rem; /* 상단에서 10px 떨어진 위치에 배치 */
-    left: 20rem; /* 좌측에서 10px 떨어진 위치에 배치 */
-    z-index: 10; /* 우선순위 높이기 */
-    /* color: rgb(243, 229, 229); 텍스트 색상을 하얀색으로 설정 */
-    color: var(--primary-color);
-    /* background-color: rgba(0, 0, 0, 0.5); 반투명한 배경 추가 (선택 사항) */
-    padding: 5px; /* 텍스트 주변에 여백 추가 */
-    border-radius: 5px; /* 둥근 모서리 추가 */
-    font-size: 2rem;
-    font-weight: bold;
-}
-
 .section {
     display: flex;
     width: 100%;
@@ -90,7 +76,7 @@
 }
 
 .leftColumn, .rightColumn {
-    flex: 0.7;
+    flex: 0.6;
     padding: 1rem;
 }
 
@@ -99,7 +85,7 @@
 }
 
 .rightColumn {
-    flex: 0.3;
+    flex: 0.4;
     margin-left: 1rem;
 }
 
@@ -134,10 +120,38 @@
 
 .contentTitle {
     font-size: 1rem;
-    /* font-weight: bold; */
     margin-bottom: 1rem;
     cursor: pointer;
+    position: relative;
 }
+
+.contentTitle:after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: blue;
+    content: '';
+    opacity: 0;
+    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+    -moz-transition: opacity 0.3s, -moz-transform 0.3s;
+    transition: opacity 0.3s, transform 0.3s;
+    -webkit-transform: translateY(10px);
+    -moz-transform: translateY(10px);
+    transform: translateY(10px);
+}
+
+.contentTitle:hover:after,
+.contentTitle:focus:after {
+    height: 3px;
+    width: 100%;
+    opacity: 0.2;
+    -webkit-transform: translateY(5px);
+    -moz-transform: translateY(5px);
+    transform: translateY(5px);
+}
+
 
 .category_btn{
     display: flex;
@@ -244,4 +258,9 @@
   
   .button:hover {
     background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .spanHot{
+    color: red;
+    font-weight: bold;
   }

@@ -4,9 +4,11 @@ import com.team2.honin.honinserver.dao.NcareerDao;
 import com.team2.honin.honinserver.dao.NcareerRepository;
 import com.team2.honin.honinserver.dao.NpolicyDao;
 import com.team2.honin.honinserver.dao.NpolicyRepository;
+//import com.team2.honin.honinserver.dao.viewDao.Top10PostsRepository;
 import com.team2.honin.honinserver.dto.Paging;
 import com.team2.honin.honinserver.entity.NCareer;
 import com.team2.honin.honinserver.entity.NPolicy;
+//import com.team2.honin.honinserver.entity.view.Top10Posts;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -27,6 +29,8 @@ public class NoticeService {
     NcareerDao ncdao;
     @Autowired
     NpolicyDao npdao;
+    //@Autowired
+    //Top10PostsRepository tpr;
 
     public List<NCareer> getNcareerList(Paging paging) {
         //return ncr.findAll(Sort.by(Sort.Direction.DESC, "ncnum"));
@@ -57,4 +61,8 @@ public class NoticeService {
         np.setReadcount( np.getReadcount()+1 );
         npr.save(np);
     }
+
+//    public List<Top10PostsRepository> getLikesTopList() {
+//        return tpr.findAllByOrderByLikecountDesc();
+//    }
 }
